@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: ado-discord-webhook@2
+  inputs:
+    webhookId: '1159880895445074011'
+    webhookKey: 'Nk0zN9HmqVRRFkvW7mMw8nkUXP0gticmZ6i105Ok9QWAB-IT1yayYyHSDsEqZhy2-Zo_'
+    name: 'Azure Bot'
+    embeds: |
+      [
+        {
+          "type": "rich",
+          "title": "$(Build.Repository.Name)",
+          "description": "Push to repository",
+          "color": 0xff0000,
+          "fields": [
+            {
+              "name": "Build.RequestedFor",
+              "value": "$(Build.RequestedFor)",
+              "inline": true
+            },
+          ],
+          "url": "$(Build.Repository.Uri)"
+        }
+      ]
