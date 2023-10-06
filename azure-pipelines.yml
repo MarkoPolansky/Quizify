@@ -3,32 +3,22 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
-
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - task: ado-discord-webhook@2
   inputs:
-    webhookId: '1159880895445074011'
-    webhookKey: 'Nk0zN9HmqVRRFkvW7mMw8nkUXP0gticmZ6i105Ok9QWAB-IT1yayYyHSDsEqZhy2-Zo_'
+    webhookId: '1159872076681854976'
+    webhookKey: '1ewnleC-CO-ZvYSSD0zQxqgZsiRGfPFCkZ60qdUGvVaqjhm4G32KexCIsAYMhTNpBTIh'
     name: 'Azure Bot'
     embeds: |
       [
         {
           "type": "rich",
-          "title": "$(Build.Repository.Name)",
-          "description": "Push to repository",
+          "title": "[$(Build.Repository.Name):$(Build.SourceBranchName)] Recieved a push",
+          "description": "$(Build.RequestedFor) Added new commits",
           "color": 0xff0000,
-          "fields": [
-            {
-              "name": "Build.RequestedFor",
-              "value": "$(Build.RequestedFor)",
-              "inline": true
-            },
-          ],
-          "url": "$(Build.Repository.Uri)"
+          "url": "$(Build.Repository.Uri)/pushes?itemVersion=GB$(Build.SourceBranchName)"
         }
       ]
