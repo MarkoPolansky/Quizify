@@ -12,7 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b047939f-a77e-425a-8084-ea579901f915" name="Changes" comment="" />
+    <list default="true" id="b047939f-a77e-425a-8084-ea579901f915" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +48,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Phase-1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -162,6 +165,8 @@
       <updated>1696945732474</updated>
       <workItem from="1696945736117" duration="370000" />
       <workItem from="1696946134989" duration="551000" />
+      <workItem from="1696947576873" duration="143000" />
+      <workItem from="1696949104181" duration="642000" />
     </task>
     <task id="LOCAL-00001" summary="Added DAL Layer, Tests">
       <option name="closed" value="true" />
@@ -171,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696945982669</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added DAL, DAL Tests">
+      <option name="closed" value="true" />
+      <created>1696947656043</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696947656043</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Repositories">
+      <option name="closed" value="true" />
+      <created>1696949137240</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696949137240</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +213,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Added DAL Layer, Tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added DAL Layer, Tests" />
+    <MESSAGE value="Added DAL, DAL Tests" />
+    <MESSAGE value="Added Repositories" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Repositories" />
   </component>
 </project>

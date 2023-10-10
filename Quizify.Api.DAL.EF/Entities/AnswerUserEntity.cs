@@ -12,7 +12,7 @@ namespace Quizify.Api.DAL.EF.Entities
         public required Guid UserId { get; set; }
         public AnswerEntity? Answer { get; set; }
         public required Guid AnswerId { get; set; }
-        public required int Points { get; set; }
+
         public string?  UserInput { get; set; }
     }
 }

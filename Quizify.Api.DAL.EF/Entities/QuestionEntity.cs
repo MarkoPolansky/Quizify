@@ -8,6 +8,7 @@ namespace Quizify.Api.DAL.EF.Entities
  
         public required TypeEnum Type { get; set; }
 
+        public required int Points { get; set; }
         public  QuizEntity? Quiz { get; set; }
         public required Guid QuizId { get; set; }
         public ICollection<AnswerEntity> Answers{ get; set; } = new List<AnswerEntity>();
