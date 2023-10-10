@@ -1,0 +1,16 @@
+Index: Quizify.Api.DAL.UnitTests/QuizUserTests.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Microsoft.EntityFrameworkCore;\r\nusing Quizify.Api.DAL.Common.Tests;\r\nusing Quizify.Api.DAL.EF.Entities;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing Xunit.Abstractions;\r\n\r\nnamespace Quizify.Api.DAL.UnitTests\r\n{\r\n    public class QuizUserTests : TestBase\r\n    {\r\n        public QuizUserTests(ITestOutputHelper output) : base(output)\r\n        {\r\n        }\r\n\r\n        [Fact]\r\n        public async Task Assign2UsersTo1Quiz_Assigned()\r\n        {\r\n\r\n            var user1 = new UserEntity()\r\n            {\r\n                Id = Guid.NewGuid(),\r\n                Name = \"Janko\"\r\n            };\r\n\r\n            var user2 = new UserEntity()\r\n            {\r\n                Id = Guid.NewGuid(),\r\n                Name = \"Honza\"\r\n            };\r\n\r\n            var quiz = new QuizEntity()\r\n            {\r\n                Id = Guid.NewGuid(),\r\n                Title = \"Title\",\r\n                CreatedByUserId = user1.Id,\r\n            };\r\n            var assign1 = new QuizUserEntity()\r\n            {\r\n                Id = Guid.NewGuid(),\r\n                UserId = user1.Id,\r\n                QuizId = quiz.Id,\r\n\r\n            };\r\n            var assign2 = new QuizUserEntity()\r\n            {\r\n                Id = Guid.NewGuid(),\r\n                UserId = user2.Id,\r\n                QuizId = quiz.Id,\r\n\r\n            };\r\n\r\n            QuizifyDbContextSUT.Users.Add(user1);\r\n            QuizifyDbContextSUT.Users.Add(user2);\r\n            QuizifyDbContextSUT.Quizzes.Add(quiz);\r\n            QuizifyDbContextSUT.QuizUsers.Add(assign1);\r\n            QuizifyDbContextSUT.QuizUsers.Add(assign2);\r\n            QuizifyDbContextSUT.SaveChangesAsync();\r\n\r\n\r\n            var dbContextText = await DbContextFactory.CreateDbContextAsync();\r\n\r\n            List<QuizUserEntity> recordsFromDb = await dbContextText.QuizUsers\r\n                .Include(u => u.User)\r\n                .Include(u => u.Quiz)\r\n                .ToListAsync();\r\n\r\n\r\n            DeepAssert.Equal(2, recordsFromDb.Count);\r\n            DeepAssert.Equal(new List<QuizUserEntity> { assign1 , assign2}, recordsFromDb);\r\n\r\n        }\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/Quizify.Api.DAL.UnitTests/QuizUserTests.cs b/Quizify.Api.DAL.UnitTests/QuizUserTests.cs
+--- a/Quizify.Api.DAL.UnitTests/QuizUserTests.cs	
++++ b/Quizify.Api.DAL.UnitTests/QuizUserTests.cs	
+@@ -69,7 +69,6 @@
+                 .ToListAsync();
+ 
+ 
+-            DeepAssert.Equal(2, recordsFromDb.Count);
+             DeepAssert.Equal(new List<QuizUserEntity> { assign1 , assign2}, recordsFromDb);
+ 
+         }
