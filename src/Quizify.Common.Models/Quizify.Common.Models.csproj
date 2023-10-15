@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Quizify.Common\Quizify.Common.csproj" />
+  </ItemGroup>
+
 </Project>
