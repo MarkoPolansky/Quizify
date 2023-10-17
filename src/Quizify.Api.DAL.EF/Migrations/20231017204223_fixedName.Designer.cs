@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizify.Api.DAL.EF;
 
@@ -11,9 +12,11 @@ using Quizify.Api.DAL.EF;
 namespace Quizify.Api.DAL.EF.Migrations
 {
     [DbContext(typeof(QuizifyDbContext))]
-    partial class QuizifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231017204223_fixedName")]
+    partial class fixedName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

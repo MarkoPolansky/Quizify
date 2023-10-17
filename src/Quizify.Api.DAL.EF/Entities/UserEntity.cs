@@ -11,13 +11,9 @@ namespace Quizify.Api.DAL.EF.Entities
     {
         public required string Name { get; set; }
         public string? ImageUrl { get; set; }
-
-
    
         public ICollection<QuizEntity> CreatedQuizzes { get; set; } = new List<QuizEntity>();
-
         public ICollection<QuizUserEntity> Quizzes { get; set; } = new List<QuizUserEntity>();
-
         public ICollection<AnswerUserEntity> Answers { get; set; } = new List<AnswerUserEntity>();
     }
 }
