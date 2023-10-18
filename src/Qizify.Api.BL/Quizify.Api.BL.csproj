@@ -6,4 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Quizify.Api.DAL.EF\Quizify.Api.DAL.EF.csproj" />
+    <ProjectReference Include="..\Quizify.Common.BL\Quizify.Common.BL.csproj" />
+    <ProjectReference Include="..\Quizify.Common.Models\Quizify.Common.Models.csproj" />
+    <ProjectReference Include="..\Quizify.Common\Quizify.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Facades\" />
+  </ItemGroup>
+
 </Project>

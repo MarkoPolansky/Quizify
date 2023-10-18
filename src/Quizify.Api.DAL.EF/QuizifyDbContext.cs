@@ -16,7 +16,7 @@ namespace Quizify.Api.DAL.EF
         public DbSet<QuizUserEntity> QuizUsers { get; set; } = null!;
         public DbSet<QuestionEntity> Questions { get; set; } = null!;
         public DbSet<AnswerEntity> Answers { get; set; } = null!;
-        public DbSet<AnswerUserEntity> AnswerUsers { get; set; } = null!;
+        public DbSet<UserAnswerEntity> AnswerUsers { get; set; } = null!;
        
         
         public QuizifyDbContext(DbContextOptions<QuizifyDbContext> options)
@@ -45,12 +45,12 @@ namespace Quizify.Api.DAL.EF
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserEntity>()
-           .HasMany<AnswerUserEntity>()
+           .HasMany<UserAnswerEntity>()
            .WithOne(d => d.User)
            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<AnswerEntity>()
-           .HasMany<AnswerUserEntity>()
+           .HasMany<UserAnswerEntity>()
            .WithOne(d => d.Answer)
            .OnDelete(DeleteBehavior.Restrict);
 

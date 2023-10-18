@@ -17,7 +17,7 @@ namespace Quizify.Api.DAL.EF.Entities
         public  QuestionEntity? Question { get; set; }
         public required Guid QuestionId { get; set; }
 
-        public ICollection<AnswerUserEntity> Users { get; set; } = new List<AnswerUserEntity>();
+        public ICollection<UserAnswerEntity> Users { get; set; } = new List<UserAnswerEntity>();
 
 
     }

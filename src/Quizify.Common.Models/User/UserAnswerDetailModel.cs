@@ -1,6 +1,6 @@
 ﻿namespace Quizify.Common.Models
 {
-    public record AnswerUserDetailModel : ModelBase
+    public record UserAnswerDetailModel : ModelBase
     {        
         public string? UserInput { get; set; }
 

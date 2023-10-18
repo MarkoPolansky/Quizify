@@ -7,6 +7,6 @@
 
         public IList<QuizListModel> CreatedQuizzes { get; set; } = new List<QuizListModel>();
         public IList<QuizUserDetailModel> Quizzes { get; set; } = new List<QuizUserDetailModel>();
-        public IList<AnswerUserDetailModel> Answers { get; set; } = new List<AnswerUserDetailModel>();
+        public IList<UserAnswerDetailModel> Answers { get; set; } = new List<UserAnswerDetailModel>();
     }
 }

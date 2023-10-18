@@ -1,6 +1,6 @@
 ﻿using Quizify.Common.Enums;
 
-namespace Quizify.Common.Models
+namespace Quizify.Common.Models 
 {
     public record AnswerListModel : ModelBase
     {

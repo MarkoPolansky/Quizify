@@ -48,7 +48,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.AnswerUserEntity", b =>
@@ -82,7 +82,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AnswerUsers");
+                    b.ToTable("AnswerUsers", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuestionEntity", b =>
@@ -108,7 +108,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuizEntity", b =>
@@ -140,7 +140,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("CreatedByUserId");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuizUserEntity", b =>
@@ -180,7 +180,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("QuizUsers");
+                    b.ToTable("QuizUsers", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.UserEntity", b =>
@@ -198,7 +198,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.AnswerEntity", b =>
