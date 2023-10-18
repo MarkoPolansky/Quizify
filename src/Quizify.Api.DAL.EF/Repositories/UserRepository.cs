@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quizify.Api.DAL.EF.Repositories
 {
-    public class UserRepository : RepositoryBase<UserEntity>, IApiRepository<UserEntity>
+    public class UserRepository : RepositoryBase<UserEntity>, IUserRepository
     {
         public UserRepository(QuizifyDbContext dbContext)
             : base(dbContext)
