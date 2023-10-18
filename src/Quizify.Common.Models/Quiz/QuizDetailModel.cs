@@ -6,10 +6,10 @@
         public string? ImageUrl { get; set; }
         public string? GamePin { get; set; }
         public TimeSpan? TimeLimit { get; set; }
-        public bool IsStarted { get; set; } = false;
+        public bool IsStarted { get; set; }
 
-        public required Guid CreatedByUserId { get; set; }
+        public required UserListModel CreatedByUser { get; set; }
         public IList<QuestionListModel> Questions { get; set; } = new List<QuestionListModel>();
-        public IList<QuizUserDetailModel> Users { get; set; } = new List<QuizUserDetailModel>();
+        public IList<QuizDetailUserModel> Users { get; set; } = new List<QuizDetailUserModel>();
     }
 }
