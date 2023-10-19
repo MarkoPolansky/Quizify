@@ -9,10 +9,10 @@ namespace Quizify.Api.BL.Facades
 {
     public class AnswerFacade : BaseFacade<AnswerEntity, AnswerListModel, AnswerDetailModel>, IAnswerFacade
     {
-        private readonly IApiRepository<AnswerEntity> answerRepository;
+        private readonly IAnswerRepository answerRepository;
         private readonly IMapper _mapper;
         public AnswerFacade(
-            IApiRepository<AnswerEntity> repository,
+            IAnswerRepository repository,
             IMapper mapper)
             : base(repository, mapper)
             {

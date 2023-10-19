@@ -6,7 +6,7 @@
         public string? ImageUrl { get; set; }
 
         public IList<QuizListModel> CreatedQuizzes { get; set; } = new List<QuizListModel>();
-        public IList<QuizDetailUserModel> Quizzes { get; set; } = new List<QuizDetailUserModel>();
+        public IList<UserDetailQuizModel> Quizzes { get; set; } = new List<UserDetailQuizModel>();
         public IList<UserDetailAnswerModel> Answers { get; set; } = new List<UserDetailAnswerModel>();
     }
 }
