@@ -1,4 +1,5 @@
-﻿using Quizify.Api.DAL.EF.Entities.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Quizify.Api.DAL.EF.Entities.Interfaces;
 
 namespace Quizify.Api.DAL.EF.Repositories.Interfaces
 {
@@ -11,5 +12,7 @@ namespace Quizify.Api.DAL.EF.Repositories.Interfaces
         Guid? Update(TEntity entity);
         void Remove(Guid id);
         bool Exists(Guid id);
+
+        IQueryable<TEntity> Get();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Quizify.Api.BL.Facades.IFacades;
+using Quizify.Api.BL.Services.Interfaces;
 using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
 using Quizify.Common.Models;
@@ -10,13 +11,16 @@ namespace Quizify.Api.BL.Facades
     {
         private readonly IQuizRepository quizRepository;
         private readonly IMapper _mapper;
+        private readonly IPinGenerationService _pinGenerationService;
         public QuizFacade(
             IQuizRepository repository,
-            IMapper mapper)
+            IMapper mapper,
+            IPinGenerationService pinGenerationService)
             : base(repository, mapper)
             {
             quizRepository = repository;
             _mapper = mapper;
+            _pinGenerationService = pinGenerationService;
             }
 
         public override Guid? Update(QuizDetailModel quizModel)
@@ -40,6 +44,38 @@ namespace Quizify.Api.BL.Facades
             }).ToList();
             var result = quizRepository.Update(quizEntity);
             return quizRepository.Update(quizEntity);
+        }
+
+
+        public Guid? Publish(QuizDetailModel model)
+        {
+            model.GamePin = GenerateGamePin();
+            return Update(model);
+            
+        }
+
+        public Guid? Start(QuizDetailModel model)
+        {
+            model.IsStarted = true;
+            return Update(model);
+        }
+
+
+
+        private bool IsGamePinUnique(string gamePin)
+        {
+            return quizRepository.Get().Count(a => a.GamePin == gamePin) == 0;
+        }
+
+        private string GenerateGamePin()
+        {
+
+            string gamePin = _pinGenerationService.Generate();
+            while (!IsGamePinUnique(gamePin))
+            {
+                gamePin = _pinGenerationService.Generate();
+            }
+            return gamePin;
         }
     }
 }

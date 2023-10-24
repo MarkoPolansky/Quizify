@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Quizify.Api.BL.Facades.IFacades;
 using Quizify.Api.DAL.EF.Entities;
+using Quizify.Api.DAL.EF.Entities.Interfaces;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
 using Quizify.Common.Models;
 
@@ -41,5 +42,6 @@ namespace Quizify.Api.BL.Facades
             var result = userRepository.Update(userEntity);
             return userRepository.Update(userEntity);
         }
+
     }
 }

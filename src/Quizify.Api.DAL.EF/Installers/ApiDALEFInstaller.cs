@@ -10,6 +10,8 @@ namespace Quizify.Api.DAL.EF.Installers
         {
             serviceCollection.AddDbContext<QuizifyDbContext>(options => options.UseSqlServer(connectionString));
 
+        
+
             serviceCollection.Scan(selector =>
                 selector.FromAssemblyOf<ApiDALEFInstaller>()
                     .AddClasses(classes => classes.AssignableTo(typeof(IApiRepository<>)))

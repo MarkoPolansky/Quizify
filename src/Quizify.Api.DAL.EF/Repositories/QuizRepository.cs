@@ -10,7 +10,7 @@ namespace Quizify.Api.DAL.EF.Repositories
 {
     public class QuizRepository : RepositoryBase<QuizEntity>, IQuizRepository
     {
-        protected QuizRepository(QuizifyDbContext dbContext) : base(dbContext)
+        public QuizRepository(QuizifyDbContext dbContext) : base(dbContext)
         {
         }
     }

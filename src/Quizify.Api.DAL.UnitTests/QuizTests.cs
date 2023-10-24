@@ -49,6 +49,99 @@ namespace Quizify.Api.DAL.UnitTests
         }
 
 
-       
+
+        [Fact]
+        public async Task InserQuiz_QuizInsertedAsyncssdsd()
+        {
+
+            
+
+        }
+
+
+        [Fact]
+        public async Task InserQuizWithGamePin_GamePinUnique_QuizInsertedAsync()
+        {
+
+            var user = new UserEntity()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Janko"
+            };
+
+            var quiz = new QuizEntity()
+            {
+                Id = Guid.NewGuid(),
+                Title = "Title",
+                CreatedByUserId = user.Id,
+                GamePin = "123456"
+            };
+
+            QuizifyDbContextSUT.Users.Add(user);
+            QuizifyDbContextSUT.Quizzes.Add(quiz);
+            QuizifyDbContextSUT.SaveChangesAsync();
+
+
+            var dbContextText = await DbContextFactory.CreateDbContextAsync();
+
+            var quizFromDb = await dbContextText.Quizzes.Where(u => u.Id == quiz.Id)
+                .Include(u => u.CreatedByUser)
+                .FirstAsync(); ;
+
+            DeepAssert.Equal(quizFromDb, quiz);
+
+        }
+
+
+
+
+        [Fact]
+        public async Task InserQuizWithGamePin_GamePinNotUnique_NotInserted()
+        {
+
+            var user = new UserEntity()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Janko"
+            };
+
+            var quiz = new QuizEntity()
+            {
+                Id = Guid.NewGuid(),
+                Title = "Title",
+                CreatedByUserId = user.Id,
+                GamePin = "123456"
+            };
+
+            var quiz2 = new QuizEntity()
+            {
+                Id = Guid.NewGuid(),
+                Title = "Titleasdasd",
+                CreatedByUserId = user.Id,
+                GamePin = "123456"
+            };
+
+            QuizifyDbContextSUT.Users.Add(user);
+            QuizifyDbContextSUT.Quizzes.Add(quiz);
+            QuizifyDbContextSUT.SaveChangesAsync();
+
+            QuizifyDbContextSUT.Quizzes.Add(quiz2);
+            QuizifyDbContextSUT.SaveChangesAsync();
+
+
+            var dbContextText = await DbContextFactory.CreateDbContextAsync();
+
+            var quizCount = await dbContextText.Quizzes
+                .Include(u => u.CreatedByUser)
+                .CountAsync(); ;
+
+            Assert.Equal(quizCount,1);
+        
+
+        }
+
+
+
+
     }
 }

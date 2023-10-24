@@ -1,4 +1,5 @@
-﻿using Quizify.Api.DAL.EF.Entities.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Quizify.Api.DAL.EF.Entities.Interfaces;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,15 @@ namespace Quizify.Api.DAL.EF.Repositories
        where TEntity : class, IEntity
     {
         protected readonly QuizifyDbContext dbContext;
+        private readonly DbSet<TEntity> _dbSet;
 
         protected RepositoryBase(QuizifyDbContext dbContext)
         {
             this.dbContext = dbContext;
+            _dbSet = dbContext.Set<TEntity>();
         }
+
+        public IQueryable<TEntity> Get() => _dbSet;
 
         public virtual IList<TEntity> GetAll()
         {

@@ -12,11 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b047939f-a77e-425a-8084-ea579901f915" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/shelf/Uncommitted_changes_before_Checkout_at_10__10__2023_16_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/shelf/Uncommitted_changes_before_Checkout_at_10__10__2023_16_00__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b047939f-a77e-425a-8084-ea579901f915" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +24,7 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -169,8 +165,7 @@
       <workItem from="1696946134989" duration="551000" />
       <workItem from="1696947576873" duration="143000" />
       <workItem from="1696949104181" duration="642000" />
-      <workItem from="1697905467542" duration="1727000" />
-      <workItem from="1697973544702" duration="46000" />
+      <workItem from="1697905294547" duration="128000" />
     </task>
     <task id="LOCAL-00001" summary="Added DAL Layer, Tests">
       <option name="closed" value="true" />

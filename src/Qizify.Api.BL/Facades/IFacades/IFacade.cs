@@ -1,9 +1,10 @@
 ﻿using Quizify.Api.DAL.EF.Entities.Interfaces;
 using Quizify.Common;
+using Quizify.Common.BL.Facades;
 
 namespace Quizify.Api.BL.Facades.IFacades
 {
-    public interface IFacade<TEntity, TListModel, TDetailModel>
+    public interface IFacade<TEntity, TListModel, TDetailModel> : IAppFacade
         where TEntity : class, IEntity
         where TListModel : IRequiredId
         where TDetailModel : class, IRequiredId
