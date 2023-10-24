@@ -39,6 +39,9 @@ namespace Quizify.Api.DAL.EF
               .WithOne(d => d.Quiz)
               .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<QuizEntity>()
+                .HasIndex(u => u.GamePin).IsUnique();
+
             modelBuilder.Entity<UserEntity>()
             .HasMany<QuizUserEntity>()
             .WithOne(d => d.User)
