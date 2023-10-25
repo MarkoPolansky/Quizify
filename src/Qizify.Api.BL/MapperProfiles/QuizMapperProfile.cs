@@ -10,14 +10,16 @@ namespace Quizify.Api.BL.MapperProfiles
         public QuizMapperProfile() 
         {
             CreateMap<QuizEntity, QuizDetailModel>()
-                .MapMember(src => src.Users, dst => dst.Users)
-                .MapMember(src => src.Questions, dst => dst.Questions);
-            CreateMap<QuizEntity, QuestionListModel>();
+                .MapMember(dst => dst.Users, src => src.Users)
+                .MapMember(dst => dst.Questions, src => src.Questions);
+            CreateMap<QuizEntity, QuizListModel>();
             CreateMap<QuizUserEntity, QuizDetailUserModel>();
 
             CreateMap<QuizDetailModel, QuizEntity>()
                 .Ignore(dst => dst.Questions)
-                .Ignore(dst => dst.Users);
+                .Ignore(dst => dst.Users)
+                .Ignore(dst => dst.CreatedByUser)
+                .MapMember(dst => dst.CreatedByUserId, src => src.CreatedByUser.Id);
         }
     }
 }

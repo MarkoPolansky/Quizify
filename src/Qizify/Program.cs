@@ -90,7 +90,7 @@ void ConfigureAutoMapper(IServiceCollection serviceCollection)
 void ValidateAutoMapperConfiguration(IServiceProvider serviceProvider)
 {
     var mapper = serviceProvider.GetRequiredService<IMapper>();
-    // mapper.ConfigurationProvider.AssertConfigurationIsValid(); //TODO Throws  AutoMapper.AutoMapperConfigurationException
+    mapper.ConfigurationProvider.AssertConfigurationIsValid(); //TODO Throws  AutoMapper.AutoMapperConfigurationException
 }
 
 void UseEndpoints(WebApplication application)

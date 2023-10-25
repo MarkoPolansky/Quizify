@@ -8,5 +8,7 @@ namespace Quizify.Common.Models
         public string? ImageUrl { get; set; }
         public required TypeEnum Type { get; set; }
         public required bool IsCorrect { get; set; }
+
+        public required Guid QuestionId { get; set; }
     }
 }
