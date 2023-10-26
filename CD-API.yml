@@ -8,8 +8,8 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
-  dotNetFramework: 'net6.0'
-  dotNetVersion: '6.0.x'
+  dotNetFramework: 'net7.0'
+  dotNetVersion: '7.0.x'
   targetRuntime: 'win-x64'
   
 pool:
