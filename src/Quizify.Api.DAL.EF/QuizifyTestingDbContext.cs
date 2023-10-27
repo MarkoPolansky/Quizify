@@ -18,6 +18,7 @@ public class QuizifyTestingDbContext : QuizifyDbContext
     {
         
         base.OnModelCreating(modelBuilder);
+        
         if (_seedTestingData)
         {
             modelBuilder.Entity<UserEntity>().HasData(UserSeeds.Seed());
