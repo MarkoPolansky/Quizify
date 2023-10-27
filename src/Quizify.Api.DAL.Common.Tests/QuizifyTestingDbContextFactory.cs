@@ -6,27 +6,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Quizify.Api.DAL.Common.Tests;
 
 namespace Quizify.Api.DAL.EF.Factories
 {
-    public class QuizifyTestingDbContextFactory : IDbContextFactory<QuizifyDbContext>
+    public class QuizifyTestingDbContextFactory : IDbContextFactory<QuizifyTestingDbContext>
     {
 
         private readonly string _dbName;
-
-        public QuizifyTestingDbContextFactory(string dbName) { 
+        private readonly bool _seedData;
+        public QuizifyTestingDbContextFactory(string dbName, bool seedData = false) { 
             _dbName = dbName;
+            _seedData = seedData;
         }
-        public QuizifyDbContext CreateDbContext()
+        
+        public QuizifyTestingDbContext CreateDbContext()
         {
             var configuration = new ConfigurationBuilder()
                  .AddUserSecrets<QuizifyDbContextFactory>(optional: true)
                  .Build();
-
+            
             var optionsBuilder = new DbContextOptionsBuilder<QuizifyDbContext>();
             optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = " + _dbName + ";MultipleActiveResultSets = True;Integrated Security = True; ");
-
-            return new QuizifyDbContext(optionsBuilder.Options);
+            
+            return new QuizifyTestingDbContext(optionsBuilder.Options, _seedData);
         }
     }
 }

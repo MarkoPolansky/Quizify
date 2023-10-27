@@ -14,8 +14,8 @@ namespace Quizify.Api.DAL.UnitTests
 {
     public class TestBase : IAsyncLifetime
     {
-        protected IDbContextFactory<QuizifyDbContext> DbContextFactory { get; }
-        protected QuizifyDbContext QuizifyDbContextSUT { get; }
+        protected IDbContextFactory<QuizifyTestingDbContext> DbContextFactory { get; }
+        protected QuizifyTestingDbContext QuizifyDbContextSUT { get; }
 
         protected  TestBase(ITestOutputHelper output)
         {

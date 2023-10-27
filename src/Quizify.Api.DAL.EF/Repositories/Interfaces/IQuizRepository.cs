@@ -4,5 +4,6 @@ namespace Quizify.Api.DAL.EF.Repositories.Interfaces
 {
     public interface IQuizRepository : IApiRepository<QuizEntity> 
     {
+        int CountGamePin(string gamePin);
     }
 }

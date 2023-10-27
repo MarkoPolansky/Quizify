@@ -35,6 +35,14 @@ namespace Quizify.Api.DAL.EF
 
 
             modelBuilder.Entity<QuizEntity>()
+                .HasOne(e => e.ActiveQuestion)
+                .WithOne()
+                .HasForeignKey<QuestionEntity>(e => e.Id)
+                .IsRequired(false);
+            
+            
+
+            modelBuilder.Entity<QuizEntity>()
               .HasMany<QuizUserEntity>()
               .WithOne(d => d.Quiz)
               .OnDelete(DeleteBehavior.Restrict);

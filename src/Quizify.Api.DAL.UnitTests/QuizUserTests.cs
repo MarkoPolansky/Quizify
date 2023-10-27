@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Quizify.Common.Enums;
 using Xunit.Abstractions;
 
 namespace Quizify.Api.DAL.UnitTests
@@ -32,11 +33,12 @@ namespace Quizify.Api.DAL.UnitTests
                 Name = "Honza"
             };
 
-            var quiz = new QuizEntity()
+            var quiz = new QuizEntity
             {
                 Id = Guid.NewGuid(),
                 Title = "Title",
                 CreatedByUserId = user1.Id,
+                QuizState = QuizStateEnum.Creation,
             };
             var assign1 = new QuizUserEntity()
             {

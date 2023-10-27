@@ -34,5 +34,7 @@ namespace Quizify.Api.BL.Facades
             var result = questionRepository.Update(questionEntity);
             return questionRepository.Update(questionEntity);
         }
+
+       
     }
 }

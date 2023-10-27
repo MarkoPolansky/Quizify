@@ -13,5 +13,10 @@ namespace Quizify.Api.DAL.EF.Repositories
         public QuizRepository(QuizifyDbContext dbContext) : base(dbContext)
         {
         }
+        
+        public int CountGamePin(string gamePin)
+        { 
+           return _dbSet.Count(a => a.GamePin == gamePin);
+        }
     }
 }

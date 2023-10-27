@@ -1,0 +1,63 @@
+using Quizify.Api.DAL.Common.Tests;
+using Quizify.Api.DAL.Common.Tests.Seeds;
+using Quizify.Api.DAL.EF.Entities;
+using Quizify.Api.DAL.EF.Repositories;
+using Quizify.Api.DAL.EF.Repositories.Interfaces;
+using Quizify.Common.Enums;
+using Xunit.Abstractions;
+
+namespace Quizify.Api.DAL.IntegrationTests;
+
+public class QuizRepositoryTests : TestBase
+{
+    private readonly IQuizRepository _repository;
+    public QuizRepositoryTests(ITestOutputHelper output) : base(output)
+    {
+        _repository = new QuizRepository(DbContextFactory.CreateDbContext());
+    }
+
+
+    [Fact]
+    public void CreateNewQuiz_QuizCreated()
+    {
+        var quiz = new QuizEntity
+        {
+            Id = Guid.NewGuid(),
+            Title = "New Quiz about animals",
+            QuizState = QuizStateEnum.Creation,
+            CreatedByUserId = UserSeeds.user.Id
+        };
+        _repository.Insert(quiz);
+        var fromRepository = _repository.GetById(quiz.Id);
+       
+        DeepAssert.Equal(quiz,fromRepository);
+    }
+    
+    
+    [Fact]
+    public void CountQuizesByGameId_NotInDb_Returns0()
+    {
+
+        var count = _repository.CountGamePin("1234");
+       
+        DeepAssert.Equal(0,count);
+    }
+    
+    [Fact]
+    public void CountQuizesByGameId_OneInDb_Returns1()
+    {
+        var quiz = new QuizEntity
+        {
+            Title = "new Title",
+            QuizState = QuizStateEnum.Creation,
+            CreatedByUserId = UserSeeds.user.Id,
+            Id = Guid.NewGuid(),
+            GamePin = "1234"
+        };
+        _repository.Insert(quiz);
+            
+        var count = _repository.CountGamePin("1234");
+       
+        DeepAssert.Equal(1,count);
+    }
+}

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Quizify.Common.Enums;
 using Xunit.Abstractions;
 
 namespace Quizify.Api.DAL.UnitTests
@@ -26,11 +27,12 @@ namespace Quizify.Api.DAL.UnitTests
                 Name = "Janko"
             };
 
-            var quiz = new QuizEntity()
+            var quiz = new QuizEntity
             {
                 Id = Guid.NewGuid(),
                 Title = "Title",
                 CreatedByUserId = user.Id,
+                QuizState = QuizStateEnum.Creation,
             };
 
             QuizifyDbContextSUT.Users.Add(user);
@@ -69,13 +71,14 @@ namespace Quizify.Api.DAL.UnitTests
                 Name = "Janko"
             };
 
-            var quiz = new QuizEntity()
+            var quiz = new QuizEntity
             {
                 Id = Guid.NewGuid(),
                 Title = "Title",
                 CreatedByUserId = user.Id,
-                GamePin = "123456"
+                QuizState = QuizStateEnum.Creation
             };
+            quiz.GamePin = "123456";
 
             QuizifyDbContextSUT.Users.Add(user);
             QuizifyDbContextSUT.Quizzes.Add(quiz);
@@ -105,20 +108,22 @@ namespace Quizify.Api.DAL.UnitTests
                 Name = "Janko"
             };
 
-            var quiz = new QuizEntity()
+            var quiz = new QuizEntity
             {
                 Id = Guid.NewGuid(),
                 Title = "Title",
                 CreatedByUserId = user.Id,
-                GamePin = "123456"
+                QuizState = QuizStateEnum.Creation
             };
+            quiz.GamePin = "123456";
 
-            var quiz2 = new QuizEntity()
+            var quiz2 = new QuizEntity
             {
                 Id = Guid.NewGuid(),
                 Title = "Titleasdasd",
                 CreatedByUserId = user.Id,
-                GamePin = "123456"
+                GamePin = "123456",
+                QuizState = QuizStateEnum.Creation
             };
 
             QuizifyDbContextSUT.Users.Add(user);

@@ -13,7 +13,7 @@ namespace Quizify.Api.DAL.EF.Repositories
        where TEntity : class, IEntity
     {
         protected readonly QuizifyDbContext dbContext;
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly DbSet<TEntity> _dbSet;
 
         protected RepositoryBase(QuizifyDbContext dbContext)
         {
@@ -32,7 +32,6 @@ namespace Quizify.Api.DAL.EF.Repositories
         {
             return dbContext.Set<TEntity>().SingleOrDefault(entity => entity.Id == id);
         }
-
         public virtual Guid Insert(TEntity entity)
         {
             var createdEntity = dbContext.Set<TEntity>().Add(entity);

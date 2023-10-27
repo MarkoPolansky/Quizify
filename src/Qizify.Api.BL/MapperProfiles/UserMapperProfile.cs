@@ -7,12 +7,15 @@ namespace Quizify.Api.BL.MapperProfiles
 {
     public class UserMapperProfile : Profile
     {
-        public UserMapperProfile() 
+        public UserMapperProfile()
         {
             CreateMap<UserEntity, UserDetailModel>()
                 .MapMember(dst => dst.Answers, src => src.Answers)
                 .MapMember(dst => dst.Quizzes, src => src.Quizzes)
-                .MapMember(dst => dst.CreatedQuizzes, src => src.CreatedQuizzes);
+                .MapMember(dst => dst.CreatedQuizzes, src => src.CreatedQuizzes)
+                ;
+            
+            
             CreateMap<UserEntity, UserListModel>();
             CreateMap<QuizUserEntity, UserDetailQuizModel>();
 

@@ -3,6 +3,7 @@ using Quizify.Api.BL.Facades.IFacades;
 using Quizify.Api.BL.Services.Interfaces;
 using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
+using Quizify.Common.Enums;
 using Quizify.Common.Models;
 
 namespace Quizify.Api.BL.Facades
@@ -22,6 +23,8 @@ namespace Quizify.Api.BL.Facades
             _mapper = mapper;
             _pinGenerationService = pinGenerationService;
             }
+        
+       
 
         public override Guid? Update(QuizDetailModel quizModel)
         {
@@ -43,28 +46,38 @@ namespace Quizify.Api.BL.Facades
                 QuizId = quizEntity.Id,
             }).ToList();
             var result = quizRepository.Update(quizEntity);
-            return quizRepository.Update(quizEntity);
-        }
-
-
-        public Guid? Publish(QuizDetailModel model)
-        {
-            model.GamePin = GenerateGamePin();
-            return Update(model);
             
+            return result;
         }
-
-        public Guid? Start(QuizDetailModel model)
+        
+        public Guid? Start(Guid modelId)
         {
-            model.IsStarted = true;
+            var model = GetById(modelId);
+            model.QuizState = QuizStateEnum.Running;
+            return Update(model);
+        }
+        public string? Publish(Guid modelId)
+        {  
+            var model = GetById(modelId);
+            model.GamePin = GenerateGamePin();
+            model.QuizState = QuizStateEnum.Published;
+            if (Update(model) != null)
+                return model.GamePin;
+             
+            return String.Empty;
+        }
+        
+        public Guid? End(Guid modelId)
+        {
+            var model = GetById(modelId);
+            model.QuizState = QuizStateEnum.Ended;
             return Update(model);
         }
 
-
-
+        
         private bool IsGamePinUnique(string gamePin)
         {
-            return quizRepository.Get().Count(a => a.GamePin == gamePin) == 0;
+            return quizRepository.CountGamePin(gamePin) == 0;
         }
 
         private string GenerateGamePin()

@@ -13,9 +13,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b047939f-a77e-425a-8084-ea579901f915" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/shelf/Uncommitted_changes_before_Checkout_at_10__10__2023_16_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/shelf/Uncommitted_changes_before_Checkout_at_10__10__2023_16_00__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quizify/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify.Api.BL/Facades/IFacades/IFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify.Api.BL/Facades/IFacades/IFacade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify.Api.BL/Facades/IFacades/IQuizFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify.Api.BL/Facades/IFacades/IQuizFacade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify.Api.BL/Facades/QuestionFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify.Api.BL/Facades/QuestionFacade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify.Api.BL/Facades/QuizFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify.Api.BL/Facades/QuizFacade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify.Api.BL/MapperProfiles/UserMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify.Api.BL/MapperProfiles/UserMapperProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Qizify/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Qizify/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.BL.UnitTests/Quizify.Api.BL.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.BL.UnitTests/Quizify.Api.BL.UnitTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.Common.Tests/Quizify.Api.DAL.Common.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.Common.Tests/Quizify.Api.DAL.Common.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Entities/QuestionEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Entities/QuestionEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Entities/QuizEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Entities/QuizEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Factories/QuizifyTestingDbContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.Common.Tests/QuizifyTestingDbContextFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Migrations/QuizifyDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Migrations/QuizifyDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/QuizifyDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/QuizifyDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/Interfaces/IApiRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/Interfaces/IApiRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/Interfaces/IQuizRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/Interfaces/IQuizRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/QuestionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/QuestionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/QuizRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/QuizRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.EF/Repositories/RepositoryBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.IntegrationTests/Quizify.Api.DAL.IntegrationTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.IntegrationTests/Quizify.Api.DAL.IntegrationTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/QuizTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/QuizTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/QuizUserTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/QuizUserTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/TestBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Api.DAL.UnitTests/TestBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Common.Models/Question/QuestionDetailModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Common.Models/Question/QuestionDetailModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quizify.Common.Models/Quiz/QuizDetailModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Quizify.Common.Models/Quiz/QuizDetailModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +51,16 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa36476.14466/RecipeMapperProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa36476.17178/RecipeDetailIngredientModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2dade03d225e25c0f2a58bfe142169fd8c624f46f9536a0af62ae2086fc1cf/AutoMapperMappingException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3182ebe051d9b4bed148730ecd591e6f2d28d705821e6fbb3c16b51b51f15c7/Profile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/771f4ca9abd4f63a7c95c3927c8686695c2f281fbd240b2516b9546591224c/ConfigurationValidator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1e84bc8f779d85eecedae89fadb5dfa8aec20ca7ee023e593fc63343db49e/MapperConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aeae22b1c972504e8888d248c7af57e956db03461ad886a20159e93a0d118f3/ParameterExpression.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -45,26 +77,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Phase-1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Phase-1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\marko\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\marko\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\marko\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\marko\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\marko\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\marko\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Quizify.Api.App: http">
     <configuration name="Quizify.Api.App: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Qizify/Quizify.Api.App.csproj" />
@@ -171,6 +204,9 @@
       <workItem from="1696949104181" duration="642000" />
       <workItem from="1697905467542" duration="1727000" />
       <workItem from="1697973544702" duration="46000" />
+      <workItem from="1698164834301" duration="2889000" />
+      <workItem from="1698270328380" duration="7125000" />
+      <workItem from="1698405112149" duration="17245000" />
     </task>
     <task id="LOCAL-00001" summary="Added DAL Layer, Tests">
       <option name="closed" value="true" />
@@ -196,7 +232,31 @@
       <option name="project" value="LOCAL" />
       <updated>1696949137240</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added PinGenerationService">
+      <option name="closed" value="true" />
+      <created>1698165116053</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698165116053</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated Db column GameMin -&gt; unique">
+      <option name="closed" value="true" />
+      <created>1698165262885</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698165262885</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added API endpoits for &quot;api/user&quot;, Added Postman export">
+      <option name="closed" value="true" />
+      <created>1698165448616</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698165448616</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +279,28 @@
     <MESSAGE value="Added DAL Layer, Tests" />
     <MESSAGE value="Added DAL, DAL Tests" />
     <MESSAGE value="Added Repositories" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Repositories" />
+    <MESSAGE value="Added PinGenerationService" />
+    <MESSAGE value="Updated Db column GameMin -&gt; unique" />
+    <MESSAGE value="Added API endpoits for &quot;api/user&quot;, Added Postman export" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added API endpoits for &quot;api/user&quot;, Added Postman export" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/771f4ca9abd4f63a7c95c3927c8686695c2f281fbd240b2516b9546591224c/ConfigurationValidator.cs</url>
+          <line>53</line>
+          <properties documentPath="C:\Users\marko\AppData\Roaming\JetBrains\Rider2023.2\resharper-host\SourcesCache\771f4ca9abd4f63a7c95c3927c8686695c2f281fbd240b2516b9546591224c\ConfigurationValidator.cs" initialLine="53" containingFunctionPresentation="Method 'AssertConfigurationIsValid'">
+            <startOffsets>
+              <option value="2323" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2392" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

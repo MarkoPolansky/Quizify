@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Quizify.Api.DAL.Common.Tests\Quizify.Api.DAL.Common.Tests.csproj" />
+    <ProjectReference Include="..\Quizify.Api.DAL.EF\Quizify.Api.DAL.EF.csproj" />
+  </ItemGroup>
+
 </Project>

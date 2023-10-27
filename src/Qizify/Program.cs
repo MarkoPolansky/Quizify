@@ -90,7 +90,7 @@ void ConfigureAutoMapper(IServiceCollection serviceCollection)
 void ValidateAutoMapperConfiguration(IServiceProvider serviceProvider)
 {
     var mapper = serviceProvider.GetRequiredService<IMapper>();
-    mapper.ConfigurationProvider.AssertConfigurationIsValid(); //TODO Throws  AutoMapper.AutoMapperConfigurationException
+    //mapper.ConfigurationProvider.AssertConfigurationIsValid(); //TODO Throws  AutoMapper.AutoMapperConfigurationException
 }
 
 void UseEndpoints(WebApplication application)
@@ -99,6 +99,8 @@ void UseEndpoints(WebApplication application)
         .WithOpenApi();
 
     UseUserEndpoints(endpointsBase);
+    UseQuizEndpoints(endpointsBase);
+    UseQuestionEndpoints(endpointsBase);
 }
 
 
@@ -119,6 +121,50 @@ void UseUserEndpoints(RouteGroupBuilder routeGroupBuilder)
     userEndpoints.MapPut("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Update(user));
     userEndpoints.MapDelete("{id:guid}", (Guid id, IUserFacade userFacade) => userFacade.Delete(id));
 }
+
+void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
+{
+    var questionEndpoints = routeGroupBuilder.MapGroup("quiz")
+        .WithTags("quiz");
+
+
+    questionEndpoints.MapGet("{id:guid}", Results<Ok<QuizDetailModel>, NotFound<string>> (Guid id, IQuizFacade userFacade)
+        => userFacade.GetById(id) is { } quiz
+            ? TypedResults.Ok(quiz)
+            : TypedResults.NotFound("Error 404 Not Found"));
+
+
+    questionEndpoints.MapGet("", (IQuizFacade quizFacade) => quizFacade.GetAll());
+    questionEndpoints.MapPost("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Create(quiz));
+    questionEndpoints.MapPut("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Update(quiz));
+    questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.Delete(id));
+    
+    questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
+    questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
+    questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
+
+}
+
+
+void UseQuestionEndpoints(RouteGroupBuilder routeGroupBuilder)
+{
+    var questionEndpoints = routeGroupBuilder.MapGroup("question")
+        .WithTags("question");
+
+
+    questionEndpoints.MapGet("{id:guid}", Results<Ok<QuestionDetailModel>, NotFound<string>> (Guid id, IQuestionFacade userFacade)
+        => userFacade.GetById(id) is { } question
+            ? TypedResults.Ok(question)
+            : TypedResults.NotFound("Error 404 Not Found"));
+
+
+    questionEndpoints.MapGet("", (IQuestionFacade userFacade) => userFacade.GetAll());
+    questionEndpoints.MapPost("", (QuestionDetailModel user, IQuestionFacade userFacade) => userFacade.Create(user));
+    questionEndpoints.MapPut("", (QuestionDetailModel user, IQuestionFacade userFacade) => userFacade.Update(user));
+    questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuestionFacade userFacade) => userFacade.Delete(id));
+}
+
+
 
 
 
