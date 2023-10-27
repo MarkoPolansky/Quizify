@@ -29,7 +29,7 @@ public class UserFacadeTests
 
         var facade = new UserFacade(repository, mapper);
 
-        var userFromSeeds = facade.GetById(UserSeeds.user.Id);
+        //var userFromSeeds = facade.GetById(UserSeeds.user.Id);
         
         
         var userId = Guid.NewGuid();
