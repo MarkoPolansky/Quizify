@@ -1,6 +1,7 @@
 using AutoMapper;
 using Moq;
 using Quizify.Api.BL.Facades;
+using Quizify.Api.DAL.Common.Tests.Seeds;
 using Quizify.Api.DAL.EF;
 using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Factories;
@@ -17,7 +18,7 @@ public class UserFacadeTests
     public void CreteUser_UserCreatedNoMock()
     {
     
-        var DbContextFactory = new QuizifyTestingDbContextFactory(GetType().FullName!).CreateDbContext();
+        var DbContextFactory = new QuizifyTestingDbContextFactory(GetType().FullName!,true).CreateDbContext();
         DbContextFactory.Database.EnsureDeleted();
         DbContextFactory.Database.EnsureCreated();
 
@@ -28,7 +29,9 @@ public class UserFacadeTests
 
         var facade = new UserFacade(repository, mapper);
 
-
+        var userFromSeeds = facade.GetById(UserSeeds.user.Id);
+        
+        
         var userId = Guid.NewGuid();
         var user = new UserDetailModel
         {
@@ -59,7 +62,7 @@ public class UserFacadeTests
 
         
 
-       // Assert.Equal(String.Empty, user.Name);
+        // Assert.Equal(String.Empty, user.Name);
 
     }
 
@@ -67,9 +70,9 @@ public class UserFacadeTests
     {
         
 
-         var repository = new Mock<IUserRepository>(MockBehavior.Loose);
-         var mapper = new Mock<IMapper>(MockBehavior.Loose).Object;
-         var facade = new UserFacade(repository.Object, mapper);
-         return facade;
+        var repository = new Mock<IUserRepository>(MockBehavior.Loose);
+        var mapper = new Mock<IMapper>(MockBehavior.Loose).Object;
+        var facade = new UserFacade(repository.Object, mapper);
+        return facade;
     }
 }
