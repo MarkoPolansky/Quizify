@@ -5,8 +5,6 @@
         public required string Title { get; set; }
         public string? ImageUrl { get; set; }
         public string? GamePin { get; set; }
-        public TimeSpan? TimeLimit { get; set; }
-        public bool IsStarted { get; set; }
 
     }
 }
