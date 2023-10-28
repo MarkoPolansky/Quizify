@@ -12,7 +12,7 @@ namespace Quizify.Common.Models
       
         public required QuizStateEnum QuizState{ get; set; }
         
-        public  QuestionListModel? ActiveQuestion { get; set; }
+        public  QuestionDetailModel? ActiveQuestion { get; set; }
         public required UserListModel CreatedByUser { get; set; }
         public IList<QuestionListModel> Questions { get; set; } = new List<QuestionListModel>();
         public IList<QuizDetailUserModel> Users { get; set; } = new List<QuizDetailUserModel>();
