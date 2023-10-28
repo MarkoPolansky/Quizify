@@ -8,7 +8,13 @@ namespace Quizify.Api.DAL.EF.Installers
     {
         public void Install(IServiceCollection serviceCollection, string connectionString)
         {
-            serviceCollection.AddDbContext<QuizifyDbContext>(options => options.UseSqlServer(connectionString));
+            serviceCollection.AddDbContext<QuizifyDbContext>(options =>
+                {
+                    options.UseSqlServer(connectionString);
+                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                }
+               );
+            
 
         
 

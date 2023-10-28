@@ -23,8 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Qizify.Api.BL\Quizify.Api.BL.csproj" />
     <ProjectReference Include="..\Quizify.Api.DAL.Common.Tests\Quizify.Api.DAL.Common.Tests.csproj" />
     <ProjectReference Include="..\Quizify.Api.DAL.EF\Quizify.Api.DAL.EF.csproj" />
+    <ProjectReference Include="..\Quizify.Common.Models\Quizify.Common.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,7 @@ namespace Quizify.Api.DAL.UnitTests
         {
         }
 
+    
         [Fact]
         public async Task InserQuiz_QuizInsertedAsync()
         {

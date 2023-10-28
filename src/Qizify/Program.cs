@@ -142,7 +142,6 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
     questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
-
 }
 
 

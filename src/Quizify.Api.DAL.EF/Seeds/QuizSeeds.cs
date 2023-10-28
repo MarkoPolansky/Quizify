@@ -10,7 +10,7 @@ public static class QuizSeeds
         Id = new Guid("e59e2cee-20f3-4e11-9aa0-ac21a3522d08"),
         Title = "New quiz about CI CD",
         QuizState = QuizStateEnum.Creation,
-        CreatedByUserId = UserSeeds.user.Id
+        CreatedByUserId = UserSeeds.user.Id,
     };
 
     public static List<QuizEntity> Seed()

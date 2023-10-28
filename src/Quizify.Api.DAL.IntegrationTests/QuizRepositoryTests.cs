@@ -1,9 +1,13 @@
+using AutoMapper;
+using AutoMapper.Internal;
+using Quizify.Api.BL.Installers;
 using Quizify.Api.DAL.Common.Tests;
 using Quizify.Api.DAL.Common.Tests.Seeds;
 using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Repositories;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
 using Quizify.Common.Enums;
+using Quizify.Common.Models;
 using Xunit.Abstractions;
 
 namespace Quizify.Api.DAL.IntegrationTests;
@@ -13,7 +17,36 @@ public class QuizRepositoryTests : TestBase
     private readonly IQuizRepository _repository;
     public QuizRepositoryTests(ITestOutputHelper output) : base(output)
     {
-        _repository = new QuizRepository(DbContextFactory.CreateDbContext());
+        _repository = new QuizRepository(DbContextFactory.CreateDbContext(), 
+            new Mapper(
+                    new MapperConfiguration(configuration => {
+                        configuration.Internal().MethodMappingEnabled = false;
+                        configuration.AddMaps(typeof(EntityBase), typeof(ApiBLInstaller));
+                    })));
+    }
+    
+    
+    [Fact]
+    public void  GetById_ReturnsWithIncludedProperties()
+    {
+        var quiz = _repository.GetById(QuizSeeds.quiz.Id);
+        quiz.ActiveQuestionId = QuestionSeeds.Question.Id;
+
+        var quizUser = new QuizUserEntity
+        {
+            UserId = UserSeeds.user.Id,
+            QuizId = QuizSeeds.quiz.Id,
+            Id = Guid.NewGuid()
+        };
+        quiz.Users.Add(quizUser); 
+        
+        // _repository.Update(quiz);
+
+        //
+        // Assert.Equal(quiz.CreatedByUser?.Id,UserSeeds.user.Id);
+        // Assert.Equal(quiz.ActiveQuestion?.Id,QuizSeeds.quiz.Id);
+        // Assert.Equal(quiz.Questions?.Count,1);
+        // Assert.Equal(quiz.Users?.Count,1);
     }
 
 
