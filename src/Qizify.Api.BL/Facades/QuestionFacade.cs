@@ -35,6 +35,20 @@ namespace Quizify.Api.BL.Facades
             return questionRepository.Update(questionEntity);
         }
 
-       
+        public List<QuestionListModel> GetQuestionByText(string? text)
+        {
+            var questionQuery = questionRepository.Get();
+
+            if(text != null)
+            {
+                questionQuery = questionQuery.Where(quest => quest.Text.Contains(text));
+            }
+
+            List<QuestionEntity> questionEntities = questionQuery.ToList();
+
+            var result = _mapper.Map<List<QuestionListModel>>(questionEntities);
+
+            return result;
+        }
     }
 }

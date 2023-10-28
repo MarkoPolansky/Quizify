@@ -53,23 +53,38 @@ namespace Quizify.Api.BL.Facades
         public Guid? Start(Guid modelId)
         {
             var model = GetById(modelId);
-            model.QuizState = QuizStateEnum.Running;
-            return Update(model);
+            Guid? result = null;
+            if (model != null)
+            {
+                model.QuizState = QuizStateEnum.Running;
+                result = Update(model);
+            }
+            return result;
         }
         public string? Publish(Guid modelId)
         {  
             var model = GetById(modelId);
+            if(model == null)
+            {
+                return null;
+            }
             model.GamePin = GenerateGamePin();
             model.QuizState = QuizStateEnum.Published;
             if (Update(model) != null)
+            {
                 return model.GamePin;
-             
-            return String.Empty;
+            }
+
+            return null;
         }
         
         public Guid? End(Guid modelId)
         {
             var model = GetById(modelId);
+            if(model == null)
+            {
+                return null;
+            }
             model.QuizState = QuizStateEnum.Ended;
             return Update(model);
         }

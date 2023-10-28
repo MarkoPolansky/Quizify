@@ -25,5 +25,21 @@ namespace Quizify.Api.BL.Facades
             var answerEntity = _mapper.Map<AnswerEntity>(answerModel);
             return answerRepository.Update(answerEntity);
         }
+
+        public List<AnswerListModel> GetAnswersByText(string? text)
+        {
+            var query = answerRepository.Get();
+
+            if (text != null)
+            {
+                query = query.Where(x => x.Text.Contains(text));
+            }
+
+            List<AnswerEntity> answerEntities = query.ToList();
+
+            var result = _mapper.Map<List<AnswerListModel>>(answerEntities);
+
+            return result;
+        }
     }
 }

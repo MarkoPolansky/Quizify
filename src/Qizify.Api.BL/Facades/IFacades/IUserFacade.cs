@@ -5,5 +5,6 @@ namespace Quizify.Api.BL.Facades.IFacades
 {
     public interface IUserFacade : IFacade<UserEntity, UserListModel, UserDetailModel>
     {
+        public List<UserListModel> GetUsersByName(string? userName);
     }
 }

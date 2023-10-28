@@ -43,5 +43,21 @@ namespace Quizify.Api.BL.Facades
             return userRepository.Update(userEntity);
         }
 
+        public List<UserListModel> GetUsersByName(string? userName)
+        {
+            var userQuery = userRepository.Get();
+            
+            if (userName != null) 
+            {
+                userQuery = userQuery.Where(usr => usr.Name.Contains(userName));    
+            }
+
+            List<UserEntity> userEntities = userQuery.ToList();
+
+            var result = _mapper.Map<List<UserListModel>>(userEntities);
+
+            return result;
+        }
+
     }
 }
