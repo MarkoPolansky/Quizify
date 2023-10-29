@@ -140,7 +140,7 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
     
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
-    questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
+    questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
 }
 
 
@@ -156,11 +156,13 @@ void UseQuestionEndpoints(RouteGroupBuilder routeGroupBuilder)
             : TypedResults.NotFound("Error 404 Not Found"));
 
 
-    questionEndpoints.MapGet("", (IQuestionFacade userFacade) => userFacade.GetAll());
-    questionEndpoints.MapPost("", (QuestionDetailModel user, IQuestionFacade userFacade) => userFacade.Create(user));
-    questionEndpoints.MapPut("", (QuestionDetailModel user, IQuestionFacade userFacade) => userFacade.Update(user));
-    questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuestionFacade userFacade) => userFacade.Delete(id));
+    questionEndpoints.MapGet("", (IQuestionFacade questionFacade) => questionFacade.GetAll());
+    questionEndpoints.MapPost("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Create(question));
+    questionEndpoints.MapPut("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Update(question));
+    questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuestionFacade questionFacade) => questionFacade.Delete(id));
 }
+
+
 
 
 

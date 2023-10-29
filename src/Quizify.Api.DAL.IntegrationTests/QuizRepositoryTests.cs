@@ -30,23 +30,44 @@ public class QuizRepositoryTests : TestBase
     public void  GetById_ReturnsWithIncludedProperties()
     {
         var quiz = _repository.GetById(QuizSeeds.quiz.Id);
-        quiz.ActiveQuestionId = QuestionSeeds.Question.Id;
+        
+        _repository.Update(quiz);
 
+        quiz = _repository.GetById(QuizSeeds.quiz.Id);
+        Assert.Equal(quiz.CreatedByUser?.Id,UserSeeds.user.Id);
+        Assert.Equal(quiz.Questions?.Count,1);
+    }
+    
+    
+    [Fact]
+    public void  AddNewUserQuiz_Added()
+    {
+        var quiz = _repository.GetById(QuizSeeds.quiz.Id);
+        Guid id = Guid.NewGuid();
         var quizUser = new QuizUserEntity
         {
             UserId = UserSeeds.user.Id,
             QuizId = QuizSeeds.quiz.Id,
-            Id = Guid.NewGuid()
+            Id = id
         };
         quiz.Users.Add(quizUser); 
-        
-        // _repository.Update(quiz);
+        _repository.Update(quiz);
 
-        //
-        // Assert.Equal(quiz.CreatedByUser?.Id,UserSeeds.user.Id);
-        // Assert.Equal(quiz.ActiveQuestion?.Id,QuizSeeds.quiz.Id);
-        // Assert.Equal(quiz.Questions?.Count,1);
-        // Assert.Equal(quiz.Users?.Count,1);
+        quiz = _repository.GetById(QuizSeeds.quiz.Id);
+        Assert.Equal(1,quiz.Users.Count(a => a.Id == id));
+    }
+    
+    [Fact]
+    public void  AddNewActiveQuestion_ActiveQuestionAdded()
+    {
+        var quiz = _repository.GetById(QuizSeeds.quiz.Id);
+
+
+        quiz.ActiveQuestionId = QuestionSeeds.Question.Id;
+        _repository.Update(quiz);
+
+        quiz = _repository.GetById(QuizSeeds.quiz.Id);
+        Assert.Equal(QuestionSeeds.Question.Id,quiz.ActiveQuestionId);
     }
 
 

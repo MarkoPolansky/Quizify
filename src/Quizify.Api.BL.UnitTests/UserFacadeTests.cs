@@ -22,10 +22,10 @@ public class UserFacadeTests
         DbContextFactory.Database.EnsureDeleted();
         DbContextFactory.Database.EnsureCreated();
 
-        var repository = new UserRepository(DbContextFactory);
-
         var _config = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailModel, UserEntity>());
         var mapper = _config.CreateMapper();
+
+        var repository = new UserRepository(DbContextFactory,mapper);
 
         var facade = new UserFacade(repository, mapper);
 

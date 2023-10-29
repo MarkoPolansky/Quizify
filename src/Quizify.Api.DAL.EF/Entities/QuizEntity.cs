@@ -16,7 +16,6 @@ namespace Quizify.Api.DAL.EF.Entities
         public required QuizStateEnum QuizState{ get; set; }
         
         public  QuestionEntity? ActiveQuestion { get; set; }
-        
         public  Guid? ActiveQuestionId { get; set; }
         public  UserEntity? CreatedByUser { get; set; }
         public required Guid CreatedByUserId { get; set; }

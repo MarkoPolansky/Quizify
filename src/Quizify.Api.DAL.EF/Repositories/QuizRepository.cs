@@ -42,8 +42,14 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .Include(r => r.Users)
                     .Single(r => r.Id == quiz.Id);
 
-                _mapper.Map(quiz, existingQuiz);
-                
+                existingQuiz = _mapper.Map(quiz, existingQuiz);
+
+                foreach (var quizUserEntity in existingQuiz.Users)
+                {
+                    dbContext.QuizUsers.Add(quizUserEntity);
+                }
+
+               
                 dbContext.Quizzes.Update(existingQuiz);
                 dbContext.SaveChanges();
 

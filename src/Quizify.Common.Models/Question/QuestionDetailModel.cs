@@ -13,6 +13,9 @@ namespace Quizify.Common.Models
         public required Guid QuizId { get; set; }
         
         public DateTime CreatedAt { get; set; }
+       
+        public  Guid? ActiveInQuizId { get; set; }
+
         
         public IList<AnswerListModel> Answers { get; set; } = new List<AnswerListModel>();
     }
