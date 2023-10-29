@@ -24,8 +24,9 @@ public class QuizifyTestingDbContext : QuizifyDbContext
             modelBuilder.Entity<UserEntity>().HasData(UserSeeds.Seed());
             modelBuilder.Entity<QuizEntity>().HasData(QuizSeeds.Seed());
             modelBuilder.Entity<QuestionEntity>().HasData(QuestionSeeds.Seed());
-            // modelBuilder.Entity<AnswerEntity>().HasData(AnswerSeeds.Seed());
-            // modelBuilder.Entity<UserAnswerEntity>().HasData(AnswerUserSeeds.Seed());
+            modelBuilder.Entity<AnswerEntity>().HasData(AnswerSeeds.Seed());
+            modelBuilder.Entity<QuizUserEntity>().HasData(QuizUserSeeds.Seed());
+            modelBuilder.Entity<UserAnswerEntity>().HasData(AnswerUserSeeds.Seed());
         }
     
         

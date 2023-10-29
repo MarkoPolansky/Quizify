@@ -24,7 +24,7 @@ public class QuestionRepositoryTests : TestBase
         _repository = new QuestionRepository(DbContextFactory.CreateDbContext(),
             new Mapper(
                     new MapperConfiguration(configuration => {
-                        configuration.Internal().MethodMappingEnabled = false;
+                        //configuration.Internal().MethodMappingEnabled = false;
                         configuration.AddMaps(typeof(EntityBase), typeof(ApiBLInstaller));
                     })));
     }

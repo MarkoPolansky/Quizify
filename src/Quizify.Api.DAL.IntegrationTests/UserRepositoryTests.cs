@@ -112,6 +112,28 @@ public class UserRepositoryTests : TestBase
 
         DeepAssert.Equal(user, fromRepository);
     }
+    
+    
+    
+    [Fact]
+    public void UpdateUserAddedAnswers_AnswersInserted()
+    {
+        var user = _repository.GetById(UserSeeds.user.Id);
+        Guid id = Guid.NewGuid();
+        var AnswerUser = new UserAnswerEntity
+        {
+            Id = id,
+            UserId = UserSeeds.user.Id,
+            AnswerId = AnswerSeeds.Answer.Id,
+            UserInput = "Zelena"
+        };
+        user.Answers.Add(AnswerUser);
+
+        _repository.Update(user);
+        var fromRepository = _repository.GetById(UserSeeds.user.Id);
+        
+       DeepAssert.Equal(user, fromRepository);
+    }
 
 }
 

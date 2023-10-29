@@ -41,28 +41,19 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .Single(r => r.Id == user.Id);
 
                 _mapper.Map(user, existingUser);
-
-
-                // TODO: Má tu být i toto?
-                //foreach (var quizEntity in existingUser.CreatedQuizzes)
-                //{
-                //    dbContext.Quizzes.Add(quizEntity);
-                //}
-
-                //foreach (var AnswerUserEntity in existingUser.Answers)
-                //{
-                //    dbContext.AnswerUsers.Add(AnswerUserEntity);
-                //}
-
-                foreach (var quizUserEntity in existingUser.Quizzes)
-                {
-                    dbContext.QuizUsers.Add(quizUserEntity);
-                }
-
                 
-
-                dbContext.Users.Update(existingUser);
-                dbContext.SaveChanges();
+                // foreach (var AnswerUserEntity in existingUser.Answers)
+                // {
+                //     dbContext.AnswerUsers.Add(AnswerUserEntity);
+                // }
+                //
+                // foreach (var quizUserEntity in existingUser.Quizzes)
+                // {
+                //     dbContext.QuizUsers.Add(quizUserEntity);
+                // }
+                //
+                dbContext.Update(existingUser);
+               
 
                 return existingUser.Id;
             }

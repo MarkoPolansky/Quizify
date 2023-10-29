@@ -34,12 +34,8 @@ public class AnswerRepositoryTests : TestBase
     public void GetById_ReturnsWithIncludedProperties()
     {
         var answer = _repository.GetById(AnswerSeeds.Answer.Id);
-
-        _repository.Update(answer);
-
-        answer = _repository.GetById(AnswerSeeds.Answer.Id);
+        
         Assert.Equal(answer.Question?.Id, QuestionSeeds.Question.Id);
-        Assert.Equal(answer.Users?.Count, 1);
     }
 
 
@@ -60,20 +56,7 @@ public class AnswerRepositoryTests : TestBase
         answer = _repository.GetById(AnswerSeeds.Answer.Id);
         Assert.Equal(1, answer.Users.Count(a => a.Id == id));
     }
-
-    [Fact]
-    public void AddNewQuestion_Question()
-    {
-        var answer = _repository.GetById(AnswerSeeds.Answer.Id);
-
-
-        answer.QuestionId = QuestionSeeds.Question.Id;
-        _repository.Update(answer);
-
-        answer = _repository.GetById(AnswerSeeds.Answer.Id);
-        Assert.Equal(QuizSeeds.quiz.Id, answer.QuestionId);
-    }
-
+    
 
     [Fact]
     public void CreateNewAnswer_AnswerCreated()

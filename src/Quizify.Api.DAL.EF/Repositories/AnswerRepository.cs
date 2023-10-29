@@ -39,7 +39,12 @@ namespace Quizify.Api.DAL.EF.Repositories
 
                 _mapper.Map(Answer, existingQuiz);
 
-                dbContext.Answers.Update(existingQuiz);
+                foreach (var user in existingQuiz.Users)
+                {
+                    dbContext.AnswerUsers.Add(user);
+                }
+
+                dbContext.Update(existingQuiz);
                 dbContext.SaveChanges();
 
                 return existingQuiz.Id;

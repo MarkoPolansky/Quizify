@@ -40,13 +40,13 @@ namespace Quizify.Api.DAL.EF.Repositories
 
                 _mapper.Map(question, existingQuestion);
 
-                foreach (var AnswerEntity in existingQuestion.Answers)
-                {
-                    dbContext.Answers.Add(AnswerEntity);
-                }
+                // foreach (var AnswerEntity in existingQuestion.Answers)
+                // {
+                //     dbContext.Answers.Add(AnswerEntity);
+                // }
 
-                dbContext.Questions.Update(existingQuestion);
-                dbContext.SaveChanges();
+                dbContext.Update(existingQuestion);
+                //dbContext.SaveChanges();
 
                 return existingQuestion.Id;
             }
