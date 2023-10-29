@@ -1,4 +1,6 @@
-﻿using Quizify.Api.DAL.EF.Entities;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,43 @@ namespace Quizify.Api.DAL.EF.Repositories
 {
     public class AnswerRepository : RepositoryBase<AnswerEntity>, IAnswerRepository
     {
-        public AnswerRepository(QuizifyDbContext dbContext) : base(dbContext)
+        private readonly IMapper _mapper;
+        public AnswerRepository(QuizifyDbContext dbContext, IMapper mapper) : base(dbContext)
         {
+            _mapper = mapper;
         }
+
+        public override AnswerEntity? GetById(Guid id)
+        {
+            return dbContext.Set<AnswerEntity>()
+                .Include(Answer => Answer.Users)
+                    .ThenInclude(quiz => quiz.User)
+                .Include(Answer => Answer.Question)
+                .SingleOrDefault(entity => entity.Id == id);
+        }
+
+
+        public override Guid? Update(AnswerEntity Answer)
+        {
+            if (Exists(Answer.Id))
+            {
+                var existingQuiz = dbContext.Answers
+                    .Include(Answer => Answer.Users)
+                    .Include(Answer => Answer.Question)
+                    .Single(r => r.Id == Answer.Id);
+
+                _mapper.Map(Answer, existingQuiz);
+
+                dbContext.Answers.Update(existingQuiz);
+                dbContext.SaveChanges();
+
+                return existingQuiz.Id;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
