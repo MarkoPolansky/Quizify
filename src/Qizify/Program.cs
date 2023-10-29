@@ -1,4 +1,3 @@
-
 using System.Globalization;
 using AutoMapper;
 using AutoMapper.Internal;
@@ -17,6 +16,7 @@ using Quizify.Api.DAL.EF.Installers;
 using Quizify.Common.Extensions;
 using Quizify.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -40,7 +40,6 @@ UseEndpoints(app);
 UseOpenApi(app);
 
 app.Run();
-
 void ConfigureCors(IServiceCollection serviceCollection)
 {
     serviceCollection.AddCors(options =>
@@ -208,5 +207,4 @@ void UseOpenApi(IApplicationBuilder application)
 
 // Make the implicit Program class public so test projects can access it
 public partial class Program
-{
-}
+{}
