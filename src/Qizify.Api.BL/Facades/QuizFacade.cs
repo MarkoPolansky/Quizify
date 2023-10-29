@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Quizify.Api.BL.Facades.IFacades;
 using Quizify.Api.BL.Services.Interfaces;
 using Quizify.Api.DAL.EF.Entities;
@@ -23,8 +25,6 @@ namespace Quizify.Api.BL.Facades
             _mapper = mapper;
             _pinGenerationService = pinGenerationService;
             }
-        
-       
 
         public override Guid? Update(QuizDetailModel quizModel)
         {
@@ -49,10 +49,12 @@ namespace Quizify.Api.BL.Facades
             
             return result;
         }
-        
         public Guid? Start(Guid modelId)
         {
             var model = GetById(modelId);
+            if(model == null) return null;
+            if (model.QuizState != QuizStateEnum.Published) return null;
+            
             Guid? result = null;
             if (model != null)
             {
@@ -64,10 +66,10 @@ namespace Quizify.Api.BL.Facades
         public string? Publish(Guid modelId)
         {  
             var model = GetById(modelId);
-            if(model == null)
-            {
-                return null;
-            }
+            if(model == null) return null;
+            if (model.QuizState == QuizStateEnum.Published || model.QuizState == QuizStateEnum.Running) 
+                return "null";
+            
             model.GamePin = GenerateGamePin();
             model.QuizState = QuizStateEnum.Published;
             if (Update(model) != null)
@@ -81,10 +83,9 @@ namespace Quizify.Api.BL.Facades
         public Guid? End(Guid modelId)
         {
             var model = GetById(modelId);
-            if(model == null)
-            {
-                return null;
-            }
+            if(model == null) return null;
+            if (model.QuizState != QuizStateEnum.Running) return null;
+            
             model.QuizState = QuizStateEnum.Ended;
             return Update(model);
         }
