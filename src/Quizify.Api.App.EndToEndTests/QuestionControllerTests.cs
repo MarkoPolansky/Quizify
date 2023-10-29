@@ -94,8 +94,6 @@ namespace Quizify.Api.App.EndToEndTests
             Assert.Empty(questions.Where(q => q.Id == questionId));
 
             // Cleaning
-            response = await client.Value.DeleteAsync(requestQuestionUri);
-            response.EnsureSuccessStatusCode();
             response = await client.Value.DeleteAsync(requestQuizUri);
             response.EnsureSuccessStatusCode();
             response = await client.Value.DeleteAsync(requestUserUri);
