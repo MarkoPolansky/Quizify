@@ -19,7 +19,7 @@ namespace Quizify.Api.DAL.UnitTests
 
     
         [Fact]
-        public async Task InserQuiz_QuizInsertedAsync()
+        public async Task InsertQuiz_QuizInsertedAsync()
         {
 
             var user = new UserEntity()

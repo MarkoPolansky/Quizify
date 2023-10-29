@@ -101,6 +101,7 @@ void UseEndpoints(WebApplication application)
     UseUserEndpoints(endpointsBase);
     UseQuizEndpoints(endpointsBase);
     UseQuestionEndpoints(endpointsBase);
+    UseAnswerEndpoints(endpointsBase);
 }
 
 
@@ -139,6 +140,7 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
     questionEndpoints.MapPut("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Update(quiz));
     questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.Delete(id));
     
+   // questionEndpoints.MapPost("/{id:guid}/join", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
     questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
@@ -161,6 +163,24 @@ void UseQuestionEndpoints(RouteGroupBuilder routeGroupBuilder)
     questionEndpoints.MapPost("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Create(question));
     questionEndpoints.MapPut("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Update(question));
     questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuestionFacade questionFacade) => questionFacade.Delete(id));
+}
+
+void UseAnswerEndpoints(RouteGroupBuilder routeGroupBuilder)
+{
+    var answerEndpoints = routeGroupBuilder.MapGroup("answer")
+        .WithTags("answer");
+
+
+    answerEndpoints.MapGet("{id:guid}", Results<Ok<AnswerDetailModel>, NotFound<string>> (Guid id, IAnswerFacade answerFacade)
+        => answerFacade.GetById(id) is { } answer
+            ? TypedResults.Ok(answer)
+            : TypedResults.NotFound("Error 404 Not Found"));
+
+
+    answerEndpoints.MapGet("", (IAnswerFacade answerFacade) => answerFacade.GetAll());
+    answerEndpoints.MapPost("", (AnswerDetailModel answer, IAnswerFacade answerFacade) => answerFacade.Create(answer));
+    answerEndpoints.MapPut("", (AnswerDetailModel answer, IAnswerFacade answerFacade) => answerFacade.Update(answer));
+    answerEndpoints.MapDelete("{id:guid}", (Guid id, IAnswerFacade answerFacade) => answerFacade.Delete(id));
 }
 
 
