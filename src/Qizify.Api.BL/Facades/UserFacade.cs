@@ -40,7 +40,7 @@ namespace Quizify.Api.BL.Facades
                 QuizId = t.Quiz.Id,
             }).ToList();
             var result = userRepository.Update(userEntity);
-            return userRepository.Update(userEntity);
+            return result;
         }
 
         public List<UserListModel> GetUsersByName(string? userName)

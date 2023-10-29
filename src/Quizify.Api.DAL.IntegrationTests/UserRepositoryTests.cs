@@ -30,17 +30,27 @@ public class UserRepositoryTests : TestBase
     }
 
 
-    //[Fact]
-    //public void GetById_ReturnsWithIncludedProperties()
-    //{
-    //    var user = _repository.GetById(UserSeeds.user.Id);
+    // [Fact]
+    // public void GetById_ReturnsWithIncludedProperties()
+    // {
+    //     var user = _repository.GetById(UserSeeds.user.Id);
+    //     
+    //     
+    //     Assert.Equal(user.Quizzes.First().Id, QuizSeeds.quiz.Id);
+    //     Assert.Equal(user.Answers?.Count, 1);
+    // }
+    
+    
+    [Fact]
+    public void UpdateUser_UserUpdated()
+    {
+        var user = _repository.GetById(UserSeeds.user.Id);
+        user.Name = "ASdadasd Updated";
+        _repository.Update(user);
 
-    //    _repository.Update(user);
-
-    //    user = _repository.GetById(UserSeeds.user.Id);
-    //    Assert.Equal(user.Quiz?.Id, QuizSeeds.quiz.Id);
-    //    Assert.Equal(user.Answers?.Count, 1);
-    //}
+        var userFromRepository = _repository.GetById(UserSeeds.user.Id);
+        Assert.Equal(user, userFromRepository);
+    }
 
 
     [Fact]
