@@ -47,7 +47,8 @@ public class UserRepositoryTests : TestBase
         var user = _repository.GetById(UserSeeds.user.Id);
         user.Name = "ASdadasd Updated";
         _repository.Update(user);
-
+    
+        
         var userFromRepository = _repository.GetById(UserSeeds.user.Id);
         Assert.Equal(user, userFromRepository);
     }

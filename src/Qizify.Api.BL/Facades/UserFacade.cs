@@ -36,7 +36,7 @@ namespace Quizify.Api.BL.Facades
             new QuizUserEntity
             {
                 Id = t.Id,
-                UserId = userEntity.Id,
+                UserId = userEntity.Id, 
                 QuizId = t.Quiz.Id,
             }).ToList();
             var result = userRepository.Update(userEntity);

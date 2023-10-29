@@ -38,24 +38,37 @@ namespace Quizify.Api.DAL.EF.Repositories
             {
                 var existingUser = dbContext.Users
                     .Include(user => user.Answers)
+                    .ThenInclude(a =>a.Answer)
                     .Include(user => user.Quizzes)
+                    .ThenInclude(a =>a.Quiz)
                     .Include(user => user.CreatedQuizzes)
                     .Single(r => r.Id == user.Id);
 
-                _mapper.Map(user, existingUser);
+                existingUser =_mapper.Map(user, existingUser);
                 
-                // foreach (var AnswerUserEntity in existingUser.Answers)
-                // {
-                //     dbContext.AnswerUsers.Add(AnswerUserEntity);
-                // }
-                //
-                // foreach (var quizUserEntity in existingUser.Quizzes)
-                // {
-                //     dbContext.QuizUsers.Add(quizUserEntity);
-                // }
-                //
+                foreach (var answerUserEntity in existingUser.Answers)
+                {
+                    dbContext.AnswerUsers.Add(answerUserEntity);
+                }
+                
+                foreach (var quizUserEntity in existingUser.Quizzes)
+                {
+                    dbContext.QuizUsers.Add(quizUserEntity);
+                }
+                
+                foreach (var quiz in existingUser.CreatedQuizzes)
+                {
+                    if(dbContext.Quizzes.Count(a =>a.Id == quiz.Id) == 0)
+                     dbContext.Quizzes.Add(quiz);
+                    else
+                    { 
+                     dbContext.Quizzes.Update(quiz);
+                    }
+                }
+                
+                
                 dbContext.Update(existingUser);
-               
+                dbContext.SaveChanges();
 
                 return existingUser.Id;
             }
