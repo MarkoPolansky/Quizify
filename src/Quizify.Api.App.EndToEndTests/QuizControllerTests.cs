@@ -1,4 +1,5 @@
-﻿using Quizify.Common.Enums;
+﻿using Quizify.Api.DAL.Common.Tests;
+using Quizify.Common.Enums;
 using Quizify.Common.Models;
 using Xunit;
 
@@ -35,8 +36,8 @@ namespace Quizify.Api.App.EndToEndTests
             Guid userId = Guid.NewGuid();
             string baseQuizUrl = "/api/quiz";
             string baseUserUrl = "/api/user";
-            string requestUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
-            string requestUserUri = string.Format("{0}/{1}", baseQuizUrl, userId);
+            string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
+            string requestUserUri = string.Format("{0}/{1}", baseUserUrl, userId);
             var user = new UserListModel
             {
                 Id = userId,
@@ -57,7 +58,7 @@ namespace Quizify.Api.App.EndToEndTests
             response = await client.Value.PostAsJsonAsync(baseQuizUrl, quiz);
             response.EnsureSuccessStatusCode();
 
-            response = await client.Value.GetAsync(requestUri);
+            response = await client.Value.GetAsync(requestQuizUri);
             response.EnsureSuccessStatusCode();
 
             var storedQuiz = await response.Content.ReadFromJsonAsync<QuizDetailModel>();
@@ -65,7 +66,7 @@ namespace Quizify.Api.App.EndToEndTests
             Assert.NotNull(storedQuiz);
 
             // Act 2 - Delete
-            response = await client.Value.DeleteAsync(requestUri);
+            response = await client.Value.DeleteAsync(requestQuizUri);
             response.EnsureSuccessStatusCode();
 
             response = await client.Value.GetAsync(baseQuizUrl);
@@ -77,6 +78,61 @@ namespace Quizify.Api.App.EndToEndTests
             Assert.Empty(quizes.Where(q => q.Id == quizId));
 
             // Cleaning
+            response = await client.Value.DeleteAsync(requestUserUri);
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task UpdateQuiz_Test()
+        {   
+            // Arrange
+            Guid quizId = Guid.NewGuid();
+            Guid userId = Guid.NewGuid();
+            string baseQuizUrl = "/api/quiz";
+            string baseUserUrl = "/api/user";
+            string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
+            string requestUserUri = string.Format("{0}/{1}", baseUserUrl, userId);
+            var user = new UserListModel
+            {
+                Id = userId,
+                Name = "CreatedQuiz"
+            };
+
+            var response = await client.Value.PostAsJsonAsync(baseUserUrl, user);
+            response.EnsureSuccessStatusCode();
+
+            var quiz = new QuizDetailModel
+            {
+                Id = quizId,
+                QuizState = QuizStateEnum.Creation,
+                CreatedByUser = user,
+                Title = "Not updated Quiz"
+            };
+
+            var quizUpdated = new QuizDetailModel
+            {
+                Id = quizId,
+                QuizState = QuizStateEnum.Creation,
+                CreatedByUser = user,
+                Title = "Updated Quiz"
+            };
+
+            response = await client.Value.PostAsJsonAsync(baseQuizUrl, quiz);
+            response.EnsureSuccessStatusCode();
+            // Act
+            response = await client.Value.PutAsJsonAsync(baseQuizUrl, quizUpdated);
+            response.EnsureSuccessStatusCode();
+            // Assert
+            response = await client.Value.GetAsync(requestQuizUri);
+            response.EnsureSuccessStatusCode();
+
+            QuizDetailModel? storedQuiz = await response.Content.ReadFromJsonAsync<QuizDetailModel>();
+            Assert.NotNull(storedQuiz);
+            DeepAssert.Equal(storedQuiz, quizUpdated);
+            
+            // Cleaning
+            response = await client.Value.DeleteAsync(requestQuizUri);
+            response.EnsureSuccessStatusCode();
             response = await client.Value.DeleteAsync(requestUserUri);
             response.EnsureSuccessStatusCode();
         }
