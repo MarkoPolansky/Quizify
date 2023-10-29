@@ -73,7 +73,8 @@ namespace Quizify.Api.App.EndToEndTests
         {
             // Arrange
             Guid userId = Guid.NewGuid();
-            string requestUri = string.Format("/api/user/{0}", userId);
+            string baseUrl = "/api/user";
+            string requestUri = string.Format("{0}/{1}", baseUrl, userId);
             var user = new UserDetailModel
             {
                 Id = userId,
@@ -85,10 +86,14 @@ namespace Quizify.Api.App.EndToEndTests
                 Name = "Thomas",
             };
 
-            var response = await client.Value.PostAsJsonAsync("/api/user", user);
+            var response = await client.Value.GetAsync(baseUrl);
+            response.EnsureSuccessStatusCode();
+            var storedUsers = await response.Content.ReadFromJsonAsync<List<UserListModel>>();
+
+            response = await client.Value.PostAsJsonAsync(baseUrl, user);
             response.EnsureSuccessStatusCode();
             // Act
-            response = await client.Value.PutAsJsonAsync("/api/user", userUpdated);
+            response = await client.Value.PutAsJsonAsync(baseUrl, userUpdated);
             response.EnsureSuccessStatusCode();
             // Assert
             response = await client.Value.GetAsync(requestUri);
