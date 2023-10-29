@@ -25,7 +25,9 @@ namespace Quizify.Api.DAL.EF.Repositories
         {
             return dbContext.Set<UserEntity>()
                 .Include(user => user.Answers)
+                .ThenInclude(a => a.Answer)
                 .Include(user => user.Quizzes)
+                .ThenInclude(a => a.Quiz)
                 .Include(user => user.CreatedQuizzes)
                 .SingleOrDefault(entity => entity.Id == id);
         }

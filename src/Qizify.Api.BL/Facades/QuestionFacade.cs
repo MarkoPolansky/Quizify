@@ -32,7 +32,7 @@ namespace Quizify.Api.BL.Facades
                     IsCorrect = t.IsCorrect,
                 }).ToList();
             var result = questionRepository.Update(questionEntity);
-            return questionRepository.Update(questionEntity);
+            return result;
         }
 
         public List<QuestionListModel> GetQuestionByText(string? text)
