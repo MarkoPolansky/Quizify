@@ -14,18 +14,23 @@ variables:
 steps:
 -  template: build-API.yml
 - task: DotNetCoreCLI@2
-  displayName: 'Run DotNet tests'
+  displayName: 'Run Dotnet Tests'
   inputs:
-   command: 'test'
-   projects: '*/Roadtrip.sln'
-   arguments: '--collect "XPlat Code coverage"'
+    command: 'test'
+    projects: '**/Quizify.sln'
+    arguments: '--collect "XPlat Code coverage"'
 
+- task: reportgenerator@5
+  displayName: ReportGenerator
+  inputs:
+    reports: 'src\target\reports\coverage\coverage.opencover.xml'
+    targetdir: '$(Build.SourcesDirectory)/coveragereport'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+    assemblyfilters: '-xunit*'
 
-- script: 'reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"'  
-  displayName: 'Create reports'
-
-- task: PublishCodeCoverageResults@1  
-  displayName: 'Publish code coverage'  
-  inputs:  
-    codeCoverageTool: Cobertura  
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/coveragereport/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/coveragereport'
