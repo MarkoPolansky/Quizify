@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="RightToLeft" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="AnswerEntity" Category="EntityType" Annotations="Relational:TableName: Answers RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="1259.81100748698,100.239735568925,311.784559733072,309.8006" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="AnswerEntity" Name="AnswerEntity" UseManualLocation="True" />
+    <Node Id="AnswerEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1374.22223388672,140.239857346269,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="AnswerEntity.ImageUrl" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1279.81126383464,308.120135568926,108.926666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="ImageUrl (string)" MaxLength="None" Name="ImageUrl" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="AnswerEntity.IsCorrect" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1279.81100748698,252.160035568926,101.526666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="IsCorrect (bool)" MaxLength="None" Name="IsCorrect" PropertyAccessMode="PropertyAccessMode.Default" Type="bool" ValueGenerated="None" />
+    <Node Id="AnswerEntity.Question" Category="Navigation Property" Bounds="1279.81276285807,196.199935568925,84.9966666666669,25.96" Dependent="" Field="" Inverse="Answers" Label="Question (1)" Name="Question" Principal="QuestionEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="QuestionEntity" />
+    <Node Id="AnswerEntity.QuestionId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1279.81225179036,364.080235568926,113.783333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="QuestionId (Guid)" MaxLength="None" Name="QuestionId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="AnswerEntity.Text" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1470.00556722005,140.24016252205,81.5900000000001,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Text (string)" MaxLength="None" Name="Text" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="AnswerEntity.Type" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1418.73939941406,308.120106369707,110.04,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Type (TypeEnum)" MaxLength="None" Name="Type" PropertyAccessMode="PropertyAccessMode.Default" Type="TypeEnum" ValueGenerated="None" />
+    <Node Id="AnswerEntity.Users" Category="Navigation Collection" Bounds="1279.81223388672,140.239835568925,64.4099999999999,25.96" Dependent="AnswerUserEntity" Field="" Inverse="" Label="Users (*)" Name="Users" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;AnswerUserEntity&gt;" />
+    <Node Id="AnswerUserEntity" Category="EntityType" Annotations="Relational:TableName: AnswerUsers RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="1214.8277586246,548.221557449878,421.88,309.8006" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="AnswerUserEntity" Name="AnswerUserEntity" UseManualLocation="True" />
+    <Node Id="AnswerUserEntity.Answer" Category="Navigation Property" Bounds="1421.39442529127,588.221607449899,75.7433333333333,25.96" Dependent="" Field="" Inverse="" Label="Answer (1)" Name="Answer" Principal="AnswerEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="AnswerEntity" />
+    <Node Id="AnswerUserEntity.AnswerEntityId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1234.8277586246,812.062057449878,139.616666666667,25.96" Field="nofield" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="False" IsShadow="True" IsUnicode="True" Label="AnswerEntityId (Guid?)" MaxLength="None" Name="AnswerEntityId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid?" ValueGenerated="None" />
+    <Node Id="AnswerUserEntity.AnswerId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1234.8277586246,644.181757449878,104.53,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="AnswerId (Guid)" MaxLength="None" Name="AnswerId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="AnswerUserEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1325.61109195794,588.221607449899,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="AnswerUserEntity.User" Category="Navigation Property" Bounds="1234.8277586246,588.221657449878,60.7833333333333,25.96" Dependent="" Field="" Inverse="" Label="User (1)" Name="User" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="AnswerUserEntity.UserEntityId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1234.8277586246,756.101957449878,124.656666666667,25.96" Field="nofield" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="False" IsShadow="True" IsUnicode="True" Label="UserEntityId (Guid?)" MaxLength="None" Name="UserEntityId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid?" ValueGenerated="None" />
+    <Node Id="AnswerUserEntity.UserId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1527.1377586246,588.221607449899,89.5699999999997,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="UserId (Guid)" MaxLength="None" Name="UserId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="AnswerUserEntity.UserInput" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1234.8277586246,700.141857449878,112.303333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="UserInput (string)" MaxLength="None" Name="UserInput" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="IModel" Category="Model" Annotations="BaseTypeDiscoveryConvention:DerivedTypes: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.IConventionEntityType]] Relational:MaxIdentifierLength: 128 RelationshipDiscoveryConvention:InverseNavigationCandidates: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.SortedSet`1[System.Type]] SqlServer:ValueGenerationStrategy: IdentityColumn" Bounds="182.858793030793,60.2396355689253,1473.84896559381,817.782621880953" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" Label="QuizifyDbContext" ProductVersion="7.0.11" PropertyAccessMode="PropertyAccessMode.Default" />
+    <Node Id="QuestionEntity" Category="EntityType" Annotations="Relational:TableName: Questions RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="818.127857666016,136.645879986183,303.403984781897,253.8405" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="QuestionEntity" Name="QuestionEntity" UseManualLocation="True" />
+    <Node Id="QuestionEntity.Answers" Category="Navigation Collection" Bounds="838.128049316406,232.606079986183,79.3699999999999,25.96" Dependent="AnswerEntity" Field="" Inverse="Question" Label="Answers (*)" Name="Answers" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;AnswerEntity&gt;" />
+    <Node Id="QuestionEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="929.294914754232,176.645979986183,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="QuestionEntity.Points" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1025.07850911458,176.64610847129,76.4533333333334,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Points (int)" MaxLength="None" Name="Points" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="QuestionEntity.Quiz" Category="Navigation Property" Bounds="838.128248087565,176.645986400978,61.1666666666665,25.96" Dependent="" Field="" Inverse="Questions" Label="Quiz (1)" Name="Quiz" Principal="QuizEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="QuizEntity" />
+    <Node Id="QuestionEntity.QuizId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="949.718035481771,288.566068493263,89.9533333333335,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="QuizId (Guid)" MaxLength="None" Name="QuizId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="QuestionEntity.Text" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="838.128004150391,288.566179986183,81.5900000000001,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Text (string)" MaxLength="None" Name="Text" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="QuestionEntity.Type" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="838.127857666016,344.526279986183,110.04,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Type (TypeEnum)" MaxLength="None" Name="Type" PropertyAccessMode="PropertyAccessMode.Default" Type="TypeEnum" ValueGenerated="None" />
+    <Node Id="QuizEntity" Category="EntityType" Annotations="Relational:TableName: Quizzes RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="202.858793030793,113.23248635963,431.883391655816,309.8006" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="QuizEntity" Name="QuizEntity" UseManualLocation="True" />
+    <Node Id="QuizEntity.CreatedByUser" Category="Navigation Property" Bounds="499.778793030793,265.152755842051,114.866666666667,25.96" Dependent="" Field="" Inverse="CreatedQuizzes" Label="CreatedByUser (1)" Name="CreatedByUser" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="QuizEntity.CreatedByUserId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="222.85881045972,377.07298635963,143.653333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="CreatedByUserId (Guid)" MaxLength="None" Name="CreatedByUserId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="QuizEntity.GamePin" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="222.858793030793,265.15278635963,107.993333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="GamePin (string)" MaxLength="None" Name="GamePin" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="QuizEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="317.26879543829,153.23258635963,65.7833333333334,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="QuizEntity.ImageUrl" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="360.852126364126,265.152755842051,108.926666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="ImageUrl (string)" MaxLength="None" Name="ImageUrl" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="QuizEntity.IsStatred" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="222.85879845614,209.19268635963,100.576666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="IsStarted (bool)" MaxLength="None" Name="IsStatred" PropertyAccessMode="PropertyAccessMode.Default" Type="bool" ValueGenerated="None" />
+    <Node Id="QuizEntity.Questions" Category="Navigation Collection" Bounds="526.118851353275,153.232772931895,88.6233333333334,25.96" Dependent="QuestionEntity" Field="" Inverse="Quiz" Label="Questions (*)" Name="Questions" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;QuestionEntity&gt;" />
+    <Node Id="QuizEntity.TimeLimit" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="222.858843215254,321.11288635963,139.71,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="TimeLimit (TimeSpan?)" MaxLength="None" Name="TimeLimit" PropertyAccessMode="PropertyAccessMode.Default" Type="TimeSpan?" ValueGenerated="None" />
+    <Node Id="QuizEntity.Title" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="413.052128771624,153.232772931895,83.0666666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Title (string)" MaxLength="None" Name="Title" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="QuizEntity.Users" Category="Navigation Collection" Bounds="222.85879543829,153.232620344005,64.4100000000001,25.96" Dependent="QuizUserEntity" Field="" Inverse="" Label="Users (*)" Name="Users" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;QuizUserEntity&gt;" />
+    <Node Id="QuizUserEntity" Category="EntityType" Annotations="Relational:TableName: QuizUsers RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="211.642958364497,540.393446677525,407.303520609537,309.8006" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="QuizUserEntity" Name="QuizUserEntity" UseManualLocation="True" />
+    <Node Id="QuizUserEntity.EndedAt" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="231.643077993403,804.233946677525,131.653333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="EndedAt (DateTime?)" MaxLength="None" Name="EndedAt" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime?" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="413.593074331294,580.3935806619,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="QuizUserEntity.Quiz" Category="Navigation Property" Bounds="322.426407664627,580.393519626743,61.1666666666667,25.96" Dependent="" Field="" Inverse="" Label="Quiz (1)" Name="Quiz" Principal="QuizEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="QuizEntity" />
+    <Node Id="QuizUserEntity.QuizEntityId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="231.642974335363,748.273846677525,125.04,25.96" Field="nofield" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="False" IsShadow="True" IsUnicode="True" Label="QuizEntityId (Guid?)" MaxLength="None" Name="QuizEntityId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid?" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.QuizId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="231.642972707758,636.353646677525,89.9533333333334,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="QuizId (Guid)" MaxLength="None" Name="QuizId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.StartedAt" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="386.682982066482,748.273646579868,130.746666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="StartedAt (DateTime)" MaxLength="None" Name="StartedAt" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.TotalPoints" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="231.643019806554,692.313746677525,101.68,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="TotalPoints (int)" MaxLength="None" Name="TotalPoints" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.User" Category="Navigation Property" Bounds="231.642958364497,580.393546677525,60.7833333333333,25.96" Dependent="" Field="" Inverse="" Label="User (1)" Name="User" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="QuizUserEntity.UserEntityId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="363.323151133865,692.3135025369,124.656666666667,25.96" Field="nofield" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="False" IsShadow="True" IsUnicode="True" Label="UserEntityId (Guid?)" MaxLength="None" Name="UserEntityId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid?" ValueGenerated="None" />
+    <Node Id="QuizUserEntity.UserId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="509.376478974034,580.3935806619,89.5700000000002,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="UserId (Guid)" MaxLength="None" Name="UserId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="UserEntity" Category="EntityType" Annotations="" BaseClass="" Bounds="803.887446254146,612.889749074629,321.650330403643,197.880618652344" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="UserEntity" Name="UserEntity" UseManualLocation="True" />
+    <Node Id="UserEntity.Answers" Category="Navigation Collection" Bounds="1026.16777665779,652.889849074629,79.3699999999999,25.96" Dependent="AnswerUserEntity" Field="" Inverse="" Label="Answers (*)" Name="Answers" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;AnswerUserEntity&gt;" />
+    <Node Id="UserEntity.CreatedQuizzes" Category="Navigation Collection" Bounds="962.814112920813,764.810015090254,117.893333333334,25.96" Dependent="QuizEntity" Field="" Inverse="CreatedByUser" Label="CreatedQuizzes (*)" Name="CreatedQuizzes" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;QuizEntity&gt;" />
+    <Node Id="UserEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="823.887676763587,652.889849074629,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="UserEntity.ImageUrl" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="823.887446254146,764.810267726973,108.926666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="ImageUrl (string)" MaxLength="None" Name="ImageUrl" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="UserEntity.Name" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="823.887692429277,708.850167726973,92.3200000000002,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Name (string)" MaxLength="None" Name="Name" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="UserEntity.Quizzes" Category="Navigation Collection" Bounds="919.67101009692,652.889849074629,76.4966666666667,25.96" Dependent="QuizUserEntity" Field="" Inverse="" Label="Quizzes (*)" Name="Quizzes" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;QuizUserEntity&gt;" />
+  </Nodes>
+  <Links>
+    <Link Source="AnswerEntity" Target="AnswerEntity.Id" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.ImageUrl" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.IsCorrect" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.Question" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.QuestionId" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.Text" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.Type" Category="Contains" />
+    <Link Source="AnswerEntity" Target="AnswerEntity.Users" Category="Contains" />
+    <Link Source="AnswerEntity" Target="QuestionEntity" Category="Foreign Key" Annotations="" Bounds="1130.53023578174,258.086080251563,129.280771705237,2.4431417025628" From="AnswerEntity.QuestionId" IsUnique="False" Label="1:*" LabelBounds="1188.17174412264,263.307651166594,14.0733333333333,15.9600000000002" Name="AnswerEntity -&gt; QuestionEntity" To="QuestionEntity.Id" />
+    <Link Source="AnswerUserEntity" Target="AnswerEntity" Category="Foreign Key" Annotations="" Bounds="1419.38546133773,419.038065132762,2.90226853773902,129.183492317116" From="AnswerUserEntity.AnswerId" IsUnique="False" Label="1:*" LabelBounds="1402.76326214596,475.694732454673,14.0733333333337,15.9600000000002" Name="AnswerUserEntity -&gt; AnswerEntity" To="AnswerEntity.Id" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.Answer" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.AnswerEntityId" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.AnswerId" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.Id" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.User" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.UserEntityId" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.UserId" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="AnswerUserEntity.UserInput" Category="Contains" />
+    <Link Source="AnswerUserEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="1134.53617175966,707.105996700612,80.2915868649388,1.51651115356208" From="AnswerUserEntity.UserId" IsUnique="False" Label="1:*" LabelBounds="1167.68306688415,711.864252341002,14.0733333333333,15.9600000000002" Name="AnswerUserEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="IModel" Target="AnswerEntity" Category="Contains" />
+    <Link Source="IModel" Target="AnswerUserEntity" Category="Contains" />
+    <Link Source="IModel" Target="QuestionEntity" Category="Contains" />
+    <Link Source="IModel" Target="QuizEntity" Category="Contains" />
+    <Link Source="IModel" Target="QuizUserEntity" Category="Contains" />
+    <Link Source="IModel" Target="UserEntity" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Answers" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Id" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Points" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Quiz" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.QuizId" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Text" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuestionEntity.Type" Category="Contains" />
+    <Link Source="QuestionEntity" Target="QuizEntity" Category="Foreign Key" Annotations="" Bounds="643.741875630502,264.823360397481,174.385982035514,1.44522399781124" From="QuestionEntity.QuizId" IsUnique="False" Label="1:*" LabelBounds="723.914774414383,269.545972398745,14.0733333333333,15.9599999999999" Name="QuestionEntity -&gt; QuizEntity" To="QuizEntity.Id" />
+    <Link Source="QuizEntity" Target="QuizEntity.CreatedByUser" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.CreatedByUserId" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.GamePin" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.Id" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.ImageUrl" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.IsStatred" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.Questions" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.TimeLimit" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.Title" Category="Contains" />
+    <Link Source="QuizEntity" Target="QuizEntity.Users" Category="Contains" />
+    <Link Source="QuizEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="609.385279193194,423.03308635963,226.60994841227,184.180221991681" From="QuizEntity.CreatedByUserId" IsUnique="False" Label="1:*" LabelBounds="723.951684671178,497.611169280208,14.0733333333333,15.96" Name="QuizEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="QuizUserEntity" Target="QuizEntity" Category="Foreign Key" Annotations="" Bounds="416.566007257226,432.032783267713,0.88933123290775,108.360663409811" From="QuizUserEntity.QuizId" IsUnique="False" Label="1:*" LabelBounds="398.937339538078,478.216701243595,14.0733333333337,15.9600000000004" Name="QuizUserEntity -&gt; QuizEntity" To="QuizEntity.Id" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.EndedAt" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.Id" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.Quiz" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.QuizEntityId" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.QuizId" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.StartedAt" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.TotalPoints" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.User" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.UserEntityId" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="QuizUserEntity.UserId" Category="Contains" />
+    <Link Source="QuizUserEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="618.946478974034,701.423232148616,175.945040982286,5.29557206280731" From="QuizUserEntity.UserId" IsUnique="False" Label="1:*" LabelBounds="699.942501304307,684.11101777008,14.0733333333328,15.96" Name="QuizUserEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="UserEntity" Target="UserEntity.Answers" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.CreatedQuizzes" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Id" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.ImageUrl" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Name" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Quizzes" Category="Contains" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="EntityType" />
+    <Category Id="Foreign Key" />
+    <Category Id="Model" />
+    <Category Id="Navigation Collection" />
+    <Category Id="Navigation Property" />
+    <Category Id="Property Foreign" />
+    <Category Id="Property Optional" />
+    <Category Id="Property Primary" />
+    <Category Id="Property Required" />
+  </Categories>
+  <Properties>
+    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
+    <Property Id="BaseClass" Description="Base class" Group="Model Properties" DataType="System.String" />
+    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
+    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Field" Description="Backing field" Group="Model Properties" DataType="System.String" />
+    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsAbstract" Label="IsAbstract" Description="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="MaxLength" DataType="System.String" />
+    <Property Id="Name" Group="Model Properties" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
+    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
+    <Property Id="Type" Description="CLR data type" Group="Model Properties" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
+      <Condition Expression="HasCategory('EntityType')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Required" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Required')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Property" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Property')" />
+      <Setter Property="Background" Value="#FF990000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Collection" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Collection')" />
+      <Setter Property="Background" Value="#FFFF3232" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Model" ValueLabel="True">
+      <Condition Expression="HasCategory('Model')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>
