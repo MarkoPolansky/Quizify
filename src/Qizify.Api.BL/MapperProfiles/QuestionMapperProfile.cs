@@ -15,7 +15,8 @@ namespace Quizify.Api.BL.MapperProfiles
 
             CreateMap<QuestionDetailModel, QuestionEntity>()
                 .Ignore(dst => dst.Answers)
-                .Ignore(dst => dst.Quiz);
+                .Ignore(dst => dst.Quiz)
+                .Ignore(dst => dst.ActiveInQuiz);
         }
     }
 }

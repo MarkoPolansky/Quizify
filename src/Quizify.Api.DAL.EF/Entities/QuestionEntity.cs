@@ -12,6 +12,10 @@ namespace Quizify.Api.DAL.EF.Entities
         public  QuizEntity? Quiz { get; set; }
         public required Guid QuizId { get; set; }
         
+        public  QuizEntity? ActiveInQuiz { get; set; }
+        public  Guid? ActiveInQuizId { get; set; }
+
+        
         public DateTime CreatedAt { get; set; }
 
         public ICollection<AnswerEntity> Answers{ get; set; } = new List<AnswerEntity>();
