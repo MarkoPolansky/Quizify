@@ -20,6 +20,7 @@ steps:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
+        arguments: '--output $(Build.ArtifactStagingDirectory)/api'
         publishWebProjects: true
     
     - task: AzureWebApp@1
@@ -27,5 +28,5 @@ steps:
         azureSubscription: 'iw5-service-connection'
         appType: 'webApp'
         appName: 'app-iw5-2023-team-xletak00-api'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
         deploymentMethod: 'auto'
