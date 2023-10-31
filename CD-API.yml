@@ -22,14 +22,14 @@ steps:
         command: 'publish'
         projects: '**/Quizify.Api.App.csproj'
         arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/api'
-        publishWebProjects: false
+        publishWebProjects: true
     
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'iw5-service-connection'
         appType: 'webApp'
         appName: 'app-iw5-2023-team-xletak00-api'
-        package: '$(Build.ArtifactStagingDirectory)/api/*.zip'
+        package: '$(Build.ArtifactStagingDirectory)/api/Qizify.zip'
         deploymentMethod: 'auto'
     - task: PublishBuildArtifacts@1
       inputs:
