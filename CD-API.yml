@@ -25,6 +25,13 @@ steps:
         arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/api'
         modifyOutputPath: false
     
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'b82c4d5f-fcf2-4987-b70d-7741dbfe8144'
+        appType: 'webApp'
+        appName: 'Quizify'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/api'
