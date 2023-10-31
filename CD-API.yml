@@ -29,7 +29,7 @@ steps:
       inputs:
         azureSubscription: 'b82c4d5f-fcf2-4987-b70d-7741dbfe8144'
         appType: 'webApp'
-        appName: 'Quizify'
+        appName: 'app-iw5-2023-team-xletak00-api'
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
     - task: PublishBuildArtifacts@1
