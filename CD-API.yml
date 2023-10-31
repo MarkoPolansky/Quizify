@@ -22,7 +22,7 @@ steps:
         command: 'publish'
         projects: '**/Quizify.Api.App.csproj'
         arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/api'
-        publishWebProjects: true
+        publishWebProjects: false
     
     - task: AzureWebApp@1
       inputs:
