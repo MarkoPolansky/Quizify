@@ -51,17 +51,7 @@ namespace Quizify.Api.DAL.UnitTests
 
         }
 
-
-
-        [Fact]
-        public async Task InserQuiz_QuizInsertedAsyncssdsd()
-        {
-
-            
-
-        }
-
-
+        
         [Fact]
         public async Task InserQuizWithGamePin_GamePinUnique_QuizInsertedAsync()
         {
@@ -142,12 +132,6 @@ namespace Quizify.Api.DAL.UnitTests
                 .CountAsync(); ;
 
             Assert.Equal(quizCount,1);
-        
-
         }
-
-
-
-
     }
 }

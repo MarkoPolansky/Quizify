@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Quizify.Api.App.EndToEndTests
 {
-    public class AnswerControllerTests : IAsyncDisposable
+    public class AnswerControllerTests : BaseTest,IAsyncDisposable
     {
         private readonly QuizifyApiApplicationFactory application;
         private readonly Lazy<HttpClient> client;
@@ -17,7 +17,7 @@ namespace Quizify.Api.App.EndToEndTests
         }
 
         [Fact]
-        public async Task GetAllAnswers_Returns_At_Least_One_User()
+        public async Task GetAllAnswers_Returns_At_Least_One_Answer()
         {
             var response = await client.Value.GetAsync("/api/answer");
 
@@ -36,10 +36,6 @@ namespace Quizify.Api.App.EndToEndTests
             Guid questionId = Guid.NewGuid();
             Guid quizId = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            string baseAnswerUrl = "/api/Answer";
-            string baseQuestionUrl = "/api/question";
-            string baseQuizUrl = "/api/quiz";
-            string baseUserUrl = "/api/user";
             string requestAnswerUri = string.Format("{0}/{1}", baseAnswerUrl, answerId);
             string requestQuestionUri = string.Format("{0}/{1}", baseQuestionUrl, questionId);
             string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
@@ -125,10 +121,6 @@ namespace Quizify.Api.App.EndToEndTests
             Guid questionId = Guid.NewGuid();
             Guid quizId = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            string baseAnswerUrl = "/api/Answer";
-            string baseQuestionUrl = "/api/question";
-            string baseQuizUrl = "/api/quiz";
-            string baseUserUrl = "/api/user";
             string requestAnswerUri = string.Format("{0}/{1}", baseAnswerUrl, answerId);
             string requestQuestionUri = string.Format("{0}/{1}", baseQuestionUrl, questionId);
             string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);

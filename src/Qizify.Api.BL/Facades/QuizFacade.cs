@@ -67,8 +67,8 @@ namespace Quizify.Api.BL.Facades
         {  
             var model = GetById(modelId);
             if(model == null) return null;
-            if (model.QuizState == QuizStateEnum.Published || model.QuizState == QuizStateEnum.Running) 
-                return "null";
+            if (model.QuizState == QuizStateEnum.Published || model.QuizState == QuizStateEnum.Running)
+                return null;
             
             model.GamePin = GenerateGamePin();
             model.QuizState = QuizStateEnum.Published;

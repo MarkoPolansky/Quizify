@@ -28,18 +28,6 @@ public class UserRepositoryTests : TestBase
                         configuration.AddMaps(typeof(EntityBase), typeof(ApiBLInstaller));
                     })));
     }
-
-
-    // [Fact]
-    // public void GetById_ReturnsWithIncludedProperties()
-    // {
-    //     var user = _repository.GetById(UserSeeds.user.Id);
-    //     
-    //     
-    //     Assert.Equal(user.Quizzes.First().Id, QuizSeeds.quiz.Id);
-    //     Assert.Equal(user.Answers?.Count, 1);
-    // }
-    
     
     [Fact]
     public void UpdateUser_UserUpdated()

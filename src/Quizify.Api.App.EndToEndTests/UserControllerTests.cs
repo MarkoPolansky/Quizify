@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Quizify.Api.App.EndToEndTests
 {
-    public class UserControllerTests : IAsyncDisposable
+    public class UserControllerTests : BaseTest, IAsyncDisposable
     {
         private readonly QuizifyApiApplicationFactory application;
         private readonly Lazy<HttpClient> client;
@@ -73,8 +73,7 @@ namespace Quizify.Api.App.EndToEndTests
         {
             // Arrange
             Guid userId = Guid.NewGuid();
-            string baseUrl = "/api/user";
-            string requestUri = string.Format("{0}/{1}", baseUrl, userId);
+            string requestUri = string.Format("{0}/{1}", baseUserUrl, userId);
             var user = new UserDetailModel
             {
                 Id = userId,
@@ -86,10 +85,10 @@ namespace Quizify.Api.App.EndToEndTests
                 Name = "Thomas",
             };
 
-            var response = await client.Value.PostAsJsonAsync(baseUrl, user);
+            var response = await client.Value.PostAsJsonAsync(baseUserUrl, user);
             response.EnsureSuccessStatusCode();
             // Act
-            response = await client.Value.PutAsJsonAsync(baseUrl, userUpdated);
+            response = await client.Value.PutAsJsonAsync(baseUserUrl, userUpdated);
             response.EnsureSuccessStatusCode();
             // Assert
             response = await client.Value.GetAsync(requestUri);

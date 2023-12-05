@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Quizify.Api.App.EndToEndTests
 {
-    public class QuizControllerTests : IAsyncDisposable
+    public class QuizControllerTests : BaseTest, IAsyncDisposable
     {
         private readonly QuizifyApiApplicationFactory application;
         private readonly Lazy<HttpClient> client;
@@ -17,7 +17,7 @@ namespace Quizify.Api.App.EndToEndTests
         }
 
         [Fact]
-        public async Task GetAllAnswers_Returns_At_Least_One_User()
+        public async Task GetAllQuizes_Returns_At_Least_One_Quiz()
         {
             var response = await client.Value.GetAsync("/api/quiz");
 
@@ -34,8 +34,6 @@ namespace Quizify.Api.App.EndToEndTests
             // Arrange
             Guid quizId = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            string baseQuizUrl = "/api/quiz";
-            string baseUserUrl = "/api/user";
             string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
             string requestUserUri = string.Format("{0}/{1}", baseUserUrl, userId);
             var user = new UserListModel
@@ -88,8 +86,6 @@ namespace Quizify.Api.App.EndToEndTests
             // Arrange
             Guid quizId = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            string baseQuizUrl = "/api/quiz";
-            string baseUserUrl = "/api/user";
             string requestQuizUri = string.Format("{0}/{1}", baseQuizUrl, quizId);
             string requestUserUri = string.Format("{0}/{1}", baseUserUrl, userId);
             var user = new UserListModel
