@@ -36,3 +36,24 @@ steps:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/api'
         ArtifactName: 'API'
         publishLocation: 'Container'
+        
+    - template: build-APP.yml
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        projects: '**/Quizify.Web.App.csproj'
+        arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/web'
+        publishWebProjects: true
+    
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'iw5-service-connection'
+        appType: 'webApp'
+        appName: 'app-iw5-2023-team-xletak00-web'
+        package: '$(Build.ArtifactStagingDirectory)/app/Qizify.zip'
+        deploymentMethod: 'auto'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/web'
+        ArtifactName: 'WEB'
+        publishLocation: 'Container'

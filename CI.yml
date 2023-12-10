@@ -1,0 +1,36 @@
+trigger:
+- Phase-2
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  buildConfiguration: 'Release'
+  dotNetFramework: 'net7.0'
+  dotNetVersion: '7.0.x'
+  targetRuntime: 'win-x64'
+
+
+steps:
+-  template: build-API.yml
+-  template: build-APP.yml
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+
+- task: PowerShell@2
+  displayName: 'start mssqllocaldb'
+  inputs:
+    targetType: 'inline'
+    script: 'sqllocaldb start mssqllocaldb'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run Dotnet Tests'
+  inputs:
+    command: 'test'
+    projects: '**/Quizify.sln'
+
+
