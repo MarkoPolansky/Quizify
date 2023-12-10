@@ -12,14 +12,16 @@ variables:
 
 
 steps:
--  template: build-API.yml
--  template: build-APP.yml
 
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
     feedsToUse: 'select'
+
+-  template: build-API.yml
+-  template: build-APP.yml
+
 
 - task: PowerShell@2
   displayName: 'start mssqllocaldb'
