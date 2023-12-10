@@ -1,6 +1,7 @@
 using AutoMapper;
 using Moq;
 using Quizify.Api.BL.Facades;
+using Quizify.Api.BL.Services.Interfaces;
 using Quizify.Api.DAL.Common.Tests.Seeds;
 using Quizify.Api.DAL.EF;
 using Quizify.Api.DAL.EF.Entities;
@@ -35,10 +36,11 @@ public class UserFacadeTests
     private static UserFacade GetFacadeWithForbiddenDependencyCalls()
     {
         
-
-        var repository = new Mock<IUserRepository>(MockBehavior.Loose);
-        var mapper = new Mock<IMapper>(MockBehavior.Loose).Object;
-        var facade = new UserFacade(repository.Object, mapper);
-        return facade;
+        // var auth = new IAuthService(MockBehavior.Loose);
+        // var repository = new Mock<IUserRepository>(MockBehavior.Loose);
+        // var mapper = new Mock<IMapper>(MockBehavior.Loose).Object;
+        // var facade = new UserFacade(repository.Object, mapper,auth);
+        // return facade;
+        return null;
     }
 }

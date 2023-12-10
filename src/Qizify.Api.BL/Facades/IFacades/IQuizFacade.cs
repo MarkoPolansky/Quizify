@@ -8,5 +8,7 @@ namespace Quizify.Api.BL.Facades.IFacades
         Guid? Start(Guid modelId);
         string? Publish(Guid modelId);
         Guid? End(Guid modelId);
+        
+        Guid? Join(string gamePin,string userName);
     }
 }

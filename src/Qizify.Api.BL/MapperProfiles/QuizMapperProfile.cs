@@ -16,10 +16,13 @@ namespace Quizify.Api.BL.MapperProfiles
             CreateMap<QuizUserEntity, QuizDetailUserModel>();
 
             CreateMap<QuizDetailModel, QuizEntity>()
-                .Ignore(dst => dst.Questions)
-                .Ignore(dst => dst.Users)
+                .Ignore(src => src.Questions)
+                .Ignore(src => src.Users)
                 .Ignore(dst => dst.CreatedByUser)
-                .MapMember(dst => dst.CreatedByUserId, src => src.CreatedByUser.Id);
+                .MapMember(dst => dst.CreatedByUserId, src => src.CreatedByUser.Id)
+                .MapMember(dst => dst.ActiveQuestionId, src => src.ActiveQuestion.Id);
+
+
         }
     }
 }

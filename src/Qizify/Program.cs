@@ -51,6 +51,7 @@ void ConfigureCors(IServiceCollection serviceCollection)
     });
 }
 
+
 void ConfigureLocalization(IServiceCollection serviceCollection)
 {
     serviceCollection.AddLocalization(options => options.ResourcesPath = string.Empty);
@@ -116,6 +117,8 @@ void UseUserEndpoints(RouteGroupBuilder routeGroupBuilder)
             : TypedResults.NotFound("Error 404 Not Found"));
 
 
+    userEndpoints.MapPost("/login", (string name,IUserFacade userFacade) => userFacade.Login(name));
+    
     userEndpoints.MapGet("", (IUserFacade userFacade) => userFacade.GetAll());
     userEndpoints.MapPost("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Create(user));
     userEndpoints.MapPut("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Update(user));
@@ -138,8 +141,7 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
     questionEndpoints.MapPost("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Create(quiz));
     questionEndpoints.MapPut("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Update(quiz));
     questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.Delete(id));
-    
-   // questionEndpoints.MapPost("/{id:guid}/join", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
+    questionEndpoints.MapPost("/join", (string gamePin,string userName, IQuizFacade quizFacade) => quizFacade.Join(gamePin,userName));
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
     questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
@@ -181,12 +183,6 @@ void UseAnswerEndpoints(RouteGroupBuilder routeGroupBuilder)
     answerEndpoints.MapPut("", (AnswerDetailModel answer, IAnswerFacade answerFacade) => answerFacade.Update(answer));
     answerEndpoints.MapDelete("{id:guid}", (Guid id, IAnswerFacade answerFacade) => answerFacade.Delete(id));
 }
-
-
-
-
-
-
 
 void UseDevelopmentSettings(WebApplication application)
 {

@@ -1,0 +1,28 @@
+﻿@page "/login"
+@layout EmptyLayout
+
+<PageTitle>Login</PageTitle>
+
+
+<div style="background: rgb(56, 18, 114)" class="absolute m-auto left-0 right-0">
+
+
+ 
+    <!-- component -->
+    <div style ="background: rgb(56, 2, 130)">
+        <div class="min-h-screen flex flex-col items-center justify-center">
+            <h1 class="text-6xl bold text-white  mb-16">
+                Login
+            </h1>
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+                <div class="mb-4">
+                    <form method="post"  >
+                        <input inputmode="" placeholder="" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500" />
+                        <button onsubmit="@LoginTo" type="submit" class="w-full bg-gray-700 text-white text-xl h-16 px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">Enter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -12,19 +12,28 @@ namespace Quizify.Api.BL.Facades
 {
     public class QuizFacade : BaseFacade<QuizEntity, QuizListModel, QuizDetailModel>, IQuizFacade
     {
+        private readonly IUserFacade _userFacade;
+        private readonly IQuestionFacade _questionFacade;
         private readonly IQuizRepository quizRepository;
         private readonly IMapper _mapper;
         private readonly IPinGenerationService _pinGenerationService;
+        private readonly IAuthService _auth;
         public QuizFacade(
+            IUserFacade userFacade,
+            IQuestionFacade questionFacade,
             IQuizRepository repository,
             IMapper mapper,
-            IPinGenerationService pinGenerationService)
+            IPinGenerationService pinGenerationService,
+            IAuthService auth)
             : base(repository, mapper)
-            {
+        {
+            _questionFacade = questionFacade;
+            _userFacade = userFacade;    
             quizRepository = repository;
             _mapper = mapper;
             _pinGenerationService = pinGenerationService;
-            }
+            _auth = auth;
+        }
 
         public override Guid? Update(QuizDetailModel quizModel)
         {
@@ -58,7 +67,10 @@ namespace Quizify.Api.BL.Facades
             Guid? result = null;
             if (model != null)
             {
+                var activeQuestion =
+                    mapper.Map<QuestionDetailModel>(_questionFacade.GetById(model.Questions.First().Id));
                 model.QuizState = QuizStateEnum.Running;
+                model.ActiveQuestion = activeQuestion;
                 result = Update(model);
             }
             return result;
@@ -90,7 +102,46 @@ namespace Quizify.Api.BL.Facades
             return Update(model);
         }
 
-        
+        public Guid? Join(string gamePin,string userName)
+        {
+            var quizEntity = quizRepository.Get().First(q => q.GamePin == gamePin);
+            var quizDetailModel = _mapper.Map<QuizDetailModel>(quizEntity);
+            
+            if (quizDetailModel == null && quizDetailModel.QuizState != QuizStateEnum.Published)
+            {
+                return Guid.Empty;
+            }
+            
+            var user = new UserDetailModel
+            {
+                Name = userName,
+                Id = Guid.NewGuid()
+            };
+            _userFacade.Create(user);
+            
+
+            var userdetail = new QuizDetailUserModel
+            {
+                Id = Guid.NewGuid(),
+                TotalPoints = 0,
+                StartedAt = default,
+                EndedAt = null,
+                User = _mapper.Map<UserListModel>(user)
+            };
+            
+            quizDetailModel.Users.Add(userdetail);
+            var quizId = Update(quizDetailModel);
+
+            if (quizId == null)
+            {
+                return null;
+            }
+            
+            _auth.SetCookieToResponse(user.Id.ToString());
+            return quizId;
+        }
+
+
         private bool IsGamePinUnique(string gamePin)
         {
             return quizRepository.CountGamePin(gamePin) == 0;

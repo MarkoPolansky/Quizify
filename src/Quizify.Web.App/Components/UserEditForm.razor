@@ -1,0 +1,38 @@
+@inherits Quizify.Web.App.Pages.PageBase
+@namespace Quizify.Web.App.Components
+
+<!-- component -->
+<div class="flex items-center justify-center mt-8 ">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+        <div class="flex items-center space-x-2 mb-6">
+            <h1 class="text-xl font-semibold">Edit User</h1>
+        </div>
+        <EditForm Model="@Data"  class="space-y-6">
+            <div>
+                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Name</label>
+                <InputText @bind-Value="@Data.Name"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                <small class="form-text text-red-500">
+                    <ValidationMessage For="@(() => Data.Name)"/>
+                </small>
+            </div>
+            <div>
+                <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
+                <InputTextArea  @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"  />
+            </div>
+        
+            <div  class="p-4">
+                     <DataAnnotationsValidator/>
+            </div>
+       
+            
+            <div class="flex justify-between">
+                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                    Save
+                </button>
+            </div>
+        </EditForm>
+        
+    </div>
+
+    
+</div>

@@ -1,0 +1,51 @@
+@page "/admin/answers/{Id:guid}"
+@using Quizify.Common.Enums
+@layout MainLayout
+
+<!-- component -->
+<div class="flex items-center justify-center mt-8 ">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+        <div class="flex items-center space-x-2 mb-6">
+            <h1 class="text-xl font-semibold">Edit Question</h1>
+        </div>
+        <EditForm Model="@Data"  class="space-y-6">
+            <div>
+                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Text</label>
+                <InputText @bind-Value="@Data.Text"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                <small class="form-text text-red-500">
+                    <ValidationMessage For="@(() => Data.Text)"/>
+                </small>
+            </div>
+              <div>
+                  <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Is Correct</label>
+                  <InputSelect class="form-select" @bind-Value="@Data.IsCorrect">
+                      <option value="false">False</option>
+                      <option value="true">True</option>
+                  </InputSelect>
+                  </div>
+            <div>
+                
+                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">In Question</label>
+                <InputSelect class="form-select" @bind-Value="@Data.QuestionId">
+                    @foreach (var question in Questions)
+                    {
+                        <option value="@question.Id">@question.Text</option>
+                    }
+                </InputSelect>
+            </div>
+            <div  class="p-4">
+                <DataAnnotationsValidator/>
+            </div>
+       
+            
+            <div class="flex justify-between">
+                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                    Save
+                </button>
+            </div>
+        </EditForm>
+        
+    </div>
+
+    
+</div>

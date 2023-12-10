@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Quizify.Api.BL.Facades.IFacades;
+using Quizify.Api.BL.Services.Interfaces;
 using Quizify.Api.DAL.EF.Entities;
 using Quizify.Api.DAL.EF.Entities.Interfaces;
 using Quizify.Api.DAL.EF.Repositories.Interfaces;
@@ -11,14 +12,18 @@ namespace Quizify.Api.BL.Facades
     {
         private readonly IUserRepository userRepository;
         private readonly IMapper _mapper;
+        private readonly IAuthService _auth;
         public UserFacade(
             IUserRepository repository,
-            IMapper mapper)
+            IMapper mapper,
+            IAuthService auth)
             : base(repository, mapper)
             {
             userRepository = repository;
             _mapper = mapper;
+            _auth = auth;
             }
+        
 
         public override Guid? Update(UserDetailModel userModel)
         {
@@ -59,5 +64,16 @@ namespace Quizify.Api.BL.Facades
             return result;
         }
 
+        public Guid Login(string? userName)
+        {
+            var user = new UserDetailModel
+            {
+                Name = userName,
+                Id = Guid.NewGuid()
+            };
+            var id = Create(user);
+            _auth.SetCookieToResponse(id.ToString());
+            return id;
+        }
     }
 }

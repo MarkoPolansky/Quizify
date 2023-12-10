@@ -1,0 +1,58 @@
+@page "/admin/quizes/{Id:guid}"
+@using Quizify.Common.Enums
+@layout MainLayout
+
+<!-- component -->
+<div class="flex items-center justify-center mt-8 ">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+        <div class="flex items-center space-x-2 mb-6">
+            <h1 class="text-xl font-semibold">Edit Quiz</h1>
+        </div>
+        <EditForm Model="@Data"  class="space-y-6">
+            <div>
+                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Title</label>
+                <InputText @bind-Value="@Data.Title"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                <small class="form-text text-red-500">
+                    <ValidationMessage For="@(() => Data.Title)"/>
+                </small>
+            </div>
+            <div>
+                <InputSelect class="form-select" @bind-Value="@Data.QuizState">
+                    @foreach (var duizState in Enum.GetValues<QuizStateEnum>())
+                    {
+                        <option value="@duizState">@(Enum.GetName<QuizStateEnum>(duizState))</option>
+                    }
+                  
+                </InputSelect>
+                <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
+                <InputText @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+            </div>
+            <div class=" ">
+                <label for="question" class="text-sm font-medium text-gray-700 block mb-2">Questions</label>
+                <ol type="1">
+                    @foreach (var question in @Data.Questions)
+                    {
+                        <li class="p-2 w-full">
+                        <NavLink  href="@($"/admin/questions/{question.Id}")" class="p-1 w-full m-1 bg-gray-100 rounded-3">
+                            @question.Text
+                        </NavLink>
+                           </li>
+                    }
+              </ol> 
+            </div>
+            <div  class="p-4">
+                <DataAnnotationsValidator/>
+            </div>
+       
+            
+            <div class="flex justify-between">
+                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                    Save
+                </button>
+            </div>
+        </EditForm>
+        
+    </div>
+
+    
+</div>

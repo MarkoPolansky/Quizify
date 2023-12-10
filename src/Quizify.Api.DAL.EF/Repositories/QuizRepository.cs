@@ -23,6 +23,7 @@ namespace Quizify.Api.DAL.EF.Repositories
         {
             return dbContext.Set<QuizEntity>()
                 .Include(quiz => quiz.ActiveQuestion)
+                .ThenInclude(q => q.Answers)
                 .Include(quiz => quiz.CreatedByUser)
                 .Include(quiz => quiz.Questions)
                 .Include(quiz => quiz.Users)
@@ -35,7 +36,7 @@ namespace Quizify.Api.DAL.EF.Repositories
         {
             if (Exists(quiz.Id))
             {
-                var existingQuiz= dbContext.Quizzes
+                var existingQuiz= dbContext.Set<QuizEntity>()
                     .Include(quiz => quiz.ActiveQuestion)
                     .Include(quiz => quiz.CreatedByUser)
                     .Include(quiz => quiz.Questions)
@@ -43,11 +44,22 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .ThenInclude(r => r.User)
                     .Single(r => r.Id == quiz.Id);
 
+                var createdUserId = existingQuiz.CreatedByUserId;
+                var activeQuestionId = quiz.ActiveQuestionId ?? existingQuiz.ActiveQuestionId;
+               
                 existingQuiz = _mapper.Map(quiz, existingQuiz);
                 
+                existingQuiz.CreatedByUserId = createdUserId;
+                existingQuiz.ActiveQuestionId = activeQuestionId;
                 foreach (var user in existingQuiz.Users)
                 {
-                    dbContext.QuizUsers.Add(user);
+                    if(!dbContext.QuizUsers.Where(
+                           a => a.UserId == user.UserId).Any(a => a.QuizId == existingQuiz.Id))
+                        dbContext.QuizUsers.Add(user);
+                    else
+                    { 
+                        dbContext.QuizUsers.Update(user);
+                    }
                 }
                 
                 foreach (var question in existingQuiz.Questions)
@@ -59,17 +71,8 @@ namespace Quizify.Api.DAL.EF.Repositories
                         dbContext.Questions.Update(question);
                     }
                 }
-                
-                
-                foreach (var question in existingQuiz.Questions)
-                {
-                    if(dbContext.Questions.Count(a => a.Id == question.Id) == 0)
-                        dbContext.Questions.Add(question);
-                    else
-                    { 
-                        dbContext.Questions.Update(question);
-                    }
-                }
+
+                existingQuiz.ActiveQuestion = null;
                 dbContext.Update(existingQuiz);
                 dbContext.SaveChanges();
                 

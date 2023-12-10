@@ -1,7 +1,10 @@
-﻿namespace Quizify.Common.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Quizify.Common.Models
 {
     public record UserDetailModel : ModelBase
     {
+       [Required]
         public required string Name { get; set; }
         public string? ImageUrl { get; set; }
 

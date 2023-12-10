@@ -29,8 +29,4 @@
     <ProjectReference Include="..\Quizify.Api.DAL.EF\Quizify.Api.DAL.EF.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ServicesTests\" />
-  </ItemGroup>
-
 </Project>
