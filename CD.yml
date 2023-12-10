@@ -50,7 +50,7 @@ steps:
         azureSubscription: 'iw5-service-connection'
         appType: 'webApp'
         appName: 'app-iw5-2023-team-xletak00-web'
-        package: '$(Build.ArtifactStagingDirectory)/app/Qizify.zip'
+        package: '$(Build.ArtifactStagingDirectory)/web/Qizify.zip'
         deploymentMethod: 'auto'
     - task: PublishBuildArtifacts@1
       inputs:
