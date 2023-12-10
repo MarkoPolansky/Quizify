@@ -5,7 +5,7 @@ steps:
       includePreviewVersions: true
 
   - task: DotNetCoreCLI@2
-    name: "Build-API"
+    name: "Build_API"
     inputs:
       command: 'build'
       projects: '**/Quizify.Api.App.csproj'
