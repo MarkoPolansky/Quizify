@@ -18,9 +18,9 @@
       <li><!-- component -->
         
         <div class="flex flex-row">
-          <div class="flex items-center max-w-md mx-auto bg-white rounded-lg ">
-            <div class="w-full">
-              <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+          <div class="flex items-center max-w-md mx-auto bg-white rounded-lg border-1 ">
+            <div class="w-full  ">
+              <input @bind="SearchInput" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
                      placeholder="search" x-model="search">
             </div>
             <div>
@@ -36,15 +36,100 @@
             </div>
           </div>
           
-          <div class="absolute bottom-0 ">
-            @if (Answer.Count > 0)
-            {
-              <h1>Answers</h1>
-              foreach (var answer in Answer)
-              {
-                
-              }
-            }
+          <div
+            class="absolute bg-white p-4 overflow-auto top-0 w-25 mt-16 border-1 @((Answer.Count > 0 || Users.Count > 0 || Questions.Count > 0) ? "" : "hidden")">
+                <!-- component -->
+                <!-- This is an example component -->
+                <div class="flex flex-column justify-content-end align-items-end">
+                  <button @onclick="() => Close()" aria-label="Close Menu" title="Close Menu" class="p-2 -mt-2 -mr-2 right transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                    <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
+                      ></path>
+                    </svg>
+                  </button>
+                  </div>
+               
+                        @if(Answer.Count > 0){
+                        <div class="flex justify-between items-center mb-4 ">
+                        <h3 class="text-xl text-black font-bold leading-none ">Answers</h3>
+                      </div>
+                         <div class="flow-root">
+                           <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                             @foreach(var answer in Answer.Take(5)){
+                               <li class="py-3 sm:py-4">
+                                 <NavLink  href="@($"/admin/answers/{answer.Id}")">
+                                   <div class="flex items-center space-x-4">
+                                             <div class="flex-shrink-0 ">
+                                            </div>
+                                     <div class="flex-1 min-w-0">
+                                       <p class="text-sm font-medium text-black truncate ">
+                                         @answer.Text
+                                       </p>
+                                     </div>
+                                   </div>
+                                 </NavLink>
+                               </li>
+                             }
+
+                           </ul>
+                          </div>
+                          }
+                        @if(Users.Count > 0){
+                          <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl text-black font-bold leading-none ">Users</h3>
+                            </div>
+                          <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                              @foreach(var user in Users.Take(5)){
+                                <li class="py-3 sm:py-4">
+                                  <NavLink  href="@($"/admin/users/{user.Id}")">
+                                    <div class="flex items-center space-x-4">
+                                       <div class="flex-shrink-0">
+                                         <img class="w-8 h-8 rounded-full" 
+                                              src="@(user.ImageUrl ?? "https://ui-avatars.com/api/?name="+@user.Name)"  alt="Neil image">
+                                         </div>
+                                      <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-black truncate ">
+                                          @user.Name
+                                        </p>
+                                      </div>
+                                    </div>
+                                    </NavLink>
+                                  </li>
+                              }
+                        
+                              </ul>
+                            </div>
+                        }
+                        @if(Questions.Count > 0){
+                                          <div class="flex justify-between items-center mb-4">
+                                            <h3 class="text-xl text-black font-bold leading-none ">Questions</h3>
+                                            </div>
+                                          <div class="flow-root">
+                                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                              @foreach(var question in Questions.Take(5)){
+                                                <li class="py-3 sm:py-4">
+                                                  <NavLink  href="@($"/admin/questions/{question.Id}")">
+                                                    <div class="flex items-center space-x-4">
+                                                       <div class="flex-shrink-0">
+                                                       @question.Text
+                                                         </div>
+                                                      <div class="flex-1 min-w-0">
+                                                        <p class="text-sm font-medium text-black truncate ">
+                                                          @question.Points
+                                                        </p>
+                                                      </div>
+                                                    </div>
+                                                    </NavLink>
+                                                  </li>
+                                              }
+                                        
+                                              </ul>
+                                            </div>
+                                        }
+              
           </div>
         </div>
           </li>

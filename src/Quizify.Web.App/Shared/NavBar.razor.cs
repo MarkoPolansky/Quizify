@@ -30,6 +30,8 @@ public partial class NavBar
     };
 
     public string SearchInput { get; set; } = "";
+
+    public bool IsFocused { get; set; } = false;
     
     private ICollection<QuestionListModel> Questions { get; set; } = new List<QuestionListModel>();
     
@@ -39,11 +41,19 @@ public partial class NavBar
 
     public async Task Search()
     {
+        IsFocused = true;
         Questions = await QuestionFacade.GetQuestionByText(SearchInput);
         Users = await UserFacade.GetUsersByName(SearchInput);
         Answer = await AnswerFacade.GetAnswersByText(SearchInput);
     }
-    
+
+
+    public async Task Close()
+    {
+        Questions  = new List<QuestionListModel>();
+        Users = new List<UserListModel>();
+        Answer = new List<AnswerListModel>();
+    }
     
     protected override async Task OnInitializedAsync()
     {
