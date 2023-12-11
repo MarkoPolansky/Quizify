@@ -49,27 +49,26 @@ steps:
         ArtifactName: 'API'
         publishLocation: 'Container'
         
-#    - template: build-APP.yml
-#    - task: DotNetCoreCLI@2
-#      name: "Dotnet_Publish_WEB"
-#      inputs:
-#        command: 'publish'
-#        publishWebProjects: false
-#        projects: '**/Quizify.Web.App.csproj'
-#        arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/web'
-
+    - template: build-APP.yml
+    - task: DotNetCoreCLI@2
+      name: "Dotnet_Publish_WEB"
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '**/Quizify.Web.App.csproj'
+        arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --output $(Build.ArtifactStagingDirectory)/web'
     
-#    - task: AzureWebApp@1
-#      name: "Put_to_AZURE_WEB"
-#      inputs:
-#        azureSubscription: 'iw5-service-connection'
-#        appType: 'webApp'
-#        appName: 'app-iw5-2023-team-xletak00-web'
-#        package: '$(Build.ArtifactStagingDirectory)/web/Quizify.Web.App.zip'
-#        deploymentMethod: 'auto'
-#    - task: PublishBuildArtifacts@1
-#      name: "Collect_Artefact_WEB"
-#      inputs:
-#        PathtoPublish: '$(Build.ArtifactStagingDirectory)/web'
-#        ArtifactName: 'WEB'
-#        publishLocation: 'Container'
+    - task: AzureWebApp@1
+      name: "Put_to_AZURE_WEB"
+      inputs:
+        azureSubscription: 'iw5-service-connection'
+        appType: 'webApp'
+        appName: 'app-iw5-2023-team-xletak00-web'
+        package: '$(Build.ArtifactStagingDirectory)/web/Quizify.Web.App.zip'
+        deploymentMethod: 'auto'
+    - task: PublishBuildArtifacts@1
+      name: "Collect_Artefact_WEB"
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/web'
+        ArtifactName: 'WEB'
+        publishLocation: 'Container'
