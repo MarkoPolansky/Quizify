@@ -50,6 +50,13 @@ namespace Quizify.Api.BL.Facades
 
         public List<UserListModel> GetUsersByName(string? userName)
         {
+
+            // var users = userRepository.Get()
+            //     .Where(usr => usr.Name.Contains(userName))
+            //     .ToList();
+            //
+            // return _mapper.Map<List<UserListModel>>(users);;
+            //
             var userQuery = userRepository.Get();
             
             if (userName != null) 
