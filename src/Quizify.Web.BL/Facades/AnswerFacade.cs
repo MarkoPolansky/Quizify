@@ -40,8 +40,11 @@ public class AnswerFacade: FacadeBase ,IAnswerFacade
         await apiClient.AnswerDeleteAsync(id,culture);
     }
 
-    public List<AnswerListModel> GetAnswersByText(string? text)
+    public async Task<List<AnswerListModel>> GetAnswersByText(string? text)
     {
-        throw new NotImplementedException();
+        var answers = new List<AnswerListModel>();
+        var answersFromApi = await apiClient.SearchAsync(text,culture);
+        answers.AddRange(answersFromApi);
+        return answers;
     }
 }

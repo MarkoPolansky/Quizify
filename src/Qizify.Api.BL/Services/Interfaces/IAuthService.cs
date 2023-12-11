@@ -9,6 +9,6 @@ public interface IAuthService
 
     void SetCookieToResponse(string cookie,CookieOptions? options = null);
 
-    UserDetailModel GetUser();
+    UserDetailModel? GetUser();
 
 }

@@ -12,7 +12,6 @@ public partial class Login
     [Inject]
     IJSRuntime JSRuntime { get; set; } = null!;
     
-    
     [Inject]
     private NavigationManager navigationManager { get; set; } = null!;
     public string UserName { get; set; } = "";

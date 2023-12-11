@@ -43,9 +43,14 @@ public class AuthService : IAuthService
 
     public void SetCookieToResponse(string cookie,CookieOptions? options)
     {
-        CookieOptions option = options ?? new CookieOptions();  
-        option.Expires = DateTime.Now.AddHours(1);  
+        CookieOptions option = options ?? new CookieOptions();
+        option.Secure = true;
+        option.HttpOnly = false;
+        option.SameSite = SameSiteMode.None;
         
+            
+        option.Expires = DateTime.Now.AddHours(1);  
+        _contextAccessor.HttpContext.Response.Headers.Add("Access-Control-Allow-Credentials","true");
         _contextAccessor.HttpContext.Response.Cookies.Append(CookieKey, cookie, option);
     }
 
@@ -54,7 +59,7 @@ public class AuthService : IAuthService
         throw new NotImplementedException();
     }
 
-    public UserDetailModel GetUser()
+    public UserDetailModel? GetUser()
     {
         return User;
     }

@@ -1,4 +1,5 @@
-﻿<div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+﻿@inherits Quizify.Web.App.Pages.PageBase
+<div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
   <div class="relative flex items-center justify-between">
     <a href="/" aria-label="QUIZIFY" title="QUIZIFY" class="inline-flex items-center">
       <svg class="w-8 text-violet-500" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
@@ -14,18 +15,64 @@
       <li><NavLink href="/admin/quizes" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Quizes</NavLink></li>
       <li><NavLink href="/admin/questions" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Questions</NavLink></li>
       <li><NavLink href="/admin/answers" aria-label="About us" title="About us" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Answers</NavLink></li>
-    </ul>
+      <li><!-- component -->
+        
+        <div class="flex flex-row">
+          <div class="flex items-center max-w-md mx-auto bg-white rounded-lg ">
+            <div class="w-full">
+              <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                     placeholder="search" x-model="search">
+            </div>
+            <div>
+              <button @onclick="() => Search()" type="submit" class="flex items-center bg-blue-500 justify-center w-12 h-12 text-white rounded-r-lg"
+                      :class="(search.length > 0) ? 'bg-purple-500' : 'bg-gray-500 cursor-not-allowed'"
+                      :disabled="search.length == 0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="absolute bottom-0 ">
+            @if (Answer.Count > 0)
+            {
+              <h1>Answers</h1>
+              foreach (var answer in Answer)
+              {
+                
+              }
+            }
+          </div>
+        </div>
+          </li>
+    
+      </ul>
     <ul class="flex items-center hidden space-x-8 lg:flex">
-      <li>
-        <a
-          href="/"
-          class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
-          aria-label="Login"
-          title="Login"
-        >
-          Login
-        </a>
-      </li>
+      @if (UserLogged != null)
+      {
+        <li>
+          <NavLink
+            href="/login"
+            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
+            aria-label="Login"
+            title="Login">
+
+          </NavLink>
+        </li>
+      }
+      else
+      {
+        <li>
+          <h1
+            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md text-black focus:shadow-outline focus:outline-none">
+            
+            </h1>
+        </li>
+      }
+     
     </ul>
     <!-- Mobile menu -->
     <div class="lg:hidden">
@@ -69,14 +116,14 @@
               <li><NavLink href="/admin/questions" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Questions</NavLink></li>
               <li><NavLink href="/admin/answers" aria-label="About us" title="About us" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Answers</NavLink></li>
               <li>
-                <a
-                  href="/"
+                <NavLink
+                  href="/login"
                   class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
                   aria-label="Login"
                   title="Login"
                 >
                   Login
-                </a>
+                </NavLink>
               </li>
             </ul>
           </nav>

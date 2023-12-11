@@ -21,11 +21,12 @@ public partial class Create
         Id = Guid.Empty,
         Title = null,
         QuizState = QuizStateEnum.Creation,
-        CreatedByUser = null
+        CreatedByUser = null,
     };
     
     public async Task Save()
     {
+     
         await QuizFacade.CreateAsync(Data);
         NavigateBack();
     }

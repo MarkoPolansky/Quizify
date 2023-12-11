@@ -44,4 +44,17 @@ public class UserFacade : FacadeBase ,IUserFacade
     {
         return await apiClient.LoginAsync(userName,culture);
     }
+
+    public async Task<UserDetailModel?> Profile()
+    {
+        return await apiClient.MeAsync(culture);
+    }
+
+    public async Task<List<UserListModel>> GetUsersByName(string? userName)
+    {
+        var users = new List<Common.Models.UserListModel>();
+        var usersFromApi = await apiClient.SearchAsync(userName,culture);
+        users.AddRange(usersFromApi);
+        return users;
+    }
 }

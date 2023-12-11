@@ -1,4 +1,4 @@
-@page "/admin/answers/{Id:guid}"
+@page "/admin/questions/create"
 @using Quizify.Common.Enums
 @layout MainLayout
 
@@ -6,7 +6,7 @@
 <div class="flex items-center justify-center mt-8 ">
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
         <div class="flex items-center space-x-2 mb-6">
-            <h1 class="text-xl font-semibold">Edit Answer</h1>
+            <h1 class="text-xl font-semibold">Create new Question</h1>
         </div>
         <EditForm Model="@Data"  class="space-y-6">
             <div>
@@ -16,30 +16,29 @@
                     <ValidationMessage For="@(() => Data.Text)"/>
                 </small>
             </div>
-              <div>
-                  <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Is Correct</label>
-                  <InputSelect class="form-select" @bind-Value="@Data.IsCorrect">
-                      <option value="false">False</option>
-                      <option value="true">True</option>
-                  </InputSelect>
-                  </div>
             <div>
-                
-                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">In Question</label>
-                <InputSelect class="form-select" @bind-Value="@Data.QuestionId">
-                    @foreach (var question in Questions)
+                <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Points</label>
+                <InputNumber @bind-Value="@Data.Points" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+            </div>
+            
+            <div>
+                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">In Quiz</label>
+                <InputSelect class="form-select" @bind-Value="@Data.QuizId">
+                     <option selected="selected" value="">---</option>
+                    @foreach (var quiz in Quizes)
                     {
-                        <option value="@question.Id">@question.Text</option>
+                        <option value="@quiz.Id">@quiz.Title</option>
                     }
                 </InputSelect>
-            </div>
+                </div>
+       
             <div  class="p-4">
                 <DataAnnotationsValidator/>
             </div>
        
             
             <div class="flex justify-between">
-                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                <button type="submit" onclick="@Save" class="px-4 ml-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
                     Save
                 </button>
             </div>

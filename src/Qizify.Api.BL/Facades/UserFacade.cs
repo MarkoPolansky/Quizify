@@ -75,5 +75,10 @@ namespace Quizify.Api.BL.Facades
             _auth.SetCookieToResponse(id.ToString());
             return id;
         }
+
+        public UserDetailModel? Profile()
+        {
+            return _auth.GetUser() ?? null;
+        }
     }
 }

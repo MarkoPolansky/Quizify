@@ -5,6 +5,7 @@ namespace Quizify.Web.BL.Facades.IFacades
 {
     public interface IAnswerFacade : IFacade<AnswerListModel, AnswerDetailModel>
     {
-        public List<AnswerListModel> GetAnswersByText(string? text);
+        public Task<List<AnswerListModel>> GetAnswersByText(string? text);
+       
     }
 }

@@ -117,7 +117,11 @@ void UseUserEndpoints(RouteGroupBuilder routeGroupBuilder)
             : TypedResults.NotFound("Error 404 Not Found"));
 
 
-    userEndpoints.MapPost("/login", (string name,IUserFacade userFacade) => userFacade.Login(name));
+    userEndpoints.MapGet("/login", (string name,IUserFacade userFacade) => userFacade.Login(name));
+    userEndpoints.MapGet("/me", (IUserFacade userFacade) => userFacade.Profile());
+
+    
+    userEndpoints.MapGet("/search", (string userName,IUserFacade userFacade) => userFacade.GetUsersByName(userName));
     
     userEndpoints.MapGet("", (IUserFacade userFacade) => userFacade.GetAll());
     userEndpoints.MapPost("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Create(user));
@@ -159,7 +163,9 @@ void UseQuestionEndpoints(RouteGroupBuilder routeGroupBuilder)
             ? TypedResults.Ok(question)
             : TypedResults.NotFound("Error 404 Not Found"));
 
+    questionEndpoints.MapGet("/search", (string text,IQuestionFacade questionFacade) => questionFacade.GetQuestionByText(text));
 
+    
     questionEndpoints.MapGet("", (IQuestionFacade questionFacade) => questionFacade.GetAll());
     questionEndpoints.MapPost("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Create(question));
     questionEndpoints.MapPut("", (QuestionDetailModel question, IQuestionFacade questionFacade) => questionFacade.Update(question));
@@ -176,6 +182,8 @@ void UseAnswerEndpoints(RouteGroupBuilder routeGroupBuilder)
         => answerFacade.GetById(id) is { } answer
             ? TypedResults.Ok(answer)
             : TypedResults.NotFound("Error 404 Not Found"));
+
+    answerEndpoints.MapGet("/search", (string text,IAnswerFacade answerFacade) => answerFacade.GetAnswersByText(text));
 
 
     answerEndpoints.MapGet("", (IAnswerFacade answerFacade) => answerFacade.GetAll());

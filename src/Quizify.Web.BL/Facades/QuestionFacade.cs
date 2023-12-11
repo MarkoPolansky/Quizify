@@ -42,8 +42,13 @@ public class QuestionFacade: FacadeBase ,IQuestionFacade
         await apiClient.QuestionDeleteAsync(id,culture);
     }
 
-    public List<QuestionListModel> GetQuestionByText(string? text)
+    public async Task<List<QuestionListModel>> GetQuestionByText(string? text)
     {
-        throw new NotImplementedException();
+        var questions = new List<QuestionListModel>();
+        var questionsFromApi = await apiClient.SearchAsync(text,culture);
+
+        questions.AddRange(questionsFromApi);
+        
+        return questions;
     }
 }

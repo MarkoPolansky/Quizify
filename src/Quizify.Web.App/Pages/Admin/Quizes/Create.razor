@@ -17,36 +17,17 @@
                 </small>
             </div>
             <div>
-                <InputSelect class="form-select" @bind-Value="@Data.QuizState">
-                    @foreach (var duizState in Enum.GetValues<QuizStateEnum>())
-                    {
-                        <option value="@duizState">@(Enum.GetName<QuizStateEnum>(duizState))</option>
-                    }
-                  
-                </InputSelect>
                 <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
                 <InputText @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
             </div>
-            <div class=" ">
-                <label for="question" class="text-sm font-medium text-gray-700 block mb-2">Questions</label>
-                <ol type="1">
-                    @foreach (var question in @Data.Questions)
-                    {
-                        <li class="p-2 w-full">
-                        <NavLink  href="@($"/admin/questions/{question.Id}")" class="p-1 w-full m-1 bg-gray-100 rounded-3">
-                            @question.Text
-                        </NavLink>
-                           </li>
-                    }
-              </ol> 
-            </div>
+       
             <div  class="p-4">
                 <DataAnnotationsValidator/>
             </div>
        
             
             <div class="flex justify-between">
-                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                <button type="submit" onclick="@Save" class="px-4 ml-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
                     Save
                 </button>
             </div>
