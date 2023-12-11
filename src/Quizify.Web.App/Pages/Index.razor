@@ -10,32 +10,36 @@
  
         <!-- component -->
     <div style ="background: rgb(56, 2, 130)">
-            <div class="min-h-screen flex flex-col items-center justify-center">
-            <h1 class="text-6xl bold text-white  mb-16">
-                QUIZIFY
-            </h1>
-                <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-                    <div class="mb-4">
+        <div class="min-h-screen flex flex-col items-center justify-center">
+        <h1 class="text-6xl bold text-white  mb-16">
+            QUIZIFY
+        </h1>
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+                <div class="mb-4">
                         
-                        <EditForm Model="@GamePin" >
-                            <InputText @bind-Value="@GamePin" inputmode="numeric" placeholder="Game PIN" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"/>
-                        </EditForm>
+                    <EditForm Model="@Data" OnValidSubmit="Join">
+                        <DataAnnotationsValidator />
+                        <ValidationMessage For="() => Data.GamePin" />
+                        <InputText @bind-Value="@Data.GamePin" inputmode="numeric" placeholder="Game PIN" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"/>
                         
-                          
-                        <EditForm Model="@UserName" >
-                            <InputText @bind-Value="@UserName" inputmode="text" placeholder="User Name" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"/>
-                        </EditForm>
+                        <ValidationMessage For="() => Data.Name" />
+                        <InputText @bind-Value="@Data.Name" inputmode="text" placeholder="User Name" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500" />
                         
-                        <button @onclick="() => Join()" type="submit" class="w-full bg-gray-700 text-white text-xl  h-16 px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">Enter</button>
 
-                    </div>
+                        <input type="submit" value="Enter" class="w-full bg-gray-700 text-white text-xl  h-16 px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"/>
+                    </EditForm>
+                    
+
+                    
+
                 </div>
-            <NavLink href="admin" class="text-decoration-underline bold text-white  ">
-                Create your own quiz here
-            </NavLink>
+            </div>
+        <NavLink href="admin" class="text-decoration-underline bold text-white  ">
+            Create your own quiz here
+        </NavLink>
 
           
-            </div>
+        </div>
    
 
     </div>
