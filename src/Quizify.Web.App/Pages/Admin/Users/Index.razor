@@ -19,7 +19,7 @@
           <div class="relative h-10 w-10">
             <img
               class="h-full w-full rounded-full object-cover object-center"
-              src="@(user.ImageUrl ?? "https://ui-avatars.com/api/?name="+@user.Name)"
+              src="@( String.IsNullOrEmpty(user.ImageUrl) ? "https://ui-avatars.com/api/?name="+@user.Name : @user.Name)"
               alt=""/>
         
           </div>  

@@ -4,8 +4,9 @@ namespace Quizify.Common.Models
 {
     public record UserDetailModel : ModelBase
     {
-       [Required]
+        [Required]
         public required string Name { get; set; }
+        [RegularExpression("^https?:\\/\\/.*$", ErrorMessage ="Image has to ba a url.")]
         public string? ImageUrl { get; set; }
 
         public IList<QuizListModel> CreatedQuizzes { get; set; } = new List<QuizListModel>();

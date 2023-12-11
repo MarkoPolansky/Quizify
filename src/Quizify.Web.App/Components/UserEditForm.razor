@@ -6,18 +6,27 @@
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
         <div class="flex items-center space-x-2 mb-6">
             <h1 class="text-xl font-semibold">Edit User</h1>
+            <div class="h-10 w-10">
+                <img class="h-full w-full rounded-full object-cover object-center"
+                     src="@( String.IsNullOrEmpty(Data.ImageUrl) ? "https://ui-avatars.com/api/?name="+@Data.Name : @Data.Name)"
+                     alt="" />
+
+            </div>
         </div>
-        <EditForm Model="@Data"  class="space-y-6">
+        <EditForm Model="@Data" class="space-y-6" OnValidSubmit="Save">
             <div>
                 <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Name</label>
-                <InputText @bind-Value="@Data.Name"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                <InputText @bind-Value="@Data.Name"  type="text" id="Name" class="form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
                 <small class="form-text text-red-500">
                     <ValidationMessage For="@(() => Data.Name)"/>
                 </small>
             </div>
             <div>
                 <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
-                <InputTextArea  @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"  />
+                <InputTextArea  @bind-Value="@Data.ImageUrl" type="text" id="ImgUrl" class="form-input block w-full border border-gray-300 rounded-md shadow-sm"  />
+                <small class="form-text text-red-500">
+                    <ValidationMessage For="@(() => Data.ImageUrl)" />
+                </small>
             </div>
         
             <div  class="p-4">
@@ -26,7 +35,7 @@
        
             
             <div class="flex justify-between">
-                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
                     Save
                 </button>
             </div>
