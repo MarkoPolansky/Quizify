@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.JSInterop;
 using Quizify.Web.App;
 using Quizify.Web.BL.Extensions;
@@ -12,7 +13,18 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 
 var cf = builder.Configuration;
-var apiBaseUrl = builder.Configuration.GetValue<string>("ApiBaseUrl");
+string apiBaseUrl = String.Empty;
+if (builder.HostEnvironment.IsDevelopment())
+{
+    apiBaseUrl = cf.GetValue<string>("ApiBaseUrl")
+    ?? throw new ArgumentException("The ApiBaseUrl string is missing");
+}
+else
+{
+    apiBaseUrl = Environment.GetEnvironmentVariable("ApiBaseUrl")
+    ?? throw new ArgumentException("The ApiBaseUrl string is missing");
+}
+
 builder.Services.AddInstaller<WebBLInstaller>(apiBaseUrl);
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

@@ -71,8 +71,6 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
     var connection = String.Empty;
     if (builder.Environment.IsDevelopment())
     {
-        //builder.Configuration.AddEnvironmentVariables().AddJsonFile("appsettings.Development.json");
-        //connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
         connection = configuration.GetConnectionString("DefaultConnection")
         ?? throw new ArgumentException("The connection string is missing");
     }
