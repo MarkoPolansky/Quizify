@@ -16,12 +16,12 @@ var cf = builder.Configuration;
 string apiBaseUrl = String.Empty;
 if (builder.HostEnvironment.IsDevelopment())
 {
-    apiBaseUrl = cf.GetValue<string>("ApiBaseUrl")
-    ?? throw new ArgumentException("The ApiBaseUrl string is missing");
+    apiBaseUrl = cf.GetValue<string>("DEVApiBaseUrl")
+    ?? throw new ArgumentException("The DEVApiBaseUrl string is missing");
 }
 else
 {
-    apiBaseUrl = Environment.GetEnvironmentVariable("ApiBaseUrl")
+    apiBaseUrl = cf.GetValue<string>("ApiBaseUrl")
     ?? throw new ArgumentException("The ApiBaseUrl string is missing");
 }
 
