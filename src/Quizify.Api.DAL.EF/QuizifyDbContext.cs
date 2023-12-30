@@ -31,19 +31,13 @@ namespace Quizify.Api.DAL.EF
             .HasOne(c => c.CreatedByUser)
             .WithMany(d => d.CreatedQuizzes)
             .HasForeignKey(c => c.CreatedByUserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<QuizEntity>()
                 .HasOne(e => e.ActiveQuestion)
                 .WithOne(d => d.ActiveInQuiz)
                 .HasForeignKey<QuizEntity>(c => c.ActiveQuestionId)
                 .IsRequired(false);
-
-            // modelBuilder.Entity<QuizEntity>()
-            //     .HasOne(e => e.ActiveQuestion)
-            //     .WithOne(a => a.ActiveInQuiz)
-            //     .HasForeignKey<QuestionEntity>("ActiveInQuizId")
-            //     .IsRequired(false);
 
             modelBuilder.Entity<QuestionEntity>()
                 .HasOne(e => e.Quiz)
@@ -57,27 +51,27 @@ namespace Quizify.Api.DAL.EF
             
             
             modelBuilder.Entity<QuizEntity>()
-              .HasMany<QuizUserEntity>()
-              .WithOne(d => d.Quiz)
-              .OnDelete(DeleteBehavior.Cascade);
+                .HasMany<QuizUserEntity>()
+                .WithOne(d => d.Quiz)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<QuizEntity>()
                 .HasIndex(u => u.GamePin).IsUnique();
 
             modelBuilder.Entity<UserEntity>()
-            .HasMany<QuizUserEntity>()
-            .WithOne(d => d.User)
-            .OnDelete(DeleteBehavior.Cascade);
+                .HasMany<QuizUserEntity>()
+                .WithOne(d => d.User)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserEntity>()
-           .HasMany<UserAnswerEntity>()
-           .WithOne(d => d.User)
-           .OnDelete(DeleteBehavior.Cascade);
+                .HasMany<UserAnswerEntity>()
+                .WithOne(d => d.User)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<AnswerEntity>()
-           .HasMany<UserAnswerEntity>()
-           .WithOne(d => d.Answer)
-           .OnDelete(DeleteBehavior.Cascade);
+                .HasMany<UserAnswerEntity>()
+                .WithOne(d => d.Answer)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
         }
