@@ -17,6 +17,7 @@ using Quizify.Common.Extensions;
 using Quizify.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.CompilerServices;
+using Microsoft.DotNet.Scaffolding.Shared;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -76,8 +77,14 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
     }
     else
     {
-        connection = Environment.GetEnvironmentVariable("SQLCONNSTR_APIDB")
-        ?? throw new ArgumentException("The production connection string is missing");
+        connection = Environment.GetEnvironmentVariable("SQLCONNSTR_APIDB");
+        if(connection == null)
+        {
+            Console.WriteLine("Using debug connstring for tests because production is missing");
+            connection = configuration.GetConnectionString("DefaultConnection")
+            ?? throw new ArgumentException("The development connection string is missing");
+        }
+        
     }
     
     serviceCollection.AddInstaller<ApiDALEFInstaller>(connection);
