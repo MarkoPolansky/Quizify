@@ -29,6 +29,7 @@ steps:
       sqllocaldb create MSSQLLocalDB
       sqllocaldb start MSSQLLocalDB
       sqllocaldb info MSSQLLocalDB
+      "C:\Program Files (x86)\Microsoft SDKs\Azure\Storage Emulator\AzureStorageEmulator.exe" start
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Dotnet Tests'
