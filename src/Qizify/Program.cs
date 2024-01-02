@@ -72,12 +72,12 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
     if (builder.Environment.IsDevelopment())
     {
         connection = configuration.GetConnectionString("DefaultConnection")
-        ?? throw new ArgumentException("The connection string is missing");
+        ?? throw new ArgumentException("The development connection string is missing");
     }
     else
     {
         connection = Environment.GetEnvironmentVariable("SQLCONNSTR_APIDB")
-        ?? throw new ArgumentException("The connection string is missing");
+        ?? throw new ArgumentException("The production connection string is missing");
     }
     
     serviceCollection.AddInstaller<ApiDALEFInstaller>(connection);

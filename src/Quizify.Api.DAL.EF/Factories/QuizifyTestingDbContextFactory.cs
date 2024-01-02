@@ -27,7 +27,7 @@ namespace Quizify.Api.DAL.EF.Factories
                  .Build();
             
             var optionsBuilder = new DbContextOptionsBuilder<QuizifyDbContext>();
-            optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = " + _dbName + ";MultipleActiveResultSets = True;Integrated Security = True;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Data Source = (localdb)\\mssqllocaldb; Initial Catalog = " + _dbName + ";MultipleActiveResultSets = True;Integrated Security = True;Trusted_Connection=True;");
             
             return new QuizifyTestingDbContext(optionsBuilder.Options, _seedData);
         }
