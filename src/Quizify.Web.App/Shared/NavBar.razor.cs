@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Quizify.Common.Models;
+using Quizify.Web.BL;
 using Quizify.Web.BL.Facades;
 
 namespace Quizify.Web.App.Shared;
 
 public partial class NavBar
 {
+    [Inject]
+    IJSRuntime JSRuntime { get; set; } = null!;
+    
+    private IJSObjectReference _jsModule;
+    private string token;
+    
     
     [Inject]
     private UserFacade UserFacade { get; set; } = null!;
@@ -19,7 +27,7 @@ public partial class NavBar
     [Inject]
     private NavigationManager navigationManager { get; set; } = null!;
 
-    public UserDetailModel? UserLogged { get; set; } = new UserDetailModel
+    public UserDetailModel UserLogged { get; set; } = new UserDetailModel
     {
         Id = Guid.Empty,
         Name = null,
@@ -59,9 +67,9 @@ public partial class NavBar
     {
         UserLogged = await UserFacade.Profile();
         
-        if (UserLogged == null)
+        if (UserLogged?.Id == Guid.Empty)
         {
-           // navigationManager.NavigateTo("/login");
+            navigationManager.NavigateTo("/login");
         }
         
         await base.OnInitializedAsync();

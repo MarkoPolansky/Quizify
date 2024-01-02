@@ -6,7 +6,7 @@ using Quizify.Web.BL.Facades;
 
 namespace Quizify.Web.App.Pages.Game;
 
-public partial class Question
+public partial class Result
 {
     [Inject]
     IJSRuntime JSRuntime { get; set; } = null!;
@@ -16,6 +16,9 @@ public partial class Question
     
     [Inject]
     public UserFacade UserFacade { get; set; }
+    
+    public int TotalPoints{ get; set; }
+    public int UserPoints{ get; set; }
     public UserDetailModel UserLogged { get; set; } = new UserDetailModel
     {
         Id = Guid.Empty,
@@ -65,15 +68,17 @@ public partial class Question
     protected override async Task OnInitializedAsync()
     {
         UserLogged = await UserFacade.Profile();
-  
+        
         if (UserLogged?.Id == Guid.Empty)
         {
             navigationManager.NavigateTo("/login");
         }
-
         
         QuizDetailModel =  await QuizFacade.GetByIdAsync(Id);
         
+        TotalPoints = QuizDetailModel.Questions.Sum(a => a.Points);
+        UserPoints = UserLogged.Quizzes.First(a => a.Quiz.Id == Id).TotalPoints;
+
         foreach (var question in QuizDetailModel.Questions)
         {
             Questions.Add(await QuestionFacade.GetByIdAsync(question.Id));
@@ -107,8 +112,7 @@ public partial class Question
     
     public async Task SubmitQuiz()
     {
-        await UserFacade.SubmitQuiz(UserLogged,QuizDetailModel.Id);
-        navigationManager.NavigateTo("/game/"+QuizDetailModel.Id+"/question/results");
+        await UserFacade.UpdateAsync(UserLogged);
     }
     public bool IsAnswerPicked(AnswerDetailModel answerDetailModel)
     {
@@ -133,6 +137,15 @@ public partial class Question
     private bool IsCreator()
     {
         return UserLogged.Id == QuizDetailModel.CreatedByUser.Id;
+    }
+
+    public int GetRecivedPointsForQuestion(QuestionDetailModel question)
+    {
+        var q = Questions.First(a => a.Id == question.Id);
+        var correctAnswers = q.Answers.Where(a => a.IsCorrect).ToHashSet();
+        var userAnswersForQuestion = UserLogged.Answers.Where(q => q.Answer.QuestionId == question.Id).Select(a => a.Answer).ToHashSet();
+        return userAnswersForQuestion.SetEquals(correctAnswers) ? q.Points : 0;
+
     }
     
   

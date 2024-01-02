@@ -16,6 +16,7 @@ namespace Quizify.Api.BL.Facades.IFacades
         Guid Create(TDetailModel model);
         Guid? Update(TDetailModel model);
         void Delete(Guid id);
+        void Delete(TEntity id);
         
     }
 }

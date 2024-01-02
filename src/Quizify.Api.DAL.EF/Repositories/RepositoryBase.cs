@@ -75,5 +75,12 @@ namespace Quizify.Api.DAL.EF.Repositories
         {
             dbContext.Dispose();
         }
+        
+        public void Remove(TEntity entity)
+        {
+                dbContext.Set<TEntity>().Remove(entity);
+                dbContext.SaveChanges();
+        }
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/{pin?}"
 @layout EmptyLayout
 
 <PageTitle>Enter Game Pin</PageTitle>
@@ -17,21 +17,12 @@
             <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <div class="mb-4">
                         
-                    <EditForm Model="@Data" OnValidSubmit="Join">
-                        <DataAnnotationsValidator />
-                        <ValidationMessage For="() => Data.GamePin" />
-                        <InputText @bind-Value="@Data.GamePin" inputmode="numeric" placeholder="Game PIN" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"/>
-                        
-                        <ValidationMessage For="() => Data.Name" />
-                        <InputText @bind-Value="@Data.Name" inputmode="text" placeholder="User Name" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500" />
-                        
-
-                        <input type="submit" value="Enter" class="w-full bg-gray-700 text-white text-xl  h-16 px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"/>
-                    </EditForm>
-                    
-
-                    
-
+                    <form onsubmit="@Join" >
+                        <InputText @bind-Value="@Pin" inputmode="numeric" placeholder="Game PIN" class="mb-4 h-16  text-xl w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"/>
+                    </form>
+                          <button onclick="@Join" type="submit"  class="w-full bg-gray-700 text-white text-xl  h-16 px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
+                                                Enter
+                                            </button>
                 </div>
             </div>
         <NavLink href="admin" class="text-decoration-underline bold text-white  ">

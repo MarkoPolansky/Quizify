@@ -8,6 +8,9 @@ namespace Quizify.Api.BL.Facades.IFacades
         public List<UserListModel> GetUsersByName(string? userName);
         public Guid Login (string? userName);
         
-        public UserDetailModel? Profile ();
+        
+        public UserDetailModel? Profile();
+
+        public Guid? SubmitQuiz(UserDetailModel model,Guid quizId);
     }
 }

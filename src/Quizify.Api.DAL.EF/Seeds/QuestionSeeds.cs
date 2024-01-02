@@ -13,9 +13,17 @@ public static class QuestionSeeds
         Points = 10,
         QuizId = QuizSeeds.quiz.Id,
     };
+    public static QuestionEntity Question2 = new()
+    {
+        Id = new Guid("05b2d8a5-40e0-4728-b177-ecb5a9dc767f"),
+        Text = "Červená",
+        Type = TypeEnum.SingleSelect,
+        Points = 10,
+        QuizId = QuizSeeds.quiz.Id,
+    };
 
     public static List<QuestionEntity> Seed()
     {
-        return new List<QuestionEntity>() { Question };
+        return new List<QuestionEntity>() { Question,Question2 };
     }
 }

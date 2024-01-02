@@ -136,15 +136,15 @@
     
       </ul>
     <ul class="flex items-center hidden space-x-8 lg:flex">
-      @if (UserLogged != null)
+      @if (UserLogged.Id == Guid.Empty)
       {
         <li>
           <NavLink
             href="/login"
-            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
+            class="inline-flex  text-white text-xl text-bold items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
             aria-label="Login"
             title="Login">
-
+            Login
           </NavLink>
         </li>
       }
@@ -152,8 +152,8 @@
       {
         <li>
           <h1
-            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md text-black focus:shadow-outline focus:outline-none">
-            
+            class="inline-flex  text-white text-xl text-bold items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
+          >@UserLogged.Name
             </h1>
         </li>
       }

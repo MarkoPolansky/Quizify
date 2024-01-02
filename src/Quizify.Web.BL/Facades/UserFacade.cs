@@ -57,4 +57,9 @@ public class UserFacade : FacadeBase ,IUserFacade
         users.AddRange(usersFromApi);
         return users;
     }
+
+    public async Task<Guid?> SubmitQuiz(UserDetailModel model, Guid quizId)
+    {
+        return await apiClient.QuizAsync(quizId, culture, model);
+    }
 }

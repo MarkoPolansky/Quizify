@@ -40,21 +40,21 @@ namespace Quizify.Api.DAL.EF.Repositories
 
                 existingQuestion = _mapper.Map(question, existingQuestion);
 
-          
-                
+
+
                 foreach (var answer in existingQuestion.Answers)
                 {
-                    if(dbContext.Answers.Count(a => a.Id == answer.Id) == 0)
+                    if (dbContext.Answers.Count(a => a.Id == answer.Id) == 0)
                         dbContext.Answers.Add(answer);
                     else
-                    { 
+                    {
                         dbContext.Answers.Update(answer);
                     }
                 }
-                
+
                 dbContext.Update(existingQuestion);
                 dbContext.SaveChanges();
-             
+
 
                 return existingQuestion.Id;
             }
@@ -63,6 +63,5 @@ namespace Quizify.Api.DAL.EF.Repositories
                 return null;
             }
         }
-
     }
 }

@@ -39,7 +39,7 @@ public class QuestionRepositoryTests : TestBase
 
         question = _repository.GetById(QuestionSeeds.Question.Id);
         Assert.Equal(question.Quiz?.Id, QuizSeeds.quiz.Id);
-        Assert.Equal(question.Answers?.Count, 1); //TODO: No answers in seeds?
+        Assert.Equal(question.Answers?.Count, 2);
     }
 
 
@@ -94,5 +94,16 @@ public class QuestionRepositoryTests : TestBase
         DeepAssert.Equal(question, fromRepository);
     }
 
+    
+    [Fact]
+    public void DeleteQuestion_QuestionDeleted()
+    {
+     
+      
+        _repository.Remove(QuestionSeeds.Question2.Id);
+        var question = _repository.GetById(QuestionSeeds.Question2.Id);
+        
+        DeepAssert.Equal(null,question);
+    }
 }
 

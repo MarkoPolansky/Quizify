@@ -130,10 +130,12 @@ void UseUserEndpoints(RouteGroupBuilder routeGroupBuilder)
 
     userEndpoints.MapGet("/login", (string name,IUserFacade userFacade) => userFacade.Login(name));
     userEndpoints.MapGet("/me", (IUserFacade userFacade) => userFacade.Profile());
+    userEndpoints.MapGet("/search", (string userName,IUserFacade userFacade) => userFacade.GetUsersByName(userName));
 
     
-    userEndpoints.MapGet("/search", (string userName,IUserFacade userFacade) => userFacade.GetUsersByName(userName));
+    userEndpoints.MapPost("/submit/quiz", (UserDetailModel user,Guid quizId,IUserFacade userFacade) => userFacade.SubmitQuiz(user,quizId));
     
+
     userEndpoints.MapGet("", (IUserFacade userFacade) => userFacade.GetAll());
     userEndpoints.MapPost("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Create(user));
     userEndpoints.MapPut("", (UserDetailModel user, IUserFacade userFacade) => userFacade.Update(user));
@@ -156,10 +158,11 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
     questionEndpoints.MapPost("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Create(quiz));
     questionEndpoints.MapPut("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Update(quiz));
     questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.Delete(id));
-    questionEndpoints.MapPost("/join", (string gamePin,string userName, IQuizFacade quizFacade) => quizFacade.Join(gamePin,userName));
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
     questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));
+    questionEndpoints.MapPost("/join", (string gamePin, IQuizFacade userFacade) => userFacade.JoinQuiz(gamePin));
+
 }
 
 

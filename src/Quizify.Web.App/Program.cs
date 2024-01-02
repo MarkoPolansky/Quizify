@@ -12,6 +12,7 @@ const string defaultCultureString = "cs";
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 
+
 var cf = builder.Configuration;
 string apiBaseUrl = String.Empty;
 if (builder.HostEnvironment.IsDevelopment())
@@ -25,13 +26,20 @@ else
     ?? throw new ArgumentException("The ApiBaseUrl string is missing");
 }
 
-builder.Services.AddInstaller<WebBLInstaller>(apiBaseUrl);
-builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+
+var httpClient = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+var serviceProvider = builder.Services.BuildServiceProvider();
+
+
+builder.Services.AddInstaller<WebBLInstaller>(apiBaseUrl,httpClient);
+builder.Services.AddScoped(_ => httpClient);
 
 builder.RootComponents.Add<HeadOutlet>("head::after");
-
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddScoped(sp => httpClient);
 
 await builder.Build().RunAsync();
+
+
 
 

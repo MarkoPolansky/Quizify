@@ -3,56 +3,108 @@
 @layout MainLayout
 
 <!-- component -->
-<div class="flex items-center justify-center mt-8 ">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-        <div class="flex items-center space-x-2 mb-6">
-            <h1 class="text-xl font-semibold">Edit Quiz</h1>
-        </div>
-        <EditForm Model="@Data"  class="space-y-6">
-            <div>
-                <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Title</label>
-                <InputText @bind-Value="@Data.Title"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
-                <small class="form-text text-red-500">
-                    <ValidationMessage For="@(() => Data.Title)"/>
-                </small>
+<div class="flex md:flex-row flex-col justify-content-evenly align-items-baseline">
+    <div class="flex items-center justify-center  mt-8 ">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+            <div class="flex items-center space-x-2 mb-6">
+                <h1 class="text-xl font-semibold">Edit Quiz</h1>
             </div>
-            <div>
-                <InputSelect class="form-select" @bind-Value="@Data.QuizState">
-                    @foreach (var duizState in Enum.GetValues<QuizStateEnum>())
-                    {
-                        <option value="@duizState">@(Enum.GetName<QuizStateEnum>(duizState))</option>
-                    }
-                  
-                </InputSelect>
-                <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
-                <InputText @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
-            </div>
-            <div class=" ">
-                <label for="question" class="text-sm font-medium text-gray-700 block mb-2">Questions</label>
-                <ol type="1">
-                    @foreach (var question in @Data.Questions)
-                    {
-                        <li class="p-2 w-full">
-                        <NavLink  href="@($"/admin/questions/{question.Id}")" class="p-1 w-full m-1 bg-gray-100 rounded-3">
-                            @question.Text
-                        </NavLink>
-                           </li>
-                    }
-              </ol> 
-            </div>
-            <div  class="p-4">
-                <DataAnnotationsValidator/>
-            </div>
-       
+            <EditForm Model="@Data"  class="space-y-6">
+                <div>
+                    <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Title</label>
+                    <InputText @bind-Value="@Data.Title"  type="text" id="currentPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                    <small class="form-text text-red-500">
+                        <ValidationMessage For="@(() => Data.Title)"/>
+                    </small>
+                </div>
+                <div>
+                    <InputSelect class="form-select" @bind-Value="@Data.QuizState">
+                        @foreach (var duizState in Enum.GetValues<QuizStateEnum>())
+                        {
+                            <option value="@duizState">@(Enum.GetName<QuizStateEnum>(duizState))</option>
+                        }
+                      
+                    </InputSelect>
+                    <label for="image" class="text-sm font-medium text-gray-700 block mb-2">Image</label>
+                    <InputText @bind-Value="@Data.ImageUrl" type="text" id="newPassword" class="password-input form-input block w-full border border-gray-300 rounded-md shadow-sm"/>
+                </div>
+                <div class=" ">
+                    <label for="question" class="text-sm font-medium text-gray-700 block mb-2">Questions</label>
+                    <ol type="1">
+                        @foreach (var question in @Data.Questions)
+                        {
+                            <li class="p-2 w-full">
+                                <NavLink  href="@($"/admin/questions/{question.Id}")" class="p-1 w-full m-1 bg-gray-100 rounded-3">
+                                    @question.Text
+                                </NavLink>
+                            </li>
+                        }
+                    </ol> 
+                </div>
+                <div  class="p-4">
+                    <DataAnnotationsValidator/>
+                </div>
+          
+                
+                <div class="flex justify-between">
+                    <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                        Save
+                    </button>
+                </div>
+                <div class="flex justify-between">
+                      @if (Data.GamePin == null)
+                      {
+                          <button type="submit" onclick="@StartQuiz" class="px-4 w-full py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:border-blue-300">
+                              Start Quiz
+                          </button>
+                      }
+               
+                </div>
+            </EditForm>
             
-            <div class="flex justify-between">
-                <button type="submit" onclick="@Save" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
-                    Save
-                </button>
-            </div>
-        </EditForm>
-        
+        </div>
     </div>
-
     
+    @if (Data.GamePin != null)
+    {
+          <div class="flex items-center justify-center  mt-8 ">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+            <div class="flex items-center space-x-2 mb-6">
+                <h1 class="text-xl font-semibold">Game Pin : @Data.GamePin</h1>
+            </div>
+               <table class="border-collapse w-full bg-white text-left text-sm text-gray-500">
+                 <thead class="bg-gray-50">
+                 <tr>
+                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">User</th>
+                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">Points</th>
+                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">When</th>
+                 </tr>
+                 </thead>
+                 <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                 @foreach(var user in Users)
+                 {
+                   <tr class="hover:bg-gray-50">
+                       <th class="w-1/3 px-6 py-4 font-normal text-gray-900">
+                           <div class="font-medium text-gray-700">@user.Name</div>
+                       </th>
+                       @foreach(var userDetail in user.Quizzes)
+                       {
+                           <th class="w-1/3 px-6 py-4 font-normal text-gray-900">
+                               <div class="font-medium text-gray-700">@userDetail.TotalPoints</div>
+                           </th>
+                           <th class="w-1/3 px-6 py-4 font-normal text-gray-900">
+                               <div class="font-medium text-gray-700">@userDetail.EndedAt</div>
+                           </th>
+                       }
+                      
+                   </tr>
+                 }
+           
+           
+                 </tbody>
+               </table>
+        </div>
+    </div>
+    }
+  
 </div>

@@ -29,6 +29,15 @@
     </div>
     <script src="js/Cookie.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+<script>
+    var storeToken = function (token) { localStorage.setItem("token", token);};
+    var getToken = function () { return localStorage.getItem("token");};
+    var removeToken = function () { localStorage.removeItem("token");};
+    var copyToClipboard= function(event) {
+        var copyText = event.currentTarget.firstElementChild.nextElementSibling.value
+        navigator.clipboard.writeText(copyText);
+    }
+</script>
 </body>
 
 </html>

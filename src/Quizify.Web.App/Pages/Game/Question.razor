@@ -1,27 +1,38 @@
 @page "/game/{Id:guid}/question"
-@layout EmptyLayout
+@layout MainLayout
+
+        <section   class="">
+         @foreach (var question in Questions)
+         {
+             <div>
+                 <div class="flex flex-row text-center    p-6 align-items-center justify-content-center">
+                     <div class="bg-white p-4 ">
+                         <h1 class="text-3xl text-start  bold title-font mb-4 ">@question.Text</h1>
+                     </div>
+                 </div>
+                 <div class="flex flex-wrap sm:px-24 -m-2">
+                     @foreach (var answer in question.Answers)
+                     {
+
+                         <div  class=" bg-white p-2 hover:bg-green-400 lg:w-1/2 md:w-1/3 w-full ">
+                             <div  @onclick="() => Choose(answer)" class="   @(IsAnswerPicked(answer) ? "bg-green-400" : "")  h-full cursor-pointer flex   items-center border-gray-200 border p-4 rounded-lg">
+                                 <div class="flex-grow">
+                                     <h2 class="text-gray-900 title-font font-medium">@answer.Text</h2>
+                                 </div>
+                             </div>
+                         </div>
+                     }
+                 </div>
+             </div>
+         }
+        <div class="flex flex-row align-items-center justify-content-center">
+            <button onclick="@SubmitQuiz" class="px-4  mt-8 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:border-blue-300">
+                Submit
+            </button>
+        </div>
+        </section>
 
 
-<section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"> @QuestionDetailModel.Text</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Creator will start this quiz any soon......</p>
-    </div>
-   
-    <div class="relative grid gap-5 grid-cols-2 lg:grid-cols-4">
-          @foreach (var answer in QuestionDetailModel.Answers)
-          {
-            <div @onclick="() => Choose()" class="px-10 py-20 text-center transition duration-300 transform bg-violet-700 rounded shadow-2xl hover:scale-105 md:shadow-xl hover:shadow-2xl">
-              <p class="font-semibold text-gray-200">
-                @answer.Text
-              </p>
-            </div>
-          }
-         </div>
-    
-  </div>
-</section>
 
 
 

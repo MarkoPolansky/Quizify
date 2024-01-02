@@ -7,8 +7,9 @@ namespace Quizify.Web.BL.Facades.IFacades
     public interface IQuizFacade : IFacade<QuizListModel,QuizDetailModel>
     {
         Task<Guid?> Start(Guid modelId);
-        Task<string?> Publish(Guid modelId);
+        Task<QuizDetailModel> Publish(Guid modelId);
         Task<Guid?> End(Guid modelId);
-        Task<Guid?> Join(string gamePin, string userName);
+        Task<QuizDetailModel> Join(string gamePin);
+ 
     }
 }

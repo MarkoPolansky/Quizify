@@ -75,6 +75,27 @@ public class AnswerRepositoryTests : TestBase
 
         DeepAssert.Equal(answer, fromRepository);
     }
+    
+    [Fact]
+    public void DeleteAnswerWithAttachedUser_AnswerDeletedWithAttachedUser()
+    {
+     
+        var answer = _repository.GetById(AnswerSeeds.answer2.Id);
+        Guid id = Guid.NewGuid();
+        var User = new UserAnswerEntity
+        {
+            UserId = UserSeeds.user2.Id,
+            AnswerId = AnswerSeeds.answer2.Id,
+            Id = id,
+         
+        };
+        answer.Users.Add(User);
+        _repository.Update(answer);
+        _repository.Remove(answer.Id);
+        answer = _repository.GetById(AnswerSeeds.answer2.Id);
+   
+        DeepAssert.Equal(null,answer);
+    }
 
 }
 

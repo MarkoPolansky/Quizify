@@ -12,13 +12,19 @@ public partial class Login
     [Inject]
     IJSRuntime JSRuntime { get; set; } = null!;
     
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? Pin { get; set; }
+
+    
     [Inject]
     private NavigationManager navigationManager { get; set; } = null!;
     public string UserName { get; set; } = "";
     
     public async Task LoginTo()
     {
-        await UserFacade.Login(UserName);
-        await JSRuntime.InvokeVoidAsync("history.back");
+        var userId =  await UserFacade.Login(UserName);
+        await JSRuntime.InvokeVoidAsync("storeToken", userId);
+        navigationManager.NavigateTo("/?pin="+Pin);
     }
 }

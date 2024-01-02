@@ -53,9 +53,13 @@ namespace Quizify.Api.BL.Facades
             throw new NotImplementedException();
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             repository.Remove(id);
+        }
+        public void Delete(TEntity entity)
+        {
+            repository.Remove(entity);
         }
     }
 }

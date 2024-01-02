@@ -9,4 +9,7 @@ public interface IUserFacade: IFacade<UserListModel,UserDetailModel>
     Task<UserDetailModel?> Profile();
     
     public Task<List<UserListModel>> GetUsersByName(string? userName);
+    
+    public Task<Guid?> SubmitQuiz(UserDetailModel model, Guid quizId);
+
 }

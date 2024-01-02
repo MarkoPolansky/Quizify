@@ -12,14 +12,12 @@ namespace Quizify.Api.BL.Facades
 {
     public class QuizFacade : BaseFacade<QuizEntity, QuizListModel, QuizDetailModel>, IQuizFacade
     {
-        private readonly IUserFacade _userFacade;
         private readonly IQuestionFacade _questionFacade;
         private readonly IQuizRepository quizRepository;
         private readonly IMapper _mapper;
         private readonly IPinGenerationService _pinGenerationService;
         private readonly IAuthService _auth;
         public QuizFacade(
-            IUserFacade userFacade,
             IQuestionFacade questionFacade,
             IQuizRepository repository,
             IMapper mapper,
@@ -28,7 +26,6 @@ namespace Quizify.Api.BL.Facades
             : base(repository, mapper)
         {
             _questionFacade = questionFacade;
-            _userFacade = userFacade;    
             quizRepository = repository;
             _mapper = mapper;
             _pinGenerationService = pinGenerationService;
@@ -54,6 +51,7 @@ namespace Quizify.Api.BL.Facades
                 UserId = t.User.Id,
                 QuizId = quizEntity.Id,
             }).ToList();
+            quizEntity.ActiveQuestionId = quizModel.ActiveQuestion?.Id;
             var result = quizRepository.Update(quizEntity);
             
             return result;
@@ -61,35 +59,50 @@ namespace Quizify.Api.BL.Facades
         public Guid? Start(Guid modelId)
         {
             var model = GetById(modelId);
+           
             if(model == null) return null;
             if (model.QuizState != QuizStateEnum.Published) return null;
             
             Guid? result = null;
             if (model != null)
             {
-                var activeQuestion =
-                    mapper.Map<QuestionDetailModel>(_questionFacade.GetById(model.Questions.First().Id));
+                var activeQuestion = new QuestionDetailModel
+                {
+                    Text = null,
+                    Type = TypeEnum.SingleSelect,
+                    Points = 0,
+                    QuizId = default,
+                    Id = model.Questions.First().Id
+                };
+                
                 model.QuizState = QuizStateEnum.Running;
                 model.ActiveQuestion = activeQuestion;
                 result = Update(model);
             }
             return result;
         }
-        public string? Publish(Guid modelId)
+        public QuizDetailModel Publish(Guid modelId)
         {  
+            var emptyModel = new QuizDetailModel
+            {
+                Title = null,
+                QuizState = QuizStateEnum.Creation,
+                CreatedByUser = null,
+                Id = Guid.Empty
+            };
             var model = GetById(modelId);
-            if(model == null) return null;
+            if(model == null) return emptyModel;
             if (model.QuizState == QuizStateEnum.Published || model.QuizState == QuizStateEnum.Running)
-                return null;
+                return emptyModel;
             
             model.GamePin = GenerateGamePin();
             model.QuizState = QuizStateEnum.Published;
             if (Update(model) != null)
             {
-                return model.GamePin;
+                return model;
             }
 
-            return null;
+            return emptyModel;
         }
         
         public Guid? End(Guid modelId)
@@ -102,46 +115,23 @@ namespace Quizify.Api.BL.Facades
             return Update(model);
         }
 
-        public Guid? Join(string gamePin,string userName)
+        
+        public QuizDetailModel? GetByGamePin(string gamePin)
         {
-            var quizEntity = quizRepository.Get().First(q => q.GamePin == gamePin);
+            var quizEntity = quizRepository.Get().FirstOrDefault(q => q.GamePin == gamePin);
+            if (quizEntity == null)
+                return null;
+            
             var quizDetailModel = _mapper.Map<QuizDetailModel>(quizEntity);
             
             if (quizDetailModel == null && quizDetailModel.QuizState != QuizStateEnum.Published)
             {
-                return Guid.Empty;
-            }
-            
-            var user = new UserDetailModel
-            {
-                Name = userName,
-                Id = Guid.NewGuid()
-            };
-            _userFacade.Create(user);
-            
-
-            var userdetail = new QuizDetailUserModel
-            {
-                Id = Guid.NewGuid(),
-                TotalPoints = 0,
-                StartedAt = default,
-                EndedAt = null,
-                User = _mapper.Map<UserListModel>(user)
-            };
-            
-            quizDetailModel.Users.Add(userdetail);
-            var quizId = Update(quizDetailModel);
-
-            if (quizId == null)
-            {
                 return null;
             }
-            
-            _auth.SetCookieToResponse(user.Id.ToString());
-            return quizId;
+
+            return quizDetailModel;
         }
-
-
+        
         private bool IsGamePinUnique(string gamePin)
         {
             return quizRepository.CountGamePin(gamePin) == 0;
@@ -157,5 +147,43 @@ namespace Quizify.Api.BL.Facades
             }
             return gamePin;
         }
+        
+        public QuizDetailModel JoinQuiz(string gamePin)
+        {
+            var quizDetailModel = GetByGamePin(gamePin);
+            var emptyModel = new QuizDetailModel
+                {
+                    Title = null,
+                    QuizState = QuizStateEnum.Creation,
+                    CreatedByUser = null,
+                    Id = Guid.Empty
+                }
+                ;
+            if (quizDetailModel == null || quizDetailModel.QuizState != QuizStateEnum.Published)
+            {
+                return emptyModel;
+            }
+            
+            
+            var userdetail = new QuizDetailUserModel
+            {
+                Id = Guid.NewGuid(),
+                TotalPoints = 0,
+                StartedAt = default,
+                EndedAt = null,
+                User = _mapper.Map<UserListModel>( _auth.GetUser())
+            };
+            
+            quizDetailModel.Users.Add(userdetail);
+            var quizId = Update(quizDetailModel);
+
+            if (quizId == null)
+            {
+                return emptyModel;
+            }
+            
+            return quizDetailModel;
+        }
+   
     }
 }

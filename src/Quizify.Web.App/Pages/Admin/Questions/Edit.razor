@@ -39,7 +39,7 @@
                 <ol type="1">
                     @foreach (var answer in @Data.Answers)
                     {
-                        <NavLink href="@($"/admin/answer/{answer.Id}")" class="p-1 m-1 bg-gray-100 rounded-3 ">
+                        <NavLink href="@($"/admin/answers/{answer.Id}")" class="p-1 m-1 bg-gray-100 rounded-3 ">
                             @answer.Text
                         </NavLink>
                     }

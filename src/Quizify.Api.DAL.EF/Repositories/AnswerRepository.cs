@@ -55,5 +55,14 @@ namespace Quizify.Api.DAL.EF.Repositories
             }
         }
 
+        public override void Remove(Guid id)
+        {
+            var answer = GetById(id);
+            foreach (var user  in answer.Users)
+            {
+                dbContext.AnswerUsers.Remove(user);
+            }
+            base.Remove(id);
+        }
     }
 }

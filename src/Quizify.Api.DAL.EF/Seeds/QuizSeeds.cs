@@ -12,9 +12,17 @@ public static class QuizSeeds
         QuizState = QuizStateEnum.Creation,
         CreatedByUserId = UserSeeds.user.Id,
     };
+    
+    public static QuizEntity quiz2 = new QuizEntity
+    {
+        Id = new Guid("4a8055f3-f2a1-45aa-a2b5-7cf39fb10d25"),
+        Title = "New quiz",
+        QuizState = QuizStateEnum.Creation,
+        CreatedByUserId = UserSeeds.user.Id,
+    };
 
     public static List<QuizEntity> Seed()
     {
-        return new List<QuizEntity>() { quiz };
+        return new List<QuizEntity>() { quiz,quiz2 };
     }
 }

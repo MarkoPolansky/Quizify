@@ -53,7 +53,12 @@ namespace Quizify.Api.DAL.EF.Repositories
                 
                 foreach (var quizUserEntity in existingUser.Quizzes)
                 {
-                    dbContext.QuizUsers.Add(quizUserEntity);
+                    if(dbContext.Quizzes.Count(a =>a.Id == quizUserEntity.Id) == 0)
+                        dbContext.QuizUsers.Add(quizUserEntity);
+                    else
+                    { 
+                        dbContext.QuizUsers.Update(quizUserEntity);
+                    }
                 }
                 
                 foreach (var quiz in existingUser.CreatedQuizzes)
@@ -76,6 +81,20 @@ namespace Quizify.Api.DAL.EF.Repositories
             {
                 return null;
             }
+        }
+
+        public override void Remove(Guid id)
+        {
+            var user = GetById(id);
+            foreach (var answer  in user.Answers)
+            {
+                dbContext.AnswerUsers.Remove(answer);
+            }
+            foreach (var quiz  in user.Quizzes)
+            {
+                dbContext.QuizUsers.Remove(quiz);
+            }
+            base.Remove(id);
         }
     }
 }

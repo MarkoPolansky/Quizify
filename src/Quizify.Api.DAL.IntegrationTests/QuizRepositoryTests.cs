@@ -35,7 +35,7 @@ public class QuizRepositoryTests : TestBase
 
         quiz = _repository.GetById(QuizSeeds.quiz.Id);
         Assert.Equal(quiz.CreatedByUser?.Id,UserSeeds.user.Id);
-        Assert.Equal(quiz.Questions?.Count,1);
+        Assert.Equal(quiz.Questions?.Count,2);
     }
     
     
@@ -46,7 +46,7 @@ public class QuizRepositoryTests : TestBase
         Guid id = Guid.NewGuid();
         var quizUser = new QuizUserEntity
         {
-            UserId = UserSeeds.user.Id,
+            UserId = UserSeeds.user2.Id,
             QuizId = QuizSeeds.quiz.Id,
             Id = id
         };
@@ -113,5 +113,25 @@ public class QuizRepositoryTests : TestBase
         var count = _repository.CountGamePin("1234");
        
         DeepAssert.Equal(1,count);
+    }
+    
+    [Fact]
+    public void DeleteQuizWithAttachedUser_QuizDeletedWithAttachedUser()
+    {
+     
+        var quiz = _repository.GetById(QuizSeeds.quiz2.Id);
+        Guid id = Guid.NewGuid();
+        var User = new QuizUserEntity
+        {
+            UserId = UserSeeds.user2.Id,
+            QuizId = QuizSeeds.quiz2.Id,
+            Id = id
+        };
+        quiz.Users.Add(User);
+        _repository.Update(quiz);
+        _repository.Remove(quiz.Id);
+        quiz = _repository.GetById(QuizSeeds.quiz2.Id);
+   
+        DeepAssert.Equal(null,quiz);
     }
 }

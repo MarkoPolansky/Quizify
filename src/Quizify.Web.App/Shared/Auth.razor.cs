@@ -7,6 +7,11 @@ namespace Quizify.Web.App.Shared;
 
 public partial class Auth
 {
+    [Inject]
+    IJSRuntime JSRuntime { get; set; } = null!;
+    
+    private IJSObjectReference _jsModule;
+    private string token;
     
     [Inject]
     private UserFacade UserFacade { get; set; } = null!;
@@ -26,6 +31,7 @@ public partial class Auth
 
     protected override async Task OnInitializedAsync()
     {
+        token = await _jsModule.InvokeAsync<string>("getToken");
         UserLogged = await UserFacade.Profile();
         
         if (UserLogged == null)

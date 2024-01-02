@@ -133,6 +133,37 @@ public class UserRepositoryTests : TestBase
         
        DeepAssert.Equal(user, fromRepository);
     }
+    
+    
+    [Fact]
+    public void DeleteUser_UserDeleted()
+    {
+     
+        _repository.Remove(UserSeeds.user2.Id);
+        var user = _repository.GetById(UserSeeds.user2.Id);
+        
+        DeepAssert.Equal(null,user);
+    }
+    
+    [Fact]
+    public void DeleteUserWithAttachedQuiz_UserDeletedWithAttachedAnswer()
+    {
+     
+        var user = _repository.GetById(UserSeeds.user2.Id);
+        Guid id = Guid.NewGuid();
+        var Quiz = new QuizUserEntity
+        {
+            UserId = UserSeeds.user2.Id,
+            QuizId = QuizSeeds.quiz.Id,
+            Id = id
+        };
+        user.Quizzes.Add(Quiz);
+        _repository.Update(user);
+        _repository.Remove(UserSeeds.user2.Id);
+        user = _repository.GetById(UserSeeds.user2.Id);
+   
+        DeepAssert.Equal(null,user);
+    }
 
 }
 

@@ -72,8 +72,8 @@ namespace Quizify.Api.DAL.EF.Repositories
                     }
                 }
 
-                existingQuiz.ActiveQuestion = null;
-                dbContext.Update(existingQuiz);
+        
+                dbContext.Quizzes.Update(existingQuiz);
                 dbContext.SaveChanges();
                 
                 return existingQuiz.Id;
@@ -88,6 +88,15 @@ namespace Quizify.Api.DAL.EF.Repositories
         { 
            return _dbSet.Count(a => a.GamePin == gamePin);
         }
-        
+
+        public override void Remove(Guid id)
+        {
+            var quiz = GetById(id);
+            foreach (var user  in quiz.Users)
+            {
+                dbContext.QuizUsers.Remove(user);
+            }
+            base.Remove(id);
+        }
     }
 }

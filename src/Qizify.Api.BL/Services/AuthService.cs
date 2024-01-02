@@ -9,9 +9,8 @@ namespace Quizify.Api.BL.Services;
 
 public class AuthService : IAuthService
 {
-    private const string CookieKey = "generated_uuid";
     public UserDetailModel? User { get; set; }
-    public string? Cookie { get; }
+    public string? Token { get; }
     
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly IAuthFacace _authFacade;
@@ -21,43 +20,27 @@ public class AuthService : IAuthService
     {
         _authFacade = authFacace;
         _contextAccessor = contextAccessor;
-        
-        Cookie = contextAccessor.HttpContext.Request.Cookies[CookieKey];
-        
-        if (Cookie.IsNullOrEmpty())
+
+        Token = contextAccessor.HttpContext.Request.Headers["Authorization"];
+        if (Token.IsNullOrEmpty())
             return;
         
-        
-        User = _authFacade.GetById(Guid.Parse(Cookie));
+        try
+        {
+            User = _authFacade.GetById(Guid.Parse(Token));
+        }
+        catch (Exception e)
+        {
+            return;
+        }
     }
 
     public bool IsLoggedIn()
     {
         return User != null;
     }
+    
 
-    public void SetCookieToResponse()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SetCookieToResponse(string cookie,CookieOptions? options)
-    {
-        CookieOptions option = options ?? new CookieOptions();
-        option.Secure = true;
-        option.HttpOnly = false;
-        option.SameSite = SameSiteMode.None;
-        
-            
-        option.Expires = DateTime.Now.AddHours(1);  
-        _contextAccessor.HttpContext.Response.Headers.Add("Access-Control-Allow-Credentials","true");
-        _contextAccessor.HttpContext.Response.Cookies.Append(CookieKey, cookie, option);
-    }
-
-    public string GetCookie()
-    {
-        throw new NotImplementedException();
-    }
 
     public UserDetailModel? GetUser()
     {

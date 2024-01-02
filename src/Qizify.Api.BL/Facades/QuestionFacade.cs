@@ -12,7 +12,7 @@ namespace Quizify.Api.BL.Facades
         private readonly IMapper _mapper;
         public QuestionFacade(
             IQuestionRepository repository,
-            IMapper mapper)
+            IMapper mapper, IAnswerFacade answerFacade)
             : base(repository, mapper)
             {
             questionRepository = repository;

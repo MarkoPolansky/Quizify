@@ -45,7 +45,7 @@ public class QuizFacade : FacadeBase ,IQuizFacade
         return await apiClient.StartAsync(modelId,culture);
     }
 
-    public async Task<string?> Publish(Guid modelId)
+    public async Task<QuizDetailModel> Publish(Guid modelId)
     {
         return await apiClient.PublishAsync(modelId,culture);
     }
@@ -54,9 +54,9 @@ public class QuizFacade : FacadeBase ,IQuizFacade
     {
         return await apiClient.EndAsync(modelId,culture);
     }
-
-    public async Task<Guid?> Join(string gamePin, string userName)
+    
+    public async Task<QuizDetailModel> Join(string gamePin)
     {
-        return await apiClient.JoinAsync(gamePin, userName,culture);
+        return await apiClient.JoinAsync(gamePin,culture);
     }
 }

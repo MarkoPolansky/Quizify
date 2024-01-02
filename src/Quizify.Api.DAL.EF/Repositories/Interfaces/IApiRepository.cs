@@ -13,6 +13,8 @@ namespace Quizify.Api.DAL.EF.Repositories.Interfaces
         void Remove(Guid id);
         bool Exists(Guid id);
 
+        void Remove(TEntity entity);
+
         IQueryable<TEntity> Get();
     }
 }
