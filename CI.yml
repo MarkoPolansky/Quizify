@@ -22,12 +22,13 @@ steps:
 -  template: build-API.yml
 -  template: build-APP.yml
 
-
-- task: PowerShell@2
+- task: CmdLine@2
   displayName: 'start mssqllocaldb'
   inputs:
-    targetType: 'inline'
-    script: 'sqllocaldb start mssqllocaldb'
+    script: |
+      sqllocaldb create MSSQLLocalDB
+      sqllocaldb start MSSQLLocalDB
+      sqllocaldb info MSSQLLocalDB
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Dotnet Tests'
