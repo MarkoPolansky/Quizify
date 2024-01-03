@@ -81,13 +81,16 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
         if(connection == null)
         {
             Console.WriteLine("Using debug connstring for tests because production is missing");
-            connection = configuration.GetConnectionString("DefaultConnection")
-            ?? throw new ArgumentException("The development connection string is missing");
+            serviceCollection.AddInstaller<ApiDALEFInstaller>(connection,DALType.Memory);
+        }
+        else
+        {
+            serviceCollection.AddInstaller<ApiDALEFInstaller>(connection,DALType.EntityFramework);
         }
         
     }
     
-    serviceCollection.AddInstaller<ApiDALEFInstaller>(connection);
+    
     serviceCollection.AddInstaller<ApiBLInstaller>();
 }
 

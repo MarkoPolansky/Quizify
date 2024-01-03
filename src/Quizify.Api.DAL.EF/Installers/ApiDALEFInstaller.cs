@@ -6,11 +6,19 @@ namespace Quizify.Api.DAL.EF.Installers
 {
     public class ApiDALEFInstaller
     {
-        public void Install(IServiceCollection serviceCollection, string connectionString)
+        public void Install(IServiceCollection serviceCollection, string connectionString, DALType dalType)
         {
             serviceCollection.AddDbContext<QuizifyDbContext>(options =>
                 {
-                    options.UseSqlServer(connectionString);
+                    switch(dalType)
+                    {
+                        case DALType.Memory:
+                            options.UseInMemoryDatabase("quizify");
+                            break;
+                        case DALType.EntityFramework:
+                            options.UseSqlServer(connectionString);
+                            break;
+                    }
                     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 }
                );
