@@ -9,9 +9,18 @@ variables:
   dotNetFramework: 'net7.0'
   dotNetVersion: '7.0.x'
   targetRuntime: 'win-x64'
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 
 steps:
+- task: Cache@2
+  inputs:
+    key: 'nuget | "$(Agent.OS)" | $(Build.SourcesDirectory)/**/packages.lock.json'
+    restoreKeys: |
+       nuget | "$(Agent.OS)"
+       nuget
+    path: $(NUGET_PACKAGES)
+  displayName: Cache NuGet packages
 
 - task: NuGetCommand@2
   inputs:
@@ -29,6 +38,15 @@ steps:
       sqllocaldb create MSSQLLocalDB
       sqllocaldb start MSSQLLocalDB
       sqllocaldb info MSSQLLocalDB
+      
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  inputs:
+    TaskType: 'dacpac'
+    DacpacFile: 'Quizify.dacpac'
+    TargetMethod: 'server'
+    ServerName: 'localhost'
+    DatabaseName: 'quizify'
+    AuthScheme: 'windowsAuthentication'
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Dotnet Tests'
