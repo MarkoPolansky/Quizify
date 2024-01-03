@@ -30,8 +30,7 @@ steps:
       sqllocaldb create MSSQLLocalDB
       sqllocaldb start MSSQLLocalDB -s
       sqllocaldb info MSSQLLocalDB
-      $sql = "CREATE database $(Database)"
-      SqlCmd -d 'master' -S '(LocalDB)\MSSQLLocalDB' -W -h -1 -Q $sql
+      SqlCmd -d 'master' -S '(LocalDB)\MSSQLLocalDB' -W -h -1 -Q "CREATE database $(Database)"
 - task: SqlDacpacDeploymentOnMachineGroup@0
   inputs:
     TaskType: 'dacpac'
