@@ -22,24 +22,6 @@ steps:
 
 -  template: build-API.yml
 -  template: build-APP.yml
-
-- task: CmdLine@2
-  displayName: 'start mssqllocaldb'
-  inputs:
-    script: |
-      sqllocaldb create MSSQLLocalDB
-      sqllocaldb start MSSQLLocalDB -s
-      sqllocaldb info MSSQLLocalDB
-      SqlCmd -d 'master' -S '(LocalDB)\MSSQLLocalDB' -W -h -1 -Q "CREATE database $(Database)"
-- task: SqlDacpacDeploymentOnMachineGroup@0
-  inputs:
-    TaskType: 'dacpac'
-    DacpacFile: 'Quizify.dacpac'
-    TargetMethod: 'server'
-    ServerName: '(localdb)\MSSQLLocalDB'
-    DatabaseName: '$(Database)'
-    AuthScheme: 'windowsAuthentication'
-
 - task: DotNetCoreCLI@2
   displayName: 'Run Dotnet Tests'
   inputs:
