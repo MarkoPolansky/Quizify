@@ -10,7 +10,7 @@ variables:
   dotNetVersion: '7.0.x'
   targetRuntime: 'win-x64'
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
-
+  Database: 'quizify'
 
 steps:
 
@@ -28,16 +28,17 @@ steps:
   inputs:
     script: |
       sqllocaldb create MSSQLLocalDB
-      sqllocaldb start MSSQLLocalDB
+      sqllocaldb start MSSQLLocalDB -s
       sqllocaldb info MSSQLLocalDB
-      
+      $sql = "CREATE database $(Database)"
+      SqlCmd -d 'master' -S '(LocalDB)\MSSQLLocalDB' -W -h -1 -Q $sql
 - task: SqlDacpacDeploymentOnMachineGroup@0
   inputs:
     TaskType: 'dacpac'
     DacpacFile: 'Quizify.dacpac'
     TargetMethod: 'server'
-    ServerName: '(localdb)\\mssqllocaldb'
-    DatabaseName: 'quizify'
+    ServerName: '(localdb)\MSSQLLocalDB'
+    DatabaseName: '$(Database)'
     AuthScheme: 'windowsAuthentication'
 
 - task: DotNetCoreCLI@2
