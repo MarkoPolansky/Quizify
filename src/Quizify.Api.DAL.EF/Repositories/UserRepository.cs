@@ -29,6 +29,11 @@ namespace Quizify.Api.DAL.EF.Repositories
                 .Include(user => user.Quizzes)
                 .ThenInclude(a => a.Quiz)
                 .Include(user => user.CreatedQuizzes)
+                    .ThenInclude(u => u.Questions)
+                    .ThenInclude(u => u.Answers)
+                    .ThenInclude(u => u.Users)
+                .Include(u => u.CreatedQuizzes)
+                    .ThenInclude(u => u.Users)
                 .SingleOrDefault(entity => entity.Id == id);
         }
 
@@ -44,16 +49,24 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .Include(user => user.CreatedQuizzes)
                     .Single(r => r.Id == user.Id);
 
-                existingUser =_mapper.Map(user, existingUser);
+                user =_mapper.Map(user, existingUser);
                 
-                foreach (var answerUserEntity in existingUser.Answers)
+                
+                dbContext.ChangeTracker.Clear();
+                
+                foreach (var answerUserEntity in user.Answers)
                 {
-                    dbContext.AnswerUsers.Add(answerUserEntity);
+                    if(dbContext.AnswerUsers.Count(a =>a.Id == answerUserEntity.Id) == 0)
+                        dbContext.AnswerUsers.Add(answerUserEntity);
+                    else
+                    { 
+                        dbContext.AnswerUsers.Update(answerUserEntity);
+                    }
                 }
                 
-                foreach (var quizUserEntity in existingUser.Quizzes)
+                foreach (var quizUserEntity in user.Quizzes)
                 {
-                    if(dbContext.Quizzes.Count(a =>a.Id == quizUserEntity.Id) == 0)
+                    if(dbContext.QuizUsers.Count(a =>a.Id == quizUserEntity.Id) == 0)
                         dbContext.QuizUsers.Add(quizUserEntity);
                     else
                     { 
@@ -61,7 +74,7 @@ namespace Quizify.Api.DAL.EF.Repositories
                     }
                 }
                 
-                foreach (var quiz in existingUser.CreatedQuizzes)
+                foreach (var quiz in user.CreatedQuizzes)
                 {
                     if(dbContext.Quizzes.Count(a =>a.Id == quiz.Id) == 0)
                      dbContext.Quizzes.Add(quiz);
@@ -72,10 +85,10 @@ namespace Quizify.Api.DAL.EF.Repositories
                 }
                 
                 
-                dbContext.Update(existingUser);
+                dbContext.Update(user);
                 dbContext.SaveChanges();
 
-                return existingUser.Id;
+                return user.Id;
             }
             else
             {
@@ -86,13 +99,35 @@ namespace Quizify.Api.DAL.EF.Repositories
         public override void Remove(Guid id)
         {
             var user = GetById(id);
-            foreach (var answer  in user.Answers)
+            
+            foreach (var createdQuiz in user.CreatedQuizzes)
             {
-                dbContext.AnswerUsers.Remove(answer);
+                foreach (var userInQuiz in createdQuiz.Users)
+                {
+                    dbContext.QuizUsers.Remove(userInQuiz);
+                }
+                
+                foreach (var question in createdQuiz.Questions)
+                {
+                    foreach (var answer in question.Answers)
+                    {    
+                        foreach (var answerUser in answer.Users)
+                        {
+                            dbContext.AnswerUsers.Remove(answerUser);
+                        }
+                      
+                    }
+                }
             }
+
             foreach (var quiz  in user.Quizzes)
             {
                 dbContext.QuizUsers.Remove(quiz);
+            }
+            
+            foreach (var answer in user.Answers)
+            {
+                dbContext.AnswerUsers.Remove(answer);
             }
             base.Remove(id);
         }

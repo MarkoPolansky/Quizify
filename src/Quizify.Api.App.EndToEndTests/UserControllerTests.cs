@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Namotion.Reflection;
+using Quizify.Api.DAL.Common.Tests.Seeds;
+using Quizify.Api.DAL.EF.Entities;
 using Quizify.Common.Models;
 using Xunit;
 
@@ -10,14 +12,9 @@ namespace Quizify.Api.App.EndToEndTests
 {
     public class UserControllerTests : BaseTest, IAsyncDisposable
     {
-        private readonly QuizifyApiApplicationFactory application;
-        private readonly Lazy<HttpClient> client;
+   
 
-        public UserControllerTests()
-        {
-            application = new QuizifyApiApplicationFactory();
-            client = new Lazy<HttpClient>(application.CreateClient());
-        }
+        public UserControllerTests(): base(true){}
 
         [Fact]
         public async Task GetAllUsers_Returns_At_Least_One_User()
@@ -108,5 +105,8 @@ namespace Quizify.Api.App.EndToEndTests
         {
             await application.DisposeAsync();
         }
+        
+       
+       
     }
 }

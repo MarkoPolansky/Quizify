@@ -7,14 +7,8 @@ namespace Quizify.Api.App.EndToEndTests
 {
     public class QuestionControllerTests : BaseTest,IAsyncDisposable
     {
-        private readonly QuizifyApiApplicationFactory application;
-        private readonly Lazy<HttpClient> client;
-
-        public QuestionControllerTests()
-        {
-            application = new QuizifyApiApplicationFactory();
-            client = new Lazy<HttpClient>(application.CreateClient());
-        }
+        public QuestionControllerTests() : base(true){}
+    
 
         [Fact]
         public async Task GetAllQuestions_Returns_At_Least_One_Question()
@@ -167,6 +161,8 @@ namespace Quizify.Api.App.EndToEndTests
             response.EnsureSuccessStatusCode();
         }
 
+        
+        
         public async ValueTask DisposeAsync()
         {
             await application.DisposeAsync();

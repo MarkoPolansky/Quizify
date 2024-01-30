@@ -59,4 +59,9 @@ public class QuizFacade : FacadeBase ,IQuizFacade
     {
         return await apiClient.JoinAsync(gamePin,culture);
     }
+
+    public async Task DeleteQuizUser(Guid id)
+    {
+        await apiClient.QuizUserAsync(id,culture);
+    }
 }

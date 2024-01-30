@@ -51,6 +51,7 @@ namespace Quizify.Api.BL.Facades
                 UserId = userEntity.Id, 
                 QuizId = t.Quiz.Id,
                 TotalPoints = t.TotalPoints,
+                StartedAt = t.StartedAt,
                 EndedAt = t.EndedAt
             }).ToList();
             var result = userRepository.Update(userEntity);
@@ -103,15 +104,10 @@ namespace Quizify.Api.BL.Facades
             
             var questions = new List<QuestionDetailModel?>();
 
-            
-            var Result = new UserDetailQuizModel
-            {
-                Quiz = _mapper.Map<QuizListModel>(quiz),
-                Id = Guid.NewGuid(),
-                TotalPoints = 0,
-                EndedAt = DateTime.Now
-            };
 
+
+            var Result = model.Quizzes.First(a => a.Quiz.Id == quiz.Id);
+            Result.EndedAt = DateTime.Now;
             foreach (var question in quiz.Questions)
             {
                 questions.Add(questionFacade.GetById(question.Id));
@@ -124,7 +120,6 @@ namespace Quizify.Api.BL.Facades
                 if (userAnswersForQuestion.SetEquals(correctAnswers))
                     Result.TotalPoints += question.Points;
             }
-            model.Quizzes.Add(Result);
            return Update(model);
         }
 

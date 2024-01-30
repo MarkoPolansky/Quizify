@@ -12,5 +12,6 @@ namespace Quizify.Api.BL.Facades.IFacades
         
         QuizDetailModel JoinQuiz(string gamePin);
         QuizDetailModel? GetByGamePin(string gamePin);
+        void DeleteQuizUser(Guid id);
     }
 }

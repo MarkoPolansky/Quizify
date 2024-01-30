@@ -74,6 +74,7 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
     {
         connection = configuration.GetConnectionString("DefaultConnection")
         ?? throw new ArgumentException("The development connection string is missing");
+        serviceCollection.AddInstaller<ApiDALEFInstaller>(connection,DALType.EntityFramework);
     }
     else
     {
@@ -81,7 +82,7 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
         if(connection == null)
         {
             Console.WriteLine("Using debug connstring for tests because production is missing");
-            serviceCollection.AddInstaller<ApiDALEFInstaller>(connection,DALType.Memory);
+            serviceCollection.AddInstaller<ApiDALEFInstaller>(Guid.NewGuid().ToString(),DALType.Memory);
         }
         else
         {
@@ -90,7 +91,7 @@ void ConfigureDependencies(IServiceCollection serviceCollection, IConfiguration 
         
     }
     
-    
+
     serviceCollection.AddInstaller<ApiBLInstaller>();
 }
 
@@ -163,11 +164,12 @@ void UseQuizEndpoints(RouteGroupBuilder routeGroupBuilder)
             ? TypedResults.Ok(quiz)
             : TypedResults.NotFound("Error 404 Not Found"));
 
-
+    
     questionEndpoints.MapGet("", (IQuizFacade quizFacade) => quizFacade.GetAll());
     questionEndpoints.MapPost("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Create(quiz));
     questionEndpoints.MapPut("", (QuizDetailModel quiz, IQuizFacade quizFacade) => quizFacade.Update(quiz));
     questionEndpoints.MapDelete("{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.Delete(id));
+    questionEndpoints.MapDelete("/quizUser/{id:guid}", (Guid id, IQuizFacade quizFacade) => quizFacade.DeleteQuizUser(id));
     questionEndpoints.MapPost("/{id:guid}/publish", (Guid id, IQuizFacade quizFacade) => quizFacade.Publish(id));
     questionEndpoints.MapPost("/{id:guid}/start", (Guid id, IQuizFacade quizFacade) => quizFacade.Start(id));
     questionEndpoints.MapPost("/{id:guid}/end", (Guid id, IQuizFacade quizFacade) => quizFacade.End(id));

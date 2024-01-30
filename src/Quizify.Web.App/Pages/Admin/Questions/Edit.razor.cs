@@ -43,6 +43,11 @@ public partial class Edit
         NavigateBack();
     }
     
+    public void AddAnswer()
+    {
+        navigationManager.NavigateTo("admin/answers/create?answer="+Data.Id);
+    }
+    
     
     public void NavigateBack()
     {

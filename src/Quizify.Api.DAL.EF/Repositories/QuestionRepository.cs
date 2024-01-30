@@ -24,6 +24,7 @@ namespace Quizify.Api.DAL.EF.Repositories
             return dbContext.Set<QuestionEntity>()
                 .Include(question => question.ActiveInQuiz)
                 .Include(question => question.Answers)
+                .ThenInclude(q => q.Users)
                 .Include(question => question.Quiz)
                 .SingleOrDefault(entity => entity.Id == id);
         }
@@ -38,11 +39,10 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .Include(question => question.Quiz)
                     .Single(r => r.Id == question.Id);
 
-                existingQuestion = _mapper.Map(question, existingQuestion);
-
-
-
-                foreach (var answer in existingQuestion.Answers)
+                question = _mapper.Map(question, existingQuestion);
+               
+                dbContext.ChangeTracker.Clear();
+                foreach (var answer in question.Answers)
                 {
                     if (dbContext.Answers.Count(a => a.Id == answer.Id) == 0)
                         dbContext.Answers.Add(answer);
@@ -52,16 +52,34 @@ namespace Quizify.Api.DAL.EF.Repositories
                     }
                 }
 
-                dbContext.Update(existingQuestion);
+              
+                dbContext.Update(question);
+                dbContext.ChangeTracker.DetectChanges();
+                Console.WriteLine(dbContext.ChangeTracker.DebugView.LongView);
                 dbContext.SaveChanges();
 
 
-                return existingQuestion.Id;
+                return question.Id;
             }
             else
             {
                 return null;
             }
+        }
+        public override void Remove(Guid id)
+        {
+            var question = GetById(id);
+
+            foreach (var answer in question.Answers)
+            {
+                foreach (var answerUser in answer.Users)
+                {
+                    dbContext.AnswerUsers.Remove(answerUser);
+                }
+            }
+            
+            
+            base.Remove(id);
         }
     }
 }

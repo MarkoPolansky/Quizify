@@ -10,6 +10,8 @@ namespace Quizify.Web.BL.Facades.IFacades
         Task<QuizDetailModel> Publish(Guid modelId);
         Task<Guid?> End(Guid modelId);
         Task<QuizDetailModel> Join(string gamePin);
+        
+        Task DeleteQuizUser(Guid id);
  
     }
 }

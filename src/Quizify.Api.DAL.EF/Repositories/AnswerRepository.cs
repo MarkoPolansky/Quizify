@@ -37,17 +37,24 @@ namespace Quizify.Api.DAL.EF.Repositories
                     .Include(Answer => Answer.Question)
                     .Single(r => r.Id == Answer.Id);
 
-                existingAnswer = _mapper.Map(Answer, existingAnswer);
+                Answer = _mapper.Map(Answer, existingAnswer);
 
-                foreach (var user in existingAnswer.Users)
+                dbContext.ChangeTracker.Clear();
+                foreach (var user in Answer.Users)
                 {
-                    dbContext.AnswerUsers.Add(user);
+                    if (dbContext.AnswerUsers.Count(a => a.Id == user.Id) == 0)
+                        dbContext.AnswerUsers.Add(user);
+                    else
+                    {
+                        dbContext.AnswerUsers.Update(user);
+                    }
+              
                 }
 
-                dbContext.Update(existingAnswer);
+                dbContext.Update(Answer);
                 dbContext.SaveChanges();
 
-                return existingAnswer.Id;
+                return Answer.Id;
             }
             else
             {

@@ -55,16 +55,23 @@ public partial class Edit
     public async Task StartQuiz()
     {
         await QuizFacade.Publish(Data.Id);
-           
-        navigationManager.NavigateTo("/admin/quizes/"+Data.Id);
+        await OnInitializedAsync();
     }
     
-    
-    
+    public void AddQuestion()
+    {
+        navigationManager.NavigateTo("admin/questions/create?quiz="+Data.Id);
+    }
     
     public void NavigateBack()
     {
         navigationManager.NavigateTo("/admin/quizes");
+    }
+
+    public async Task DeleteQuizUserAsync(Guid id)
+    {
+        await QuizFacade.DeleteQuizUser(id);
+        Users.Remove(Users.First(a => a.Quizzes.Any(a => a.Id == id)));
     }
     
     

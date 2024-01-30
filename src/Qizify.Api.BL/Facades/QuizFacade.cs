@@ -42,6 +42,7 @@ namespace Quizify.Api.BL.Facades
                     Type = t.Type,
                     Text = t.Text,
                     QuizId = quizEntity.Id,
+                    Quiz = quizEntity,
                     Points = t.Points,
                 }).ToList();
             quizEntity.Users = quizModel.Users.Select(t =>
@@ -50,6 +51,10 @@ namespace Quizify.Api.BL.Facades
                 Id = t.Id,
                 UserId = t.User.Id,
                 QuizId = quizEntity.Id,
+                Quiz = quizEntity,
+                StartedAt = t.StartedAt,
+                EndedAt = t.EndedAt,
+                
             }).ToList();
             quizEntity.ActiveQuestionId = quizModel.ActiveQuestion?.Id;
             var result = quizRepository.Update(quizEntity);
@@ -169,7 +174,7 @@ namespace Quizify.Api.BL.Facades
             {
                 Id = Guid.NewGuid(),
                 TotalPoints = 0,
-                StartedAt = default,
+                StartedAt = DateTime.Now,
                 EndedAt = null,
                 User = _mapper.Map<UserListModel>( _auth.GetUser())
             };
@@ -184,6 +189,12 @@ namespace Quizify.Api.BL.Facades
             
             return quizDetailModel;
         }
+
+        public void DeleteQuizUser(Guid quizUser)
+        {
+            quizRepository.RemoveQuizUser(quizUser);
+        }
+        
    
     }
 }

@@ -37,6 +37,12 @@
             <div>
                 <label for="name" class="text-sm font-medium text-gray-700 block mb-2">Answers</label>
                 <ol type="1">
+                       <li onclick="@AddAnswer">
+                                                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600 cursor-pointer">
+                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                    
+                                            </li>
                     @foreach (var answer in @Data.Answers)
                     {
                         <NavLink href="@($"/admin/answers/{answer.Id}")" class="p-1 m-1 bg-gray-100 rounded-3 ">

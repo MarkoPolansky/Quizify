@@ -200,16 +200,27 @@
               <li><NavLink href="/admin/quizes" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Quizes</NavLink></li>
               <li><NavLink href="/admin/questions" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Questions</NavLink></li>
               <li><NavLink href="/admin/answers" aria-label="About us" title="About us" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-violet-500">Answers</NavLink></li>
-              <li>
-                <NavLink
-                  href="/login"
-                  class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
-                  aria-label="Login"
-                  title="Login"
-                >
-                  Login
-                </NavLink>
-              </li>
+               @if (UserLogged.Id == Guid.Empty)
+                   {
+                     <li>
+                       <NavLink
+                         href="/login"
+                         class="inline-flex  text-white text-xl text-bold items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
+                         aria-label="Login"
+                         title="Login">
+                         Login
+                       </NavLink>
+                     </li>
+                   }
+                   else
+                   {
+                     <li>
+                       <h1
+                         class="inline-flex  text-white text-xl text-bold items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-violet-500 hover:bg-violet-700 focus:shadow-outline focus:outline-none"
+                       >@UserLogged.Name
+                         </h1>
+                     </li>
+                   }
             </ul>
           </nav>
         </div>

@@ -7,6 +7,10 @@ namespace Quizify.Web.App.Pages.Admin.Answers;
 
 public partial class Create
 {
+    
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? answer { get; set; }
     [Inject]
     private NavigationManager navigationManager { get; set; } = null!;
     
@@ -35,12 +39,14 @@ public partial class Create
     
     public void NavigateBack()
     {
-        navigationManager.NavigateTo("/admin/answers");
+        navigationManager.NavigateTo("/admin/questions/"+Data.QuestionId);
     }
 
     protected override async Task OnInitializedAsync()
     {
         Questions = await QuestionFacade.GetAllAsync();
+        if (Questions.Any(a => a.Id.ToString() == answer))
+            Data.QuestionId = new Guid(answer);
         await base.OnInitializedAsync();
     }
 }

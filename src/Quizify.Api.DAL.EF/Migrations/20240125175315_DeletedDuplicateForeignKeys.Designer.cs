@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizify.Api.DAL.EF;
 
@@ -11,9 +12,11 @@ using Quizify.Api.DAL.EF;
 namespace Quizify.Api.DAL.EF.Migrations
 {
     [DbContext(typeof(QuizifyDbContext))]
-    partial class QuizifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240125175315_DeletedDuplicateForeignKeys")]
+    partial class DeletedDuplicateForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuestionEntity", b =>
@@ -87,7 +90,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuizEntity", b =>
@@ -123,7 +126,7 @@ namespace Quizify.Api.DAL.EF.Migrations
                         .IsUnique()
                         .HasFilter("[GamePin] IS NOT NULL");
 
-                    b.ToTable("Quizzes", (string)null);
+                    b.ToTable("Quizzes");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.QuizUserEntity", b =>
@@ -153,7 +156,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("QuizUsers", (string)null);
+                    b.ToTable("QuizUsers");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.UserAnswerEntity", b =>
@@ -177,7 +180,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AnswerUsers", (string)null);
+                    b.ToTable("AnswerUsers");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.UserEntity", b =>
@@ -195,7 +198,7 @@ namespace Quizify.Api.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Quizify.Api.DAL.EF.Entities.AnswerEntity", b =>
@@ -213,8 +216,7 @@ namespace Quizify.Api.DAL.EF.Migrations
                 {
                     b.HasOne("Quizify.Api.DAL.EF.Entities.QuizEntity", "ActiveInQuiz")
                         .WithOne("ActiveQuestion")
-                        .HasForeignKey("Quizify.Api.DAL.EF.Entities.QuestionEntity", "ActiveInQuizId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("Quizify.Api.DAL.EF.Entities.QuestionEntity", "ActiveInQuizId");
 
                     b.HasOne("Quizify.Api.DAL.EF.Entities.QuizEntity", "Quiz")
                         .WithMany("Questions")

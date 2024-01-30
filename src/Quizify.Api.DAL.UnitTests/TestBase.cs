@@ -21,8 +21,6 @@ namespace Quizify.Api.DAL.UnitTests
         {
             XUnitTestOutputConverter converter = new(output);
             Console.SetOut(converter);
-
-     
           
             DbContextFactory = new QuizifyTestingDbContextFactory(GetType().FullName);
             QuizifyDbContextSUT = DbContextFactory.CreateDbContext();

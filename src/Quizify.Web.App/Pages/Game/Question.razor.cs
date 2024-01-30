@@ -107,8 +107,9 @@ public partial class Question
     
     public async Task SubmitQuiz()
     {
+        // /game/{Id:guid}/question/{UserId:guid}/results
         await UserFacade.SubmitQuiz(UserLogged,QuizDetailModel.Id);
-        navigationManager.NavigateTo("/game/"+QuizDetailModel.Id+"/question/results");
+        navigationManager.NavigateTo("/game/"+QuizDetailModel.Id+"/user/"+UserLogged.Id+"/results");
     }
     public bool IsAnswerPicked(AnswerDetailModel answerDetailModel)
     {

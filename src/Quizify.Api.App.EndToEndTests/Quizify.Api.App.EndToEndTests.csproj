@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Quizify.Api.DAL.Common.Tests\Quizify.Api.DAL.Common.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

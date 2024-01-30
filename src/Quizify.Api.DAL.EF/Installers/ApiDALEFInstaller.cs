@@ -13,13 +13,12 @@ namespace Quizify.Api.DAL.EF.Installers
                     switch(dalType)
                     {
                         case DALType.Memory:
-                            options.UseInMemoryDatabase("quizify");
+                            options.UseInMemoryDatabase(connectionString.Length > 0 ? connectionString : "quizify");
                             break;
                         case DALType.EntityFramework:
                             options.UseSqlServer(connectionString);
                             break;
                     }
-                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 }
                );
             
