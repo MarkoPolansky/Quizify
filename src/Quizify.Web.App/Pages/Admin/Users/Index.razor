@@ -9,27 +9,38 @@
         <tr>
           <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
           <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100 border-t border-gray-100">
       @foreach(var user in Users)
     {
-          <tr class="hover:bg-gray-50">
-        <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
+      <tr class="hover:bg-gray-50">
+        
+        <td class="flex gap-3 px-6 py-4 font-normal text-gray-900">
           <div class="relative h-10 w-10">
             <img
               class="h-full w-full rounded-full object-cover object-center"
-              src="@( String.IsNullOrEmpty(user.ImageUrl) ? "https://ui-avatars.com/api/?name="+@user.Name : @user.Name)"
+              src="@(String.IsNullOrEmpty(user.ImageUrl) ? "https://ui-avatars.com/api/?name=" + @user.Name : @user.Name)"
               alt=""/>
-        
-          </div>  
+
+          </div>
           <div class="text-sm flex align-items-center">
             <div class="font-medium text-gray-700">@user.Name</div>
           </div>
-        </th>
+        </td>
         <td class="px-6 py-4">
           <div class="flex justify-end gap-4">
-            <button @onclick="() => DeleteUserAsync(user.Id)" >
+            @if(user.Id.ToString() != token){
+              <button @onclick="() => LoginAs(user.Id)" class="px-4 ml-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"><!--!-->
+                Login
+              </button>
+            }
+          </div>
+        </td>
+        <td class="px-6 py-4">
+          <div class="flex justify-end gap-4">
+            <button @onclick="() => DeleteUserAsync(user.Id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -44,7 +55,7 @@
                   d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
               </svg>
             </button>
-            <NavLink href="@($"/admin/users/{user.Id}")" >
+            <NavLink href="@($"/admin/users/{user.Id}")">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -68,4 +79,9 @@
       </tbody>
     </table>
   </div>
+   <NavLink href="/login">
+      <button  class="px-4 ml-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300">
+                         Create new User 
+        </button>
+      </NavLink>
 </div>
